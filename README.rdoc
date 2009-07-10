@@ -21,4 +21,4 @@ I like tinkering with my build scripts. That's why I don't use hoe and jeweler a
  mkdir features
  rake -T
 
-And that's about it.
+And that's about it. There's also a :release task that will pop up when you have a git remote called "origin", you're on the master branch, and you don't have a tag with the current version number.

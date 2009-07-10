@@ -60,6 +60,18 @@ class Shoe
       Cucumber::Rake::Task.new('features', 'Run features')
       default_depends_on(:features)
     end
+
+    if system("git branch | grep '* master' > /dev/null") && system('git remote show origin 1> /dev/null 2> /dev/null')
+      unless system("git tag | grep #{spec.version} > /dev/null")
+        desc "Release #{spec.name}-#{spec.version}"
+        task :release => :gemspec do
+          sh "git commit -a -m 'Release #{spec.version}"
+          sh "git tag #{version}"
+          sh 'git push'
+          sh 'git push --tags'
+        end
+      end
+    end
   end
 
   private
