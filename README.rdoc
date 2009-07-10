@@ -1,0 +1,24 @@
+= Shoe
+
+You probably don't want to use Shoe -- especially if you're like me!
+
+I like tinkering with my build scripts. That's why I don't use hoe and jeweler and those guys. I like to put my own thing together, but that gets old after a while. So, I made Shoe.
+
+== Install
+
+ gem sources --add http://gems.github.com
+ gem install matthewtodd-shoe
+
+== Use
+
+ cd myproject
+ shoe           # create a Rakefile
+ rake -T        # see what you get
+
+ mkdir test
+ rake -T
+
+ mkdir features
+ rake -T
+
+And that's about it.
