@@ -2,7 +2,7 @@
 
 You probably don't want to use Shoe -- especially if you're like me!
 
-I like tinkering with my build scripts. That's why I don't use hoe and jeweler and those guys. I like to put my own thing together, but that gets old after a while. So, I made Shoe.
+I like tinkering with my build scripts. That's why I don't use hoe and jeweler and those guys, even though they're awesome. I like to put my own thing together, so I made Shoe.
 
 == Install
 
