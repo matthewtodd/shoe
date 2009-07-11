@@ -2,12 +2,10 @@
 
 if File.exists?('Rakefile')
   abort 'Rakefile exists. Not clobbering.'
-else
-  project_name = File.basename(File.expand_path(Dir.pwd))
-  File.open('Rakefile', 'w') { |file| file.write(DATA.read.gsub('NAME', project_name)) }
 end
 
-__END__
+File.open('Rakefile', 'w') do |file|
+  file.write <<-END_RAKEFILE.gsub('NAME', File.basename(File.expand_path(Dir.pwd)))
 begin
   gem 'matthewtodd-shoe'
 rescue Gem::LoadError
@@ -24,4 +22,6 @@ end
 
 Shoe.tie('NAME', '0.1.0', 'TODO write a summary of NAME here.') do |spec|
   # spec.add_development_dependency 'thoughtbot-shoulda'
+end
+  END_RAKEFILE
 end
