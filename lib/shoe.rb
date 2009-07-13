@@ -44,13 +44,6 @@ class Shoe
       DocManager.new(local_spec).generate_rdoc
     end
 
-    desc 'Generate gemspec'
-    task :gemspec do
-      File.open("#{spec.name}.gemspec", 'w') do |f|
-        f.write spec.to_ruby
-      end
-    end
-
     if Pathname.pwd.join('test').directory?
       Rake::TestTask.new { |task| task.pattern = 'test/*_test.rb' }
       default_depends_on(:test)
@@ -63,7 +56,9 @@ class Shoe
 
     if system("[[ -z `git tag -l #{spec.version}` ]] && git branch | grep -q '* master' && git remote | grep -q origin")
       desc "Release #{spec.name}-#{spec.version}"
-      task :release => :gemspec do
+      task :release do
+        File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
+        sh "git add #{spec.name}.gemspec"
         sh "git commit -a -m 'Release #{spec.version}'"
         sh "git tag #{spec.version}"
         sh 'git push'
