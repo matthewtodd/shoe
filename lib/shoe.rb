@@ -61,15 +61,13 @@ class Shoe
       default_depends_on(:features)
     end
 
-    if system("git branch | grep '* master' > /dev/null") && system('git remote | grep origin > /dev/null')
-      unless system("git tag | grep #{spec.version} > /dev/null")
-        desc "Release #{spec.name}-#{spec.version}"
-        task :release => :gemspec do
-          sh "git commit -a -m 'Release #{spec.version}'"
-          sh "git tag #{spec.version}"
-          sh 'git push'
-          sh 'git push --tags'
-        end
+    if system("[[ -z `git tag -l #{spec.version}` ]] && git branch | grep -q '* master' && git remote | grep -q origin")
+      desc "Release #{spec.name}-#{spec.version}"
+      task :release => :gemspec do
+        sh "git commit -a -m 'Release #{spec.version}'"
+        sh "git tag #{spec.version}"
+        sh 'git push'
+        sh 'git push --tags'
       end
     end
   end
