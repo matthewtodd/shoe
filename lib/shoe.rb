@@ -61,7 +61,8 @@ class Shoe
         sh "git add #{spec.name}.gemspec"
         sh "git commit -a -m 'Release #{spec.version}'"
         sh "git tag #{spec.version}"
-        sh 'git push --tags origin master'
+        sh 'git push'
+        sh 'git push --tags'
       end
     end
   end
