@@ -6,16 +6,18 @@ end
 
 File.open('Rakefile', 'w') do |file|
   file.write <<-END_RAKEFILE.gsub('NAME', File.basename(File.expand_path(Dir.pwd)))
-begin
-  gem 'matthewtodd-shoe'
-rescue Gem::LoadError
-  abort <<-END
+this_rakefile_uses_shoe = <<END
 ----------------------------------------
 Please install Shoe:
 gem sources --add http://gems.github.com
 gem install matthewtodd-shoe
 ----------------------------------------
-  END
+END
+
+begin
+  gem 'matthewtodd-shoe'
+rescue Gem::LoadError
+  abort this_rakefile_uses_shoe
 else
   require 'shoe'
 end
