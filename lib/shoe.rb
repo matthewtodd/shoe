@@ -1,5 +1,15 @@
 require 'rubygems/doc_manager'
 
+# Shoe defines some handy Rake tasks for your project, all built around your Gem::Specification.
+#
+# Here's how you use it in your Rakefile:
+#
+#  require 'shoe'
+#  Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
+#    spec.add_development_dependency 'thoughtbot-shoulda'
+#  end
+#
+# Shoe comes with an executable named "shoe" that will generate a Rakefile like this (but slightly fancier) for you.
 class Shoe
   # Here's where you start. In your Rakefile, you'll probably just call
   # Shoe.tie, then add any dependencies in the block.
@@ -9,6 +19,7 @@ class Shoe
     shoe.define_tasks
   end
 
+  # The Gem::Specification for your project.
   attr_reader :spec
 
   # Initializes a Gem::Specification with some nice conventions.

@@ -2,23 +2,38 @@
 
 You probably don't want to use Shoe -- especially if you're like me!
 
-I like tinkering with my build scripts. That's why I don't use hoe and jeweler and those guys, even though they're awesome. I like to put my own thing together, so I made Shoe.
+I like tinkering with my build scripts. That's why I don't use hoe[http://seattlerb.rubyforge.org/hoe] and jeweler[http://github.com/technicalpickles/jeweler] and those guys, even though they're awesome. I like to put my own thing together, so I made Shoe.
+
+== Behold
+
+Here's how your Rakefile looks:
+
+ require 'shoe'
+
+ Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
+   spec.add_development_dependency 'thoughtbot-shoulda'
+ end
+
+And here's what you get, at most:
+
+ rake clean     # Remove ignored files
+ rake default   # Run tests / Run features
+ rake features  # Run features
+ rake rdoc      # Generate documentation
+ rake release   # Release myproject-0.1.0
+ rake shell     # Run an irb console
+ rake test      # Run tests
+
+Most of the time, though, you won't see all of these: when possible, tasks are conditionally defined.
+
+See what I mean by reading Shoe#define_tasks.
 
 == Install
 
- gem sources --add http://gems.github.com
- gem install matthewtodd-shoe
+ gem install matthewtodd-shoe --source http://gems.github.com
 
-== Use
+== Getting Started
 
- cd myproject
- shoe           # create a Rakefile
- rake -T        # see what you get
+Shoe can create a Rakefile for you:
 
- mkdir test
- rake -T
-
- mkdir features
- rake -T
-
-And that's about it. There's also a :release task that will pop up when you have a git remote called "origin", you're on the master branch, and you don't have a tag with the current version number.
+ cd myproject && shoe
