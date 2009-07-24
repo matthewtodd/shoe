@@ -5,6 +5,8 @@ require 'cucumber/rake/task'
 require 'rake/testtask'
 
 class Shoe
+  # Here's where you start. In your Rakefile, you'll probably just call
+  # Shoe.tie, then add any dependencies in the block.
   def self.tie(name, version, summary)
     shoe = new(name, version, summary)
     yield shoe.spec if block_given?
@@ -13,6 +15,7 @@ class Shoe
 
   attr_reader :spec
 
+  # Initializes a Gem::Specification with some nice conventions.
   def initialize(name, version, summary)
     @spec = Gem::Specification.new do |spec|
       spec.name             = name
@@ -20,7 +23,7 @@ class Shoe
       spec.summary          = summary
       spec.files            = FileList['Rakefile', '*.rdoc', 'bin/**/*', 'features/**/*', 'lib/**/*', 'resources/**/*', 'test/**/*'].to_a
       spec.executables      = everything_in_the_bin_directory
-      spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source)
+      spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source) # MAYBE include --all, so that we document private methods?
       spec.extra_rdoc_files = FileList['*.rdoc'].to_a
       spec.has_rdoc         = true
       spec.author           = `git config --get user.name`.chomp
@@ -33,6 +36,7 @@ class Shoe
     end
   end
 
+  # This is where the magic happens.
   def define_tasks
     desc 'Remove ignored files'
     task :clean do
@@ -41,7 +45,7 @@ class Shoe
 
     desc 'Generate documentation'
     task :rdoc do
-      DocManager.new(local_spec).generate_rdoc
+      LocalDocManager.new(spec).generate_rdoc
       sh 'open rdoc/index.html' if RUBY_PLATFORM =~ /darwin/
     end
 
@@ -61,7 +65,7 @@ class Shoe
       default_depends_on(:features)
     end
 
-    if system("[[ -z `git tag -l #{spec.version}` ]] && git branch | grep -q '* master' && git remote | grep -q origin")
+    if these_shell_commands_all_succeed(there_is_no_tag_for_the_current_version, we_are_on_the_master_branch, there_is_a_remote_called_origin)
       desc "Release #{spec.name}-#{spec.version}"
       task :release do
         File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
@@ -86,19 +90,36 @@ class Shoe
     bin.directory? ? bin.children.map { |child| child.basename.to_s } : []
   end
 
-  def local_spec
-    local_spec = spec.dup
-    def local_spec.full_gem_path
-      Pathname.pwd
-    end
-    local_spec
+  # I'm guessing it's a little faster shell out to all these commands
+  # together, rather than running each one separately.
+  def these_shell_commands_all_succeed(*commands)
+    system(commands.join(' && '))
   end
 
-  class DocManager < Gem::DocManager #:nodoc:
+  def there_is_no_tag_for_the_current_version
+    "[[ -z `git tag -l #{spec.version}` ]]"
+  end
+
+  def we_are_on_the_master_branch
+    "git branch | grep -q '* master'"
+  end
+
+  def there_is_a_remote_called_origin
+    'git remote | grep -q origin'
+  end
+
+  class LocalDocManager < Gem::DocManager #:nodoc:
     def initialize(spec)
       @spec      = spec
       @doc_dir   = Pathname.pwd
       @rdoc_args = []
+      adjust_spec_so_that_we_can_generate_rdoc_locally
+    end
+
+    def adjust_spec_so_that_we_can_generate_rdoc_locally
+      def @spec.full_gem_path
+        Pathname.pwd
+      end
     end
   end
 end
