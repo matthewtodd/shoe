@@ -19,7 +19,7 @@ class Shoe
       spec.version          = version
       spec.summary          = summary
       spec.files            = FileList['Rakefile', '*.rdoc', 'bin/**/*', 'features/**/*', 'lib/**/*', 'resources/**/*', 'test/**/*'].to_a
-      spec.executables      = executables
+      spec.executables      = everything_in_the_bin_directory
       spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source)
       spec.extra_rdoc_files = FileList['*.rdoc'].to_a
       spec.has_rdoc         = true
@@ -81,7 +81,7 @@ class Shoe
     task :default => task_name
   end
 
-  def executables
+  def everything_in_the_bin_directory
     bin = Pathname.pwd.join('bin')
     bin.directory? ? bin.children.map { |child| child.basename.to_s } : []
   end
