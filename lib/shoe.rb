@@ -74,7 +74,7 @@ class Shoe
       default_depends_on(:features)
     end
 
-    if these_shell_commands_all_succeed(there_is_no_tag_for_the_current_version, we_are_on_the_master_branch, there_is_a_remote_called_origin)
+    if there_is_no_tag_for_the_current_version && we_are_on_the_master_branch && we_have_already_pushed_the_master_branch_to_a_remote_called_origin
       desc "Release #{spec.name}-#{spec.version}"
       task :release do
         File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
@@ -98,22 +98,16 @@ class Shoe
     File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
   end
 
-  # I'm guessing it's a little faster shell out to all these commands
-  # together, rather than running each one separately.
-  def these_shell_commands_all_succeed(*commands)
-    system(commands.join(' && '))
-  end
-
   def there_is_no_tag_for_the_current_version
-    "[[ -z `git tag -l #{spec.version}` ]]"
+    !File.exists?(".git/refs/tags/#{spec.version}")
   end
 
   def we_are_on_the_master_branch
-    "git branch | grep -q '* master'"
+    File.exists?('.git/HEAD') && File.read('.git/HEAD').strip == 'ref: refs/heads/master'
   end
 
-  def there_is_a_remote_called_origin
-    'git remote | grep -q origin'
+  def we_have_already_pushed_the_master_branch_to_a_remote_called_origin
+    File.exists?('.git/refs/remotes/origin/master')
   end
 
   # Using Gem::DocManager instead of Rake::RdocTask means you get to see your
