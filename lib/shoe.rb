@@ -45,21 +45,27 @@ class Shoe
 
   # This is where the magic happens.
   def define_tasks
-    desc 'Remove ignored files'
-    task :clean do
-      sh 'git clean -fdX'
+    if File.directory?('.git')
+      desc 'Remove ignored files'
+      task :clean do
+        sh 'git clean -fdX'
+      end
     end
 
-    desc 'Generate documentation'
-    task :rdoc do
-      LocalDocManager.new(spec).generate_rdoc
-      sh 'open rdoc/index.html' if RUBY_PLATFORM =~ /darwin/
+    if File.directory?('lib')
+      desc 'Generate documentation'
+      task :rdoc do
+        LocalDocManager.new(spec).generate_rdoc
+        sh 'open rdoc/index.html' if RUBY_PLATFORM =~ /darwin/
+      end
     end
 
-    desc 'Run an irb console'
-    task :shell do
-      # MAYBE include -Iext. I think I'd like to wait until I handle C extensions in general.
-      exec 'irb', '-Ilib', "-r#{spec.name}"
+    if File.file?("lib/#{spec.name}.rb")
+      desc 'Run an irb console'
+      task :shell do
+        # MAYBE include -Iext. I think I'd like to wait until I handle C extensions in general.
+        exec 'irb', '-Ilib', "-r#{spec.name}"
+      end
     end
 
     if File.directory?('test')
