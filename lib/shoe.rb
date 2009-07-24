@@ -44,6 +44,12 @@ class Shoe
       DocManager.new(local_spec).generate_rdoc
     end
 
+    desc 'Run an irb console'
+    task :shell do
+      # MAYBE include -Iext. I think I'd like to wait until I handle C extensions in general.
+      exec 'irb', '-Ilib', "-r#{spec.name}"
+    end
+
     if Pathname.pwd.join('test').directory?
       Rake::TestTask.new { |task| task.pattern = 'test/*_test.rb' }
       default_depends_on(:test)
