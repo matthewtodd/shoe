@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'cucumber/rake/task'
-require 'rake/testtask'
 require 'rubygems/doc_manager'
 
 class Shoe
@@ -55,11 +52,13 @@ class Shoe
     end
 
     if File.directory?('test')
+      require 'rake/testtask'
       Rake::TestTask.new { |task| task.pattern = 'test/*_test.rb' }
       default_depends_on(:test)
     end
 
     if File.directory?('features')
+      require 'cucumber/rake/task'
       Cucumber::Rake::Task.new('features', 'Run features')
       default_depends_on(:features)
     end
