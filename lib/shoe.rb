@@ -110,7 +110,7 @@ class Shoe
     File.exists?('.git/refs/remotes/origin/master')
   end
 
-  # Using Gem::DocManager instead of Rake::RdocTask means you get to see your
+  # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
   # rdoc *exactly* as users who install your gem will.
   class LocalDocManager < Gem::DocManager #:nodoc:
     def initialize(spec)
