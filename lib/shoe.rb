@@ -99,15 +99,15 @@ class Shoe
   end
 
   def there_is_no_tag_for_the_current_version
-    !File.exists?(".git/refs/tags/#{spec.version}")
+    !File.file?(".git/refs/tags/#{spec.version}")
   end
 
   def we_are_on_the_master_branch
-    File.exists?('.git/HEAD') && File.read('.git/HEAD').strip == 'ref: refs/heads/master'
+    File.file?('.git/HEAD') && File.read('.git/HEAD').strip == 'ref: refs/heads/master'
   end
 
   def we_have_already_pushed_the_master_branch_to_a_remote_called_origin
-    File.exists?('.git/refs/remotes/origin/master')
+    File.file?('.git/refs/remotes/origin/master')
   end
 
   # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
