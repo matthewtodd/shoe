@@ -42,6 +42,7 @@ class Shoe
     desc 'Generate documentation'
     task :rdoc do
       DocManager.new(local_spec).generate_rdoc
+      sh 'open rdoc/index.html' if RUBY_PLATFORM =~ /darwin/
     end
 
     desc 'Run an irb console'
