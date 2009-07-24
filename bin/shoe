@@ -4,8 +4,10 @@ if File.exists?('Rakefile')
   abort 'Rakefile exists. Not clobbering.'
 end
 
+project_name = File.basename(File.expand_path(Dir.pwd))
+
 File.open('Rakefile', 'w') do |file|
-  file.write <<-END_RAKEFILE.gsub('NAME', File.basename(File.expand_path(Dir.pwd)))
+  file.write <<-END_RAKEFILE.gsub('NAME', project_name)
 this_rakefile_uses_shoe = <<END
 ----------------------------------------
 Please install Shoe:
@@ -26,4 +28,16 @@ Shoe.tie('NAME', '0.1.0', 'TODO write a summary of NAME here.') do |spec|
   # spec.add_development_dependency 'thoughtbot-shoulda'
 end
   END_RAKEFILE
+end
+
+if File.exists?('README.rdoc')
+  abort 'README.rdoc exists. Not clobbering.'
+end
+
+File.open('README.rdoc', 'w') do |file|
+  file.write <<-END_README.gsub('NAME', project_name.capitalize)
+= NAME
+
+NAME is one of my favorite things! Let me tell you about it:
+  END_README
 end
