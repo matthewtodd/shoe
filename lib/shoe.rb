@@ -116,6 +116,8 @@ class Shoe
     'git remote | grep -q origin'
   end
 
+  # Using Gem::DocManager instead of Rake::RdocTask means you get to see your
+  # rdoc *exactly* as users who install your gem will.
   class LocalDocManager < Gem::DocManager #:nodoc:
     def initialize(spec)
       @spec      = spec
