@@ -18,7 +18,7 @@ class Shoe
       spec.name             = name
       spec.version          = version
       spec.summary          = summary
-      spec.files            = FileList['Rakefile', '*.rdoc', 'bin/**/*', 'features/**/*', 'lib/**/*', 'resources**/*', 'test/**/*'].to_a
+      spec.files            = FileList['Rakefile', '*.rdoc', 'bin/**/*', 'features/**/*', 'lib/**/*', 'resources/**/*', 'test/**/*'].to_a
       spec.executables      = executables
       spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source)
       spec.extra_rdoc_files = FileList['*.rdoc'].to_a
