@@ -1,8 +1,7 @@
-require 'pathname'
-require 'rubygems/doc_manager'
-
+require 'rubygems'
 require 'cucumber/rake/task'
 require 'rake/testtask'
+require 'rubygems/doc_manager'
 
 class Shoe
   # Here's where you start. In your Rakefile, you'll probably just call
@@ -55,12 +54,12 @@ class Shoe
       exec 'irb', '-Ilib', "-r#{spec.name}"
     end
 
-    if Pathname.pwd.join('test').directory?
+    if File.directory?('test')
       Rake::TestTask.new { |task| task.pattern = 'test/*_test.rb' }
       default_depends_on(:test)
     end
 
-    if Pathname.pwd.join('features').directory?
+    if File.directory?('features')
       Cucumber::Rake::Task.new('features', 'Run features')
       default_depends_on(:features)
     end
@@ -86,8 +85,7 @@ class Shoe
   end
 
   def everything_in_the_bin_directory
-    bin = Pathname.pwd.join('bin')
-    bin.directory? ? bin.children.map { |child| child.basename.to_s } : []
+    File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
   end
 
   # I'm guessing it's a little faster shell out to all these commands
@@ -111,14 +109,14 @@ class Shoe
   class LocalDocManager < Gem::DocManager #:nodoc:
     def initialize(spec)
       @spec      = spec
-      @doc_dir   = Pathname.pwd
+      @doc_dir   = Dir.pwd
       @rdoc_args = []
       adjust_spec_so_that_we_can_generate_rdoc_locally
     end
 
     def adjust_spec_so_that_we_can_generate_rdoc_locally
       def @spec.full_gem_path
-        Pathname.pwd
+        Dir.pwd
       end
     end
   end
