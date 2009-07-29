@@ -56,7 +56,15 @@ class Shoe
       desc 'Generate documentation'
       task :rdoc do
         LocalDocManager.new(spec).generate_rdoc
-        sh 'open rdoc/index.html' if RUBY_PLATFORM =~ /darwin/
+
+        case RUBY_PLATFORM
+        when /darwin/
+          sh 'open rdoc/index.html'
+        when /mswin|mingw/
+          sh 'start rdoc\index.html'
+        else
+          sh 'firefox rdoc/index.html'
+        end
       end
     end
 
