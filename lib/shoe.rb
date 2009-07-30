@@ -89,6 +89,11 @@ class Shoe
       default_depends_on(:features)
     end
 
+    desc 'Show latest gemspec contents'
+    task :gemspec do
+      puts spec.to_ruby
+    end
+
     if there_is_no_tag_for_the_current_version && we_are_on_the_master_branch && we_have_already_pushed_the_master_branch_to_a_remote_called_origin
       desc "Release #{spec.name}-#{spec.version}"
       task :release do
