@@ -28,10 +28,10 @@ class Shoe
       spec.name             = name
       spec.version          = version
       spec.summary          = summary
-      spec.files            = FileList['Rakefile', '*.gemspec', '**/*.rdoc', 'bin/**/*', 'examples/**/*', 'features/**/*', 'lib/**/*', 'resources/**/*', 'test/**/*'].to_a
+      spec.files            = FileList['Rakefile', '*.gemspec', '**/*.rdoc', 'bin/**/*', 'examples/**/*', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*', 'test/**/*'].to_a
       spec.executables      = everything_in_the_bin_directory
       spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source) # MAYBE include --all, so that we document private methods?
-      spec.extra_rdoc_files = FileList['*.rdoc'].to_a
+      spec.extra_rdoc_files = FileList['*.rdoc', 'shoulda_macros/**/*'].to_a
       spec.has_rdoc         = true
       spec.author           = `git config --get user.name`.chomp
       spec.email            = `git config --get user.email`.chomp
