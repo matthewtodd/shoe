@@ -6,7 +6,7 @@ require 'rubygems/doc_manager'
 #
 #  require 'shoe'
 #  Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
-#    spec.add_development_dependency 'thoughtbot-shoulda'
+#    spec.add_development_dependency 'shoulda'
 #  end
 #
 # Shoe comes with an executable named "shoe" that will generate a Rakefile like this (but slightly fancier) for you.
@@ -35,11 +35,11 @@ class Shoe
       spec.has_rdoc         = true
       spec.author           = `git config --get user.name`.chomp
       spec.email            = `git config --get user.email`.chomp
-      spec.add_development_dependency 'matthewtodd-shoe'
+      spec.add_development_dependency 'shoe'
     end
 
     def @spec.remove_development_dependency_on_shoe
-      dependencies.delete_if { |d| d.name == 'matthewtodd-shoe' }
+      dependencies.delete_if { |d| d.name == 'shoe' }
     end
   end
 
