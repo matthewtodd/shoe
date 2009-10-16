@@ -6,12 +6,15 @@ Given /^I have created a file called "([^\"]*)" containing "([^\"]*)"$/ do |path
   create_file(path, contents)
 end
 
-When /^I run shoe inside "([^\"]*)"$/ do |path|
-  inside_directory(path) { run_shoe }
+When /^I (?:have )?run (.*) inside "([^\"]*)"$/ do |command, path|
+  run(command, path)
 end
 
-Then /^I should see "([^\"]*)" on standard error$/ do |message|
-  error_stream.should include(message)
+Then /^I (should.*) see "([^\"]*)" on (standard.*)$/ do |should_or_should_not, message, standard_out_or_error|
+  standard_out_or_error.tr!(' ', '_')
+  should_or_should_not.tr!(' ', '_')
+
+  send(standard_out_or_error).send(should_or_should_not, include(message))
 end
 
 Then /^I should see a file "([^\"]*)"$/ do |path|
