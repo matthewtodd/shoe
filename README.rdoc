@@ -11,14 +11,14 @@ Here's how your Rakefile looks:
  require 'shoe'
 
  Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
-   spec.add_development_dependency 'thoughtbot-shoulda'
+   spec.add_development_dependency 'shoulda'
  end
 
 And here's what you get, at most:
 
  rake clean     # Remove ignored files
+ rake cucumber  # Run features
  rake default   # Run tests / Run features
- rake features  # Run features
  rake rdoc      # Generate documentation
  rake release   # Release myproject-0.1.0
  rake shell     # Run an irb console
@@ -30,7 +30,7 @@ See what I mean by reading Shoe#define_tasks.
 
 == Install
 
- gem install matthewtodd-shoe --source http://gems.github.com
+ gem install shoe
 
 == Getting Started
 
