@@ -1,43 +1,30 @@
 #!/usr/bin/env ruby
 
-if File.exists?('Rakefile')
-  abort 'Rakefile exists. Not clobbering.'
+def create_file(name, contents)
+  project_name = File.basename(File.expand_path(Dir.pwd))
+
+  if File.exists?(name)
+    STDERR.puts("#{name} exists. Not clobbering.")
+  else
+    File.open(name, 'w') { |file| file.write(contents.gsub('NAME', project_name)) }
+  end
 end
 
-project_name = File.basename(File.expand_path(Dir.pwd))
-
-File.open('Rakefile', 'w') do |file|
-  file.write <<-END_RAKEFILE.gsub('NAME', project_name)
-this_rakefile_uses_shoe = <<END
-----------------------------------------
-Please install Shoe:
-gem sources --add http://gems.github.com
-gem install matthewtodd-shoe
-----------------------------------------
-END
-
+# TODO read about heredocs at http://tomayko.com to see if I can clean this up a little.
+create_file 'Rakefile', <<-END
 begin
-  gem 'matthewtodd-shoe'
-rescue Gem::LoadError
-  abort this_rakefile_uses_shoe
-else
   require 'shoe'
+rescue LoadError
+  abort 'Please `gem install shoe` to get started.'
 end
 
 Shoe.tie('NAME', '0.1.0', 'TODO write a summary of NAME here.') do |spec|
-  # spec.add_development_dependency 'thoughtbot-shoulda'
+  # spec.add_development_dependency 'shoulda'
 end
-  END_RAKEFILE
-end
+END
 
-if File.exists?('README.rdoc')
-  abort 'README.rdoc exists. Not clobbering.'
-end
-
-File.open('README.rdoc', 'w') do |file|
-  file.write <<-END_README.gsub('NAME', project_name.capitalize)
+create_file 'README.rdoc', <<-END
 = NAME
 
 NAME is one of my favorite things! Let me tell you about it:
-  END_README
-end
+END
