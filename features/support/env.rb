@@ -3,7 +3,7 @@ require 'pathname'
 require 'tmpdir'
 
 class WorkingDirectory
-  THE_SHOE_BIN_DIRECTORY = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'bin'))
+  PROJECT_ROOT = Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '..')))
 
   attr_reader :working_directory
   attr_reader :standard_out
@@ -37,7 +37,7 @@ class WorkingDirectory
   private
 
   def rejigger_the_path(command)
-    "/usr/bin/env PATH='#{THE_SHOE_BIN_DIRECTORY}:#{ENV['PATH']}' #{command}"
+    "/usr/bin/env PATH='#{PROJECT_ROOT.join('bin')}:#{ENV['PATH']}' RUBYLIB='#{PROJECT_ROOT.join('lib')}' #{command}"
   end
 end
 

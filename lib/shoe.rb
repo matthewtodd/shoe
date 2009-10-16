@@ -85,8 +85,8 @@ class Shoe
 
     if File.directory?('features')
       require 'cucumber/rake/task'
-      Cucumber::Rake::Task.new('features', 'Run features')
-      default_depends_on(:features)
+      Cucumber::Rake::Task.new(:cucumber, 'Run features')
+      default_depends_on(:cucumber)
     end
 
     desc 'Show latest gemspec contents'
