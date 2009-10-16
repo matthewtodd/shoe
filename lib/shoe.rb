@@ -104,7 +104,7 @@ class Shoe
         sh 'git push'
         sh 'git push --tags'
         sh "gem build #{spec.name}.gemspec"
-        sh "gem push #{spec.name}-#{spec.version}.gem"
+        sh "gem push #{spec.file_name}"
       end
     end
   end
