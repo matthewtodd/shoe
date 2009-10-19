@@ -85,8 +85,14 @@ class Shoe
 
     if File.directory?('features')
       require 'cucumber/rake/task'
-      Cucumber::Rake::Task.new(:cucumber, 'Run features')
+      Cucumber::Rake::Task.new(:cucumber, 'Run features') { |task| task.cucumber_opts = '--tags ~@wip' }
       default_depends_on(:cucumber)
+
+      if there_are_any_work_in_progress_features
+        namespace :cucumber do
+          Cucumber::Rake::Task.new(:wip, 'Run work-in-progress features') { |task| task.cucumber_opts = '--tags @wip --wip' }
+        end
+      end
     end
 
     desc 'Show latest gemspec contents'
@@ -118,6 +124,12 @@ class Shoe
 
   def everything_in_the_bin_directory
     File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
+  end
+
+  def there_are_any_work_in_progress_features
+    Dir.glob('features/**/*.feature').detect do |path|
+      File.read(path).include?('@wip')
+    end
   end
 
   def there_is_no_tag_for_the_current_version

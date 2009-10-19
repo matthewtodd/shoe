@@ -6,6 +6,10 @@ Given /^I have created a file called "([^\"]*)" containing "([^\"]*)"$/ do |path
   create_file(path, contents)
 end
 
+Given /^I have created a file called "([^\"]*)" containing:$/ do |path, contents|
+  create_file(path, contents)
+end
+
 When /^I (?:have )?run (.*) inside "([^\"]*)"$/ do |command, path|
   run(command, path)
 end

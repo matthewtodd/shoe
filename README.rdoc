@@ -16,13 +16,15 @@ Here's how your Rakefile looks:
 
 And here's what you get, at most:
 
- rake clean     # Remove ignored files
- rake cucumber  # Run features
- rake default   # Run tests / Run features
- rake rdoc      # Generate documentation
- rake release   # Release myproject-0.1.0
- rake shell     # Run an irb console
- rake test      # Run tests
+ rake clean         # Remove ignored files
+ rake cucumber      # Run features
+ rake cucumber:wip  # Run work-in-progress features
+ rake default       # Run features
+ rake gemspec       # Show latest gemspec contents
+ rake rdoc          # Generate documentation
+ rake release       # Release myproject-0.1.0
+ rake shell         # Run an irb console
+ rake test          # Run tests
 
 Most of the time, though, you won't see all of these: when possible, tasks are conditionally defined.
 
