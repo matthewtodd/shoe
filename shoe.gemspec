@@ -2,17 +2,17 @@
 
 Gem::Specification.new do |s|
   s.name = %q{shoe}
-  s.version = "0.1.9"
+  s.version = "0.1.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew Todd"]
-  s.date = %q{2009-10-16}
+  s.date = %q{2009-10-19}
   s.default_executable = %q{shoe}
   s.email = %q{matthew.todd@gmail.com}
   s.executables = ["shoe"]
   s.extra_rdoc_files = ["README.rdoc"]
   s.files = ["Rakefile", "shoe.gemspec", "README.rdoc", "bin/shoe", "features/cucumber.feature", "features/getting_started.feature", "features/step_definitions", "features/step_definitions/shoe_steps.rb", "features/support", "features/support/env.rb", "lib/shoe.rb"]
-  s.rdoc_options = ["--main", "README.rdoc", "--title", "shoe-0.1.9", "--inline-source"]
+  s.rdoc_options = ["--main", "README.rdoc", "--title", "shoe-0.1.10", "--inline-source"]
   s.require_paths = ["lib"]
   s.requirements = ["git"]
   s.rubygems_version = %q{1.3.5}
