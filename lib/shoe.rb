@@ -100,7 +100,7 @@ class Shoe
       puts spec.to_ruby
     end
 
-    if the_current_version_is_not_zero && there_is_no_tag_for_the_current_version && we_are_on_the_master_branch && we_have_already_pushed_the_master_branch_to_a_remote_called_origin
+    if the_current_version_is_greater_than_zero && there_is_no_tag_for_the_current_version && we_are_on_the_master_branch && we_have_already_pushed_the_master_branch_to_a_remote_called_origin
       desc "Release #{spec.name}-#{spec.version}"
       task :release do
         File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
@@ -126,8 +126,8 @@ class Shoe
     File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
   end
 
-  def the_current_version_is_not_zero
-    spec.version != '0.0.0'
+  def the_current_version_is_greater_than_zero
+    spec.version > Gem::Version.new('0.0.0')
   end
 
   def there_are_any_work_in_progress_features

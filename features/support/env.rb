@@ -13,12 +13,18 @@ class WorkingDirectory
     @working_directory = Pathname.new(Dir.mktmpdir)
   end
 
-  def create_directory(name)
-    working_directory.join(name).mkpath
+  def create_directory(path)
+    file(path).mkpath
   end
 
   def create_file(path, contents)
-    working_directory.join(path).open('w') { |file| file.write(contents) }
+    file(path).open('w') { |file| file.write(contents) }
+  end
+
+  def edit_file(path, search, replace)
+    old_contents = file(path).read
+    new_contents = old_contents.gsub(search, replace)
+    create_file(path, new_contents)
   end
 
   def file(path)
