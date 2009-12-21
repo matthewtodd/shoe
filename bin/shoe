@@ -19,6 +19,7 @@ rescue LoadError
 end
 
 Shoe.tie('NAME', '0.0.0', 'TODO write a summary of NAME here.') do |spec|
+  # do whatever you want with the Gem::Specification here, for example:
   # spec.add_development_dependency 'shoulda'
 end
 END

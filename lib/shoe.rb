@@ -6,7 +6,8 @@ require 'rubygems/doc_manager'
 #
 #  require 'shoe'
 #  Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
-#    spec.add_development_dependency 'shoulda'
+#    # do whatever you want with the Gem::Specification here, for example:
+#    # spec.add_development_dependency 'shoulda'
 #  end
 #
 # Shoe comes with an executable named "shoe" that will generate a Rakefile like this (but slightly fancier) for you.

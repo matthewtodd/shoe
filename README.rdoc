@@ -11,7 +11,8 @@ Here's how your Rakefile looks:
  require 'shoe'
 
  Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
-   spec.add_development_dependency 'shoulda'
+   # do whatever you want with the Gem::Specification here, for example:
+   # spec.add_development_dependency 'shoulda'
  end
 
 And here's what you get, at most:
