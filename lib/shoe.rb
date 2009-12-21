@@ -28,8 +28,9 @@ class Shoe
       spec.name             = name
       spec.version          = version
       spec.summary          = summary
-      spec.files            = FileList['Rakefile', '*.gemspec', '**/*.rdoc', 'bin/**/*', 'examples/**/*', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*', 'test/**/*'].to_a
+      spec.files            = FileList['Rakefile', '*.gemspec', '**/*.rdoc', 'bin/**/*', 'examples/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*', 'test/**/*'].to_a
       spec.executables      = everything_in_the_bin_directory
+      spec.extensions       = FileList['ext/**/extconf.rb'].to_a
       spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source) # MAYBE include --all, so that we document private methods?
       spec.extra_rdoc_files = FileList['**/*.rdoc', 'shoulda_macros/**/*'].to_a
       spec.has_rdoc         = true
@@ -71,8 +72,7 @@ class Shoe
     if File.file?("lib/#{spec.name}.rb")
       desc 'Run an irb console'
       task :shell do
-        # MAYBE include -Iext. I think I'd like to wait until I handle C extensions in general.
-        exec 'irb', '-Ilib', "-r#{spec.name}"
+        exec 'irb', '-Iext', '-Ilib', "-r#{spec.name}"
       end
     end
 
@@ -111,6 +111,24 @@ class Shoe
         sh 'git push --tags'
         sh "gem build #{spec.name}.gemspec"
         sh "gem push #{spec.file_name}"
+      end
+    end
+
+    if File.directory?('ext')
+      desc 'Compile C extensions'
+      task :compile do
+        spec.extensions.each do |extension|
+          Dir.chdir(File.dirname(extension)) do
+            sh 'ruby extconf.rb'
+            sh 'make'
+          end
+        end
+      end
+
+      [:test, :cucumber, 'cucumber:wip', :release].each do |task_name|
+        if Rake.application.lookup(task_name)
+          task task_name => :compile
+        end
       end
     end
   end

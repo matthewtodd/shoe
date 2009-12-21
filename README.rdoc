@@ -17,6 +17,7 @@ Here's how your Rakefile looks:
 And here's what you get, at most:
 
  rake clean         # Remove ignored files
+ rake compile       # Compile C extensions
  rake cucumber      # Run features
  rake cucumber:wip  # Run work-in-progress features
  rake default       # Run features
