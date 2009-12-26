@@ -1,4 +1,5 @@
 require 'rubygems/doc_manager'
+require 'rubygems/ext'
 
 # Shoe defines some handy Rake tasks for your project, all built around your Gem::Specification.
 #
@@ -73,7 +74,7 @@ class Shoe
     if File.file?("lib/#{spec.name}.rb")
       desc 'Run an irb console'
       task :shell do
-        exec 'irb', '-Iext', '-Ilib', "-r#{spec.name}"
+        exec 'irb', '-Ilib', "-r#{spec.name}"
       end
     end
 
@@ -118,10 +119,12 @@ class Shoe
     if File.directory?('ext')
       desc 'Compile C extensions'
       task :compile do
+        top_level_path   = File.expand_path('.')
+        destination_path = File.join(top_level_path, spec.require_paths.first)
+
         spec.extensions.each do |extension|
           Dir.chdir(File.dirname(extension)) do
-            sh 'ruby extconf.rb'
-            sh 'make'
+            Gem::Ext::ExtConfBuilder.build(extension, top_level_path, destination_path, results = [])
           end
         end
       end
