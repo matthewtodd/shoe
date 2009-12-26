@@ -81,7 +81,10 @@ class Shoe
     if File.directory?('test')
       require 'rake/testtask'
       # MAYBE be a little more forgiving in test selection, using test/**/*_test.rb. Or create suites based on subdirectory?
-      Rake::TestTask.new { |task| task.pattern = 'test/*_test.rb' }
+      Rake::TestTask.new do |task|
+        task.libs    = ['lib', 'test']
+        task.pattern = 'test/*_test.rb'
+      end
       default_depends_on(:test)
     end
 
