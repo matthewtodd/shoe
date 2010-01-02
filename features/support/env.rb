@@ -1,5 +1,6 @@
 require 'open3'
 require 'pathname'
+require 'test/unit/assertions'
 require 'tmpdir'
 
 class WorkingDirectory
@@ -47,6 +48,7 @@ class WorkingDirectory
   end
 end
 
+World(Test::Unit::Assertions)
 World  { WorkingDirectory.new }
 Before { working_directory.mkpath }
 After  { working_directory.rmtree }

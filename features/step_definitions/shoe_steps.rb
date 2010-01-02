@@ -18,17 +18,17 @@ When /^I (?:have )?run (.*) inside "([^\"]*)"$/ do |command, path|
   run(command, path)
 end
 
-Then /^I (should.*) see "([^\"]*)" on (standard.*)$/ do |should_or_should_not, message, standard_out_or_error|
+Then /^I should(.*) see "([^\"]*)" on (standard.*)$/ do |negate, message, standard_out_or_error|
   standard_out_or_error.tr!(' ', '_')
-  should_or_should_not.tr!(' ', '_')
+  am_i_expecting_to_see_something = negate.strip.empty?
 
-  send(standard_out_or_error).send(should_or_should_not, include(message))
+  assert_equal am_i_expecting_to_see_something, send(standard_out_or_error).include?(message)
 end
 
 Then /^I should see a file "([^\"]*)"$/ do |path|
-  file(path).exist?.should == true
+  assert file(path).exist?
 end
 
 Then /^the contents of "([^\"]*)" should still be "([^\"]*)"$/ do |path, expected|
-  file(path).read.should == expected
+  assert_equal expected, file(path).read
 end
