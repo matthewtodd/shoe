@@ -1,4 +1,3 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
 require 'shoe'
 
 Shoe.tie('shoe', '0.1.13', 'Another take on hoe, jeweler & friends.') do |spec|
