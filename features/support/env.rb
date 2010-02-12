@@ -1,5 +1,6 @@
 require 'open3'
 require 'pathname'
+require 'shellwords'
 require 'test/unit/assertions'
 require 'tmpdir'
 
@@ -19,7 +20,11 @@ class WorkingDirectory
   end
 
   def create_file(path, contents)
-    file(path).open('w') { |file| file.write(contents) }
+    file(path).open('w') { |file| file.write(be_sneaky_with_the_gemfile(contents)) }
+  end
+
+  def append_file(path, contents)
+    file(path).open('a') { |file| file.write(contents) }
   end
 
   def edit_file(path, search, replace)
@@ -34,7 +39,7 @@ class WorkingDirectory
 
   def run(command, path)
     Dir.chdir(working_directory.join(path)) do
-      Open3.popen3(rejigger_the_path(command)) do |stdin, stdout, stderr|
+      Open3.popen3(isolate_environment(command)) do |stdin, stdout, stderr|
         @standard_out   = stdout.read
         @standard_error = stderr.read
       end
@@ -43,8 +48,15 @@ class WorkingDirectory
 
   private
 
-  def rejigger_the_path(command)
-    "/usr/bin/env PATH='#{PROJECT_ROOT.join('bin')}:#{ENV['PATH']}' RUBYLIB='#{PROJECT_ROOT.join('lib')}' #{command}"
+  def be_sneaky_with_the_gemfile(contents)
+    contents.sub("gem 'shoe'", "gem 'shoe', :path => '#{Pathname.pwd.expand_path}'")
+  end
+
+  # bundle exec rake running from bundle exec cucumber otherwise gets confused
+  # about where the real Gemfile is.
+  # TODO tests may be slow because of all the bash login shells. So maybe I can just inherit the PATH and be okay?
+  def isolate_environment(command)
+    "/usr/bin/env -i HOME=#{ENV['HOME']} /bin/bash -l -c #{Shellwords.escape(command)}"
   end
 end
 

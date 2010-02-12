@@ -1,31 +1,65 @@
 #!/usr/bin/env ruby
 
-def create_file(name, contents)
-  project_name = File.basename(File.expand_path(Dir.pwd))
+require 'erb'
+require 'pathname'
 
-  if File.exists?(name)
-    STDERR.puts("#{name} exists. Not clobbering.")
-  else
-    File.open(name, 'w') { |file| file.write(contents.gsub('NAME', project_name)) }
+class String
+  def unindent
+    gsub(/^  /, '')
   end
 end
 
-# TODO read about heredocs at http://tomayko.com to see if I can clean this up a little.
-create_file 'Rakefile', <<-END
-begin
-  require 'shoe'
-rescue LoadError
-  abort 'Please `gem install shoe` to get started.'
+def root
+  Pathname.pwd.expand_path
 end
 
-Shoe.tie('NAME', '0.0.0', 'TODO write a summary of NAME here.') do |spec|
-  # do whatever you want with the Gem::Specification here, for example:
-  # spec.add_development_dependency 'shoulda'
+def spec
+  spec = Gem::Specification.new do |spec|
+    spec.name = root.basename.to_s
+    spec.version = '0.0.0'
+  end
+
+  def spec.class_name
+    name.capitalize.gsub(/_(\w)/) { $1.upcase }
+  end
+
+  spec
 end
+
+def create_file(name, contents)
+  file     = root.join(name)
+  template = ERB.new(contents)
+
+  if file.exist?
+    STDERR.puts("#{name} exists. Not clobbering.")
+  else
+    file.parent.mkpath
+    file.open('w') do |stream|
+      stream.write(template.result)
+    end
+  end
+end
+
+create_file 'Rakefile', <<-END.unindent
+  require 'shoe'
+  require '<%= spec.name %>/version'
+
+  Shoe.tie('<%= spec.name %>', <%= spec.class_name %>::VERSION, 'TODO write a summary of <%= spec.class_name %> here.') do |spec|
+    # do whatever you want with the Gem::Specification here, for example:
+    # spec.add_development_dependency 'shoulda'
+  end
 END
 
-create_file 'README.rdoc', <<-END
-= NAME
+create_file 'README.rdoc', <<-END.unindent
+  = <%= spec.class_name %>
 
-NAME is one of my favorite things! Let me tell you about it:
+  <%= spec.class_name %> is one of my favorite things! Let me tell you about it:
+END
+
+create_file "#{spec.name}.gemspec", spec.to_ruby
+
+create_file "lib/#{spec.name}/version.rb", <<-END.unindent
+  class <%= spec.class_name %>
+    VERSION = '<%= spec.version %>'
+  end
 END

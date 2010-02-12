@@ -9,8 +9,9 @@ I like tinkering with my build scripts. That's why I don't use hoe[http://seattl
 Here's how your Rakefile looks:
 
  require 'shoe'
+ require 'my_project/version'
 
- Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
+ Shoe.tie('my_project', MyProject::VERSION, "This is my project, and it's awesome!") do |spec|
    # do whatever you want with the Gem::Specification here, for example:
    # spec.add_development_dependency 'shoulda'
  end
@@ -32,12 +33,26 @@ Most of the time, though, you won't see all of these: when possible, tasks are c
 
 See what I mean by reading Shoe#define_tasks.
 
-== Install
-
- gem install shoe
-
 == Getting Started
 
-Shoe can create a Rakefile for you:
+It's nice to use bundler[http://github.com/carlhuda/bundler], though bootstrapping is a little chicken-and-egg-y.
 
- cd myproject && shoe
+Start with just shoe in your +Gemfile+:
+
+ source :gemcutter
+
+ gem 'shoe'
+
+Use shoe to generate some skeleton project files:
+
+ bundle exec shoe
+
+Then add my_project to your +Gemfile+:
+
+ gem 'my_project', :path => File.expand_path('..', __FILE__)
+
+And then you can poke around with
+
+ bundle exec rake -T
+
+(It's probably worth aliasing rake to "bundle exec rake" in your shell.)
