@@ -1,6 +1,5 @@
 require 'open3'
 require 'pathname'
-require 'shellwords'
 require 'test/unit/assertions'
 require 'tmpdir'
 
@@ -54,9 +53,8 @@ class WorkingDirectory
 
   # bundle exec rake running from bundle exec cucumber otherwise gets confused
   # about where the real Gemfile is.
-  # TODO tests may be slow because of all the bash login shells. So maybe I can just inherit the PATH and be okay?
   def isolate_environment(command)
-    "/usr/bin/env -i HOME=#{ENV['HOME']} /bin/bash -l -c #{Shellwords.escape(command)}"
+    "/usr/bin/env -i HOME=#{ENV['HOME']} PATH=#{ENV['PATH']} #{command}"
   end
 end
 
