@@ -46,7 +46,7 @@ create_file 'Rakefile', <<-END.unindent
 
   Shoe.tie('<%= spec.name %>', <%= spec.class_name %>::VERSION, 'TODO write a summary of <%= spec.class_name %> here.') do |spec|
     # do whatever you want with the Gem::Specification here, for example:
-    # spec.add_development_dependency 'shoulda'
+    # spec.add_runtime_dependency 'dnssd'
   end
 END
 

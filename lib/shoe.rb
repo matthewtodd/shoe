@@ -8,7 +8,7 @@ require 'rubygems/ext'
 #  require 'shoe'
 #  Shoe.tie('myproject', '0.1.0', "This is my project, and it's awesome!") do |spec|
 #    # do whatever you want with the Gem::Specification here, for example:
-#    # spec.add_development_dependency 'shoulda'
+#    # spec.add_runtime_dependency 'dnssd'
 #  end
 #
 # Shoe comes with an executable named "shoe" that will generate a Rakefile like this (but slightly fancier) for you.
@@ -38,11 +38,6 @@ class Shoe
       spec.has_rdoc         = true
       spec.author           = `git config --get user.name`.chomp
       spec.email            = `git config --get user.email`.chomp
-      spec.add_development_dependency 'shoe'
-    end
-
-    def @spec.remove_development_dependency_on_shoe
-      dependencies.delete_if { |d| d.name == 'shoe' }
     end
   end
 
