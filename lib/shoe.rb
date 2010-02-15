@@ -84,13 +84,18 @@ class Shoe
     end
 
     if File.directory?('features')
-      require 'cucumber/rake/task'
-      Cucumber::Rake::Task.new(:cucumber, 'Run features') { |task| task.cucumber_opts = '--tags ~@wip' }
-      default_depends_on(:cucumber)
+      begin
+        require 'cucumber/rake/task'
+      rescue LoadError
+        # no cuke for you
+      else
+        Cucumber::Rake::Task.new(:cucumber, 'Run features') { |task| task.cucumber_opts = '--tags ~@wip' }
+        default_depends_on(:cucumber)
 
-      if there_are_any_work_in_progress_features
-        namespace :cucumber do
-          Cucumber::Rake::Task.new(:wip, 'Run work-in-progress features') { |task| task.cucumber_opts = '--tags @wip --wip' }
+        if there_are_any_work_in_progress_features
+          namespace :cucumber do
+            Cucumber::Rake::Task.new(:wip, 'Run work-in-progress features') { |task| task.cucumber_opts = '--tags @wip --wip' }
+          end
         end
       end
     end
@@ -110,7 +115,10 @@ class Shoe
         sh 'git push'
         sh 'git push --tags'
         sh "gem build #{spec.name}.gemspec"
-        sh "gem push #{spec.file_name}"
+
+        if Gem::CommandManager.instance.command_names.include?('push')
+          sh "gem push #{spec.file_name}"
+        end
       end
     end
 
