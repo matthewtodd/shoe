@@ -13,6 +13,7 @@
 # this (but slightly fancier) for you.
 module Shoe
   autoload :Project, 'shoe/project'
+  autoload :Tasks,   'shoe/tasks'
 
   # Here's where you start. In your Rakefile, you'll probably just call
   # Shoe.tie, then add any dependencies in the block.

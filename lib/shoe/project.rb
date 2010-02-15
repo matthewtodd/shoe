@@ -26,11 +26,8 @@ module Shoe
 
     # This is where the magic happens.
     def define_tasks
-      if File.directory?('.git')
-        desc 'Remove ignored files'
-        task :clean do
-          sh 'git clean -fdX'
-        end
+      Shoe::Tasks.each do |task|
+        task.new(spec).define
       end
 
       if File.directory?('lib')
