@@ -60,6 +60,7 @@ module Shoe
   end
 end
 
+require 'shoe/tasks/bin'
 require 'shoe/tasks/clean'
 require 'shoe/tasks/rdoc'
 require 'shoe/tasks/release'

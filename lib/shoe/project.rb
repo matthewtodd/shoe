@@ -10,8 +10,7 @@ module Shoe
         spec.name             = name
         spec.version          = version
         spec.summary          = summary
-        spec.files            = FileList['Rakefile', 'bin/**/*', 'lib/**/*', 'resources/**/*']
-        spec.executables      = everything_in_the_bin_directory
+        spec.files            = FileList['Rakefile', 'lib/**/*', 'resources/**/*']
         spec.author           = `git config --get user.name`.chomp
         spec.email            = `git config --get user.email`.chomp
       end
@@ -27,12 +26,6 @@ module Shoe
       task :gemspec do
         puts spec.to_ruby
       end
-    end
-
-    private
-
-    def everything_in_the_bin_directory
-      File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
     end
   end
 end
