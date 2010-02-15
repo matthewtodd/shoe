@@ -45,7 +45,7 @@ module Shoe
       end
 
       def define
-        raise "Please implement define in your subclass."
+        # no-op
       end
 
       def should_define?
@@ -64,6 +64,7 @@ require 'shoe/tasks/clean'
 require 'shoe/tasks/rdoc'
 require 'shoe/tasks/release'
 require 'shoe/tasks/shell'
+require 'shoe/tasks/shoulda'
 require 'shoe/tasks/test'
 
 # put cucumber toward the end so tests will run before features
