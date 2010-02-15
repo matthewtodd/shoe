@@ -111,7 +111,7 @@ class Shoe
         File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
         sh "git add #{spec.name}.gemspec"
         sh "git commit -a -m 'Release #{spec.version}'"
-        sh "git tag #{spec.version}"
+        sh "git tag v#{spec.version}"
         sh 'git push'
         sh 'git push --tags'
         sh "gem build #{spec.name}.gemspec"
@@ -165,7 +165,7 @@ class Shoe
   end
 
   def there_is_no_tag_for_the_current_version
-    !File.file?(".git/refs/tags/#{spec.version}")
+    !File.file?(".git/refs/tags/v#{spec.version}")
   end
 
   def we_are_on_the_master_branch

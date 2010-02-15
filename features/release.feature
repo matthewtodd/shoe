@@ -25,7 +25,7 @@ Feature: Release
 
   Scenario: I cannot release when I already have a tag for the current version
     When I run git push origin master inside "my_project"
-    And I run git tag 0.1.0 inside "my_project"
+    And I run git tag v0.1.0 inside "my_project"
     And I replace "0.0.0" with "0.1.0" in the file "my_project/lib/my_project/version.rb"
     And I run bundle exec rake --tasks inside "my_project"
     Then I should not see "rake release" on standard out
