@@ -45,19 +45,16 @@ bootstrapping is a little chicken-and-egg-y.
 Start with just shoe in your +Gemfile+:
 
  source :gemcutter
-
  gem 'shoe'
+
+Open a sub-shell configured for the bundler environment:
+
+ $ bundle exec bash
 
 Use shoe to generate some skeleton project files:
 
- bundle exec shoe
-
-Then add my_project to your +Gemfile+:
-
- gem 'my_project', :path => File.expand_path('..', __FILE__)
+ $ shoe
 
 And then you can poke around with
 
- bundle exec rake -T
-
-(It's probably worth aliasing rake to "bundle exec rake" in your shell.)
+ $ rake -T

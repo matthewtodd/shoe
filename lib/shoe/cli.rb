@@ -27,10 +27,12 @@ class Shoe
     end
 
     def run
-      install(template('readme.erb'),   path('README.rdoc'))
-      install(template('rakefile.erb'), path('Rakefile'))
-      install(template('version.erb'),  path("lib/#{project}/version.rb"))
-      install(spec.to_ruby,             path("#{project}.gemspec"))
+      path('Gemfile').update template('gemfile.erb')
+
+      path('README.rdoc').install template('readme.erb')
+      path('Rakefile').install    template('rakefile.erb')
+      path(version_path).install  template('version.erb')
+      path(gemspec_path).install  spec.to_ruby
     end
 
     private
@@ -47,14 +49,12 @@ class Shoe
       spec.version
     end
 
-    def install(contents, path)
-      if path.exist?
-        $stderr.puts "#{path} exists. Not clobbering."
-      else
-        path.open('w') do |stream|
-          stream.write(contents)
-        end
-      end
+    def version_path
+      "lib/#{project}/version.rb"
+    end
+
+    def gemspec_path
+      "#{project}.gemspec"
     end
 
     def template(name)
@@ -68,7 +68,27 @@ class Shoe
     def path(name)
       path = root.join(name)
       path.dirname.mkpath
-      path
+      path.extend(PathExtensions)
+    end
+
+    module PathExtensions
+      def install(contents)
+        if exist?
+          $stderr.puts "#{to_s} exists. Not clobbering."
+        else
+          write(contents, 'w')
+        end
+      end
+
+      def update(contents)
+        write(contents, 'a')
+      end
+
+      private
+
+      def write(contents, mode)
+        open(mode) { |file| file.write(contents) }
+      end
     end
   end
 end

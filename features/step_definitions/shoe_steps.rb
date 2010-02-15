@@ -5,7 +5,6 @@ Given /^I have created a project called "([^\"]*)"$/ do |name|
     gem 'shoe'
   END
   run('bundle exec shoe', name)
-  append_file("#{name}/Gemfile", "gem '#{name}', :path => File.expand_path('..', __FILE__)")
 end
 
 Given /^I have created a directory called "([^\"]*)"$/ do |name|
