@@ -177,7 +177,7 @@ class Shoe
   end
 
   def there_is_no_tag_for(tag)
-    !File.file?(".git/refs/tags/#{tag}")
+    !`git tag`.to_a.include?("#{tag}\n")
   end
 
   def version_tag(version)
@@ -185,7 +185,7 @@ class Shoe
   end
 
   def we_are_on_the_master_branch
-    File.file?('.git/HEAD') && File.read('.git/HEAD').strip == 'ref: refs/heads/master'
+    `git symbolic-ref HEAD`.strip == 'refs/heads/master'
   end
 
   def there_is_a_remote_called(name)
