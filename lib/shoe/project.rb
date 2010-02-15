@@ -12,7 +12,7 @@ module Shoe
         spec.name             = name
         spec.version          = version
         spec.summary          = summary
-        spec.files            = FileList['Rakefile', '*.gemspec', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*']
+        spec.files            = FileList['Rakefile', '*.gemspec', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*']
         spec.executables      = everything_in_the_bin_directory
         spec.extensions       = FileList['ext/**/extconf.rb']
         spec.extra_rdoc_files = FileList['shoulda_macros/**/*']
@@ -25,23 +25,6 @@ module Shoe
     def define_tasks
       Shoe::Tasks.each do |task|
         task.define(spec)
-      end
-
-      if File.directory?('features')
-        begin
-          require 'cucumber/rake/task'
-        rescue LoadError
-          # no cuke for you
-        else
-          Cucumber::Rake::Task.new(:cucumber, 'Run features') { |task| task.cucumber_opts = '--tags ~@wip' }
-          default_depends_on(:cucumber)
-
-          if there_are_any_work_in_progress_features
-            namespace :cucumber do
-              Cucumber::Rake::Task.new(:wip, 'Run work-in-progress features') { |task| task.cucumber_opts = '--tags @wip --wip' }
-            end
-          end
-        end
       end
 
       desc 'Show latest gemspec contents'
