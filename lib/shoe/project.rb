@@ -12,7 +12,7 @@ module Shoe
         spec.name             = name
         spec.version          = version
         spec.summary          = summary
-        spec.files            = FileList['Rakefile', '*.gemspec', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*']
+        spec.files            = FileList['Rakefile', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*']
         spec.executables      = everything_in_the_bin_directory
         spec.extensions       = FileList['ext/**/extconf.rb']
         spec.extra_rdoc_files = FileList['shoulda_macros/**/*']
@@ -30,33 +30,6 @@ module Shoe
       desc 'Show latest gemspec contents'
       task :gemspec do
         puts spec.to_ruby
-      end
-
-      if releasable?
-        desc "Release #{spec.name}-#{spec.version}"
-        task :release do
-          File.open("#{spec.name}.gemspec", 'w') do |stream|
-            stream.write(spec.to_ruby)
-          end
-
-          sh "git add #{spec.name}.gemspec"
-          sh "git commit -a -m 'Release #{spec.version}'"
-          sh "git tag #{version_tag(spec.version)}"
-
-          if there_is_no_tag_for('semver')
-            sh 'git tag semver'
-          end
-
-          if there_is_a_remote_called('origin')
-            sh 'git push origin master'
-            sh 'git push --tags origin'
-          end
-
-          sh "gem build #{spec.name}.gemspec"
-          if Gem::CommandManager.instance.command_names.include?('push')
-            sh "gem push #{spec.file_name}"
-          end
-        end
       end
 
       if File.directory?('ext')
@@ -89,34 +62,6 @@ module Shoe
 
     def everything_in_the_bin_directory
       File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
-    end
-
-    def releasable?
-      spec.version > Gem::Version.new('0.0.0') &&
-        there_is_no_tag_for(version_tag(spec.version)) &&
-        we_are_on_the_master_branch
-    end
-
-    def there_are_any_work_in_progress_features
-      Dir.glob('features/**/*.feature').detect do |path|
-        File.read(path).include?('@wip')
-      end
-    end
-
-    def there_is_no_tag_for(tag)
-      !`git tag`.to_a.include?("#{tag}\n")
-    end
-
-    def version_tag(version)
-      "v#{spec.version}"
-    end
-
-    def we_are_on_the_master_branch
-      `git symbolic-ref HEAD`.strip == 'refs/heads/master'
-    end
-
-    def there_is_a_remote_called(name)
-      `git remote`.to_a.include?("#{name}\n")
     end
   end
 end

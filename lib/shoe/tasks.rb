@@ -56,6 +56,9 @@ end
 
 require 'shoe/tasks/clean'
 require 'shoe/tasks/rdoc'
+require 'shoe/tasks/release'
 require 'shoe/tasks/shell'
 require 'shoe/tasks/test'
+
+# put cucumber last so tests will run before features
 require 'shoe/tasks/cucumber'
