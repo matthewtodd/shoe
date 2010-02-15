@@ -105,13 +105,20 @@ class Shoe
       puts spec.to_ruby
     end
 
-    if the_current_version_is_greater_than_zero && there_is_no_tag_for_the_current_version && we_are_on_the_master_branch
+    if releasable?
       desc "Release #{spec.name}-#{spec.version}"
       task :release do
-        File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
+        File.open("#{spec.name}.gemspec", 'w') do |stream|
+          stream.write(spec.to_ruby)
+        end
+
         sh "git add #{spec.name}.gemspec"
         sh "git commit -a -m 'Release #{spec.version}'"
-        sh "git tag v#{spec.version}"
+        sh "git tag #{version_tag(spec.version)}"
+
+        if there_is_no_tag_for('semver')
+          sh 'git tag semver'
+        end
 
         if there_is_a_remote_called_origin
           sh 'git push origin master'
@@ -119,7 +126,6 @@ class Shoe
         end
 
         sh "gem build #{spec.name}.gemspec"
-
         if Gem::CommandManager.instance.command_names.include?('push')
           sh "gem push #{spec.file_name}"
         end
@@ -158,8 +164,10 @@ class Shoe
     File.directory?('bin') ? Dir.entries('bin') - ['.', '..'] : []
   end
 
-  def the_current_version_is_greater_than_zero
-    spec.version > Gem::Version.new('0.0.0')
+  def releasable?
+    spec.version > Gem::Version.new('0.0.0') &&
+      there_is_no_tag_for(version_tag(spec.version)) &&
+      we_are_on_the_master_branch
   end
 
   def there_are_any_work_in_progress_features
@@ -168,8 +176,12 @@ class Shoe
     end
   end
 
-  def there_is_no_tag_for_the_current_version
-    !File.file?(".git/refs/tags/v#{spec.version}")
+  def there_is_no_tag_for(tag)
+    !File.file?(".git/refs/tags/#{tag}")
+  end
+
+  def version_tag(version)
+    "v#{spec.version}"
   end
 
   def we_are_on_the_master_branch
