@@ -6,6 +6,10 @@ module Shoe
     # MAYBE be a little more forgiving in test selection, using
     # test/**/*_test.rb. Or create suites based on subdirectory?
     class Test < AbstractTask
+      def active?
+        File.directory?('test')
+      end
+
       def define
         Rake::TestTask.new do |task|
           task.libs    = ['lib', 'test']
@@ -13,10 +17,6 @@ module Shoe
         end
 
         before(:default, :test)
-      end
-
-      def should_define?
-        File.directory?('test')
       end
 
       def update_spec

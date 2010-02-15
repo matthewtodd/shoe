@@ -2,6 +2,10 @@ module Shoe
   module Tasks
 
     class Cucumber < AbstractTask
+      def active?
+        File.directory?('features')
+      end
+
       def define
         begin
           require 'cucumber/rake/task'
@@ -10,10 +14,6 @@ module Shoe
         else
           define_tasks
         end
-      end
-
-      def should_define?
-        File.directory?('features')
       end
 
       def update_spec

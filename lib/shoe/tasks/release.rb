@@ -2,6 +2,14 @@ module Shoe
   module Tasks
 
     class Release < AbstractTask
+      def active?
+        spec.extend(VersionExtensions)
+
+        spec.has_version_greater_than?('0.0.0') &&
+          there_is_no_tag_for(version_tag(spec.version)) &&
+          we_are_on_the_master_branch
+      end
+
       def define
         desc "Release #{spec.full_name}"
         task :release do
@@ -29,16 +37,8 @@ module Shoe
         end
       end
 
-      def should_define?
-        spec.has_version_greater_than?('0.0.0') &&
-          there_is_no_tag_for(version_tag(spec.version)) &&
-          we_are_on_the_master_branch
-      end
-
       def update_spec
         spec.files += Rake::FileList['*.gemspec']
-
-        spec.extend(VersionExtensions)
       end
 
       private

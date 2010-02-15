@@ -19,30 +19,28 @@ module Shoe
 
     extend Registration
 
-    class AbstractTask
+    class AbstractTask < Struct.new(:spec)
       def self.inherited(subclass)
         Shoe::Tasks.register(subclass)
       end
 
       def self.define(spec)
         task = new(spec)
-        task.define if task.should_define?
+
+        if task.active?
+          task.update_spec
+          task.define
+        end
+
         task
       end
 
-      attr_reader :spec
-
-      def initialize(spec)
-        @spec = spec
-        update_spec
+      def active?
+        true
       end
 
       def define
         # no-op
-      end
-
-      def should_define?
-        true
       end
 
       def update_spec

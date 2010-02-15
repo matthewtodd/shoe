@@ -4,6 +4,10 @@ module Shoe
   module Tasks
 
     class Rdoc < AbstractTask
+      def active?
+        File.directory?('lib')
+      end
+
       def define
         desc 'Generate documentation'
         task :rdoc do
@@ -18,10 +22,6 @@ module Shoe
             sh 'firefox rdoc/index.html'
           end
         end
-      end
-
-      def should_define?
-        File.directory?('lib')
       end
 
       def update_spec

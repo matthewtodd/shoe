@@ -4,6 +4,10 @@ module Shoe
   module Tasks
 
     class Compile < AbstractTask
+      def active?
+        File.directory?('ext')
+      end
+
       def define
         desc 'Compile C extensions'
         task :compile do
@@ -30,10 +34,6 @@ module Shoe
         ).each do |name|
           before_existing(name, :compile)
         end
-      end
-
-      def should_define?
-        File.directory?('ext')
       end
 
       def update_spec
