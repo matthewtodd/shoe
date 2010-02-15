@@ -33,17 +33,6 @@ module Shoe
         update_spec
       end
 
-      def before(name, dependency)
-        desc Rake::Task[dependency].comment
-        task name => dependency
-      end
-
-      def before_existing(name, dependency)
-        if Rake::Task.task_defined?(name)
-          task name => dependency
-        end
-      end
-
       def define
         # no-op
       end
@@ -54,6 +43,19 @@ module Shoe
 
       def update_spec
         # no-op
+      end
+
+      private
+
+      def before(name, dependency)
+        desc Rake::Task[dependency].comment
+        task name => dependency
+      end
+
+      def before_existing(name, dependency)
+        if Rake::Task.task_defined?(name)
+          task name => dependency
+        end
       end
     end
 
