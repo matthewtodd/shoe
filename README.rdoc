@@ -1,15 +1,14 @@
 = Shoe
 
-You probably don't want to use Shoe -- especially if you're like me!
+You probably don't want to use shoe -- especially if you're like me!
 
-I like tinkering with my build scripts. That's why I don't use
+I like tinkering with my build scripts, so I made shoe, even though
 hoe[http://seattlerb.rubyforge.org/hoe] and
-jeweler[http://github.com/technicalpickles/jeweler] and those guys, even though
-they're awesome. I like to put my own thing together, so I made Shoe.
+jeweler[http://github.com/technicalpickles/jeweler] are awesome.
 
 == Behold
 
-Here's how your Rakefile looks:
+Here's how your +Rakefile+ looks:
 
  require 'shoe'
  require 'my_project/version'
@@ -35,7 +34,7 @@ And here's what you get, at most:
 Most of the time, though, you won't see all of these: when possible, tasks are
 conditionally defined.
 
-See what I mean by reading Shoe#define_tasks.
+See what I mean by reading <tt>Shoe#define_tasks</tt>.
 
 == Getting Started with Bundler[http://github.com/carlhuda/bundler]
 
@@ -48,7 +47,7 @@ Open a sub-shell configured for the bundler environment:
 
  $ bundle exec bash
 
-Use shoe to generate some skeleton project files:
+Use +shoe+ to generate some skeleton project files:
 
  $ shoe
 
