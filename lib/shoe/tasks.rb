@@ -1,11 +1,7 @@
 module Shoe
   module Tasks
 
-    class << self
-      def tasks
-        @tasks ||= []
-      end
-
+    module Registration
       def register(task)
         tasks.push(task)
       end
@@ -13,7 +9,15 @@ module Shoe
       def each(&block)
         tasks.each(&block)
       end
+
+      private
+
+      def tasks
+        @tasks ||= []
+      end
     end
+
+    extend Registration
 
     class AbstractTask
       def self.inherited(subclass)
