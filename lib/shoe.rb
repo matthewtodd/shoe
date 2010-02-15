@@ -105,15 +105,19 @@ class Shoe
       puts spec.to_ruby
     end
 
-    if the_current_version_is_greater_than_zero && there_is_no_tag_for_the_current_version && we_are_on_the_master_branch && we_have_already_pushed_the_master_branch_to_a_remote_called_origin
+    if the_current_version_is_greater_than_zero && there_is_no_tag_for_the_current_version && we_are_on_the_master_branch
       desc "Release #{spec.name}-#{spec.version}"
       task :release do
         File.open("#{spec.name}.gemspec", 'w') { |f| f.write spec.to_ruby }
         sh "git add #{spec.name}.gemspec"
         sh "git commit -a -m 'Release #{spec.version}'"
         sh "git tag v#{spec.version}"
-        sh 'git push'
-        sh 'git push --tags'
+
+        if there_is_a_remote_called_origin
+          sh 'git push origin master'
+          sh 'git push --tags origin'
+        end
+
         sh "gem build #{spec.name}.gemspec"
 
         if Gem::CommandManager.instance.command_names.include?('push')
@@ -172,8 +176,8 @@ class Shoe
     File.file?('.git/HEAD') && File.read('.git/HEAD').strip == 'ref: refs/heads/master'
   end
 
-  def we_have_already_pushed_the_master_branch_to_a_remote_called_origin
-    File.file?('.git/refs/remotes/origin/master')
+  def there_is_a_remote_called_origin
+    `git remote`.include?('origin')
   end
 
   # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
