@@ -1,4 +1,3 @@
-require 'rubygems/doc_manager'
 require 'rubygems/ext'
 
 module Shoe
@@ -13,12 +12,10 @@ module Shoe
         spec.name             = name
         spec.version          = version
         spec.summary          = summary
-        spec.files            = FileList['Rakefile', '*.gemspec', '**/*.rdoc', 'bin/**/*', 'examples/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*', 'test/**/*'].to_a
+        spec.files            = FileList['Rakefile', '*.gemspec', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*', 'test/**/*']
         spec.executables      = everything_in_the_bin_directory
-        spec.extensions       = FileList['ext/**/extconf.rb'].to_a
-        spec.rdoc_options     = %W(--main README.rdoc --title #{name}-#{version} --inline-source) # MAYBE include --all, so that we document private methods?
-        spec.extra_rdoc_files = FileList['**/*.rdoc', 'shoulda_macros/**/*'].to_a
-        spec.has_rdoc         = true
+        spec.extensions       = FileList['ext/**/extconf.rb']
+        spec.extra_rdoc_files = FileList['shoulda_macros/**/*']
         spec.author           = `git config --get user.name`.chomp
         spec.email            = `git config --get user.email`.chomp
       end
@@ -27,23 +24,7 @@ module Shoe
     # This is where the magic happens.
     def define_tasks
       Shoe::Tasks.each do |task|
-        task.new(spec).define
-      end
-
-      if File.directory?('lib')
-        desc 'Generate documentation'
-        task :rdoc do
-          LocalDocManager.new(spec).generate_rdoc
-
-          case RUBY_PLATFORM
-          when /darwin/
-            sh 'open rdoc/index.html'
-          when /mswin|mingw/
-            sh 'start rdoc\index.html'
-          else
-            sh 'firefox rdoc/index.html'
-          end
-        end
+        task.define(spec)
       end
 
       if File.file?("lib/#{spec.name}.rb")
@@ -171,23 +152,5 @@ module Shoe
     def there_is_a_remote_called(name)
       `git remote`.to_a.include?("#{name}\n")
     end
-
-    # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
-    # rdoc *exactly* as users who install your gem will.
-    class LocalDocManager < Gem::DocManager #:nodoc:
-      def initialize(spec)
-        @spec      = spec
-        @doc_dir   = Dir.pwd
-        @rdoc_args = []
-        adjust_spec_so_that_we_can_generate_rdoc_locally
-      end
-
-      def adjust_spec_so_that_we_can_generate_rdoc_locally
-        def @spec.full_gem_path
-          Dir.pwd
-        end
-      end
-    end
-
   end
 end

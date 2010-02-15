@@ -2,8 +2,6 @@ module Shoe
   module Tasks
 
     class << self
-      include Enumerable
-
       def tasks
         @tasks ||= []
       end
@@ -17,25 +15,34 @@ module Shoe
       end
     end
 
-    class AbstractTask < Struct.new(:spec)
+    class AbstractTask
       def self.inherited(subclass)
         Shoe::Tasks.register(subclass)
       end
 
-      def define
-        if should_define_tasks?
-          define_tasks
-        end
+      def self.define(spec)
+        task = new(spec)
+        task.define if task.should_define?
+        task
       end
 
-      private
+      attr_reader :spec
 
-      def should_define_tasks?
+      def initialize(spec)
+        @spec = spec
+        update_spec
+      end
+
+      def define
+        raise "Please implement define in your subclass."
+      end
+
+      def should_define?
         true
       end
 
-      def define_tasks
-        raise "Please implement define_tasks in your subclass."
+      def update_spec
+        # no-op
       end
     end
 
@@ -43,3 +50,4 @@ module Shoe
 end
 
 require 'shoe/tasks/clean'
+require 'shoe/tasks/rdoc'
