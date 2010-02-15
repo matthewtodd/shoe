@@ -1,4 +1,5 @@
-# Shoe defines some handy Rake tasks for your project, all built around your Gem::Specification.
+# Shoe defines some handy Rake tasks for your project, all built around your
+# Gem::Specification.
 #
 # Here's how you use it in your Rakefile:
 #
@@ -8,7 +9,8 @@
 #    # spec.add_runtime_dependency 'dnssd'
 #  end
 #
-# Shoe comes with an executable named "shoe" that will generate a Rakefile like this (but slightly fancier) for you.
+# Shoe comes with an executable named "shoe" that will generate a Rakefile like
+# this (but slightly fancier) for you.
 module Shoe
   autoload :Project, 'shoe/project'
 
