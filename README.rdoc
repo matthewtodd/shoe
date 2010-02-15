@@ -37,10 +37,7 @@ conditionally defined.
 
 See what I mean by reading Shoe#define_tasks.
 
-== Getting Started
-
-It's nice to use bundler[http://github.com/carlhuda/bundler], though
-bootstrapping is a little chicken-and-egg-y.
+== Getting Started with Bundler[http://github.com/carlhuda/bundler]
 
 Start with just shoe in your +Gemfile+:
 
@@ -58,3 +55,18 @@ Use shoe to generate some skeleton project files:
 And then you can poke around with
 
  $ rake -T
+
+== Getting Started Without Bundler
+
+If you're not using bundler, it's probably best not to use the +shoe+
+generator. Instead, just install shoe normally:
+
+ $ gem install shoe
+
+And then <tt>require 'shoe'</tt> and add a <tt>Shoe.tie</tt> clause to your +Rakefile+:
+
+ Shoe.tie('name', 'version', 'description') do |spec|
+ end
+
+Shoe also assumes you have a <tt>README.rdoc</tt>, so you'll need to create one if you
+want to avoid warnings running <tt>`rake rdoc`</tt>.
