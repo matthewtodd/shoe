@@ -33,6 +33,11 @@ module Shoe
         update_spec
       end
 
+      def before(name, dependency)
+        desc Rake.application.lookup(dependency).comment
+        task name => dependency
+      end
+
       def define
         raise "Please implement define in your subclass."
       end
@@ -52,3 +57,4 @@ end
 require 'shoe/tasks/clean'
 require 'shoe/tasks/rdoc'
 require 'shoe/tasks/shell'
+require 'shoe/tasks/test'

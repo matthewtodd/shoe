@@ -12,7 +12,7 @@ module Shoe
         spec.name             = name
         spec.version          = version
         spec.summary          = summary
-        spec.files            = FileList['Rakefile', '*.gemspec', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*', 'test/**/*']
+        spec.files            = FileList['Rakefile', '*.gemspec', 'bin/**/*', 'ext/**/extconf.rb', 'ext/**/*.c', 'features/**/*', 'lib/**/*', 'resources/**/*', 'shoulda_macros/**/*']
         spec.executables      = everything_in_the_bin_directory
         spec.extensions       = FileList['ext/**/extconf.rb']
         spec.extra_rdoc_files = FileList['shoulda_macros/**/*']
@@ -25,16 +25,6 @@ module Shoe
     def define_tasks
       Shoe::Tasks.each do |task|
         task.define(spec)
-      end
-
-      if File.directory?('test')
-        require 'rake/testtask'
-        # MAYBE be a little more forgiving in test selection, using test/**/*_test.rb. Or create suites based on subdirectory?
-        Rake::TestTask.new do |task|
-          task.libs    = ['lib', 'test']
-          task.pattern = 'test/*_test.rb'
-        end
-        default_depends_on(:test)
       end
 
       if File.directory?('features')
