@@ -10,7 +10,7 @@ module Shoe
         spec.name             = name
         spec.version          = version
         spec.summary          = summary
-        spec.files            = FileList['Rakefile', 'lib/**/*', 'resources/**/*']
+        spec.files            = FileList['Rakefile', 'lib/**/*']
         spec.author           = `git config --get user.name`.chomp
         spec.email            = `git config --get user.email`.chomp
       end
