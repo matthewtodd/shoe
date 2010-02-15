@@ -62,6 +62,7 @@ end
 
 require 'shoe/tasks/bin'
 require 'shoe/tasks/clean'
+require 'shoe/tasks/gemspec'
 require 'shoe/tasks/rdoc'
 require 'shoe/tasks/release'
 require 'shoe/tasks/shell'
