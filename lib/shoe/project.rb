@@ -27,13 +27,6 @@ module Shoe
         task.define(spec)
       end
 
-      if File.file?("lib/#{spec.name}.rb")
-        desc 'Run an irb console'
-        task :shell do
-          exec 'irb', '-Ilib', "-r#{spec.name}"
-        end
-      end
-
       if File.directory?('test')
         require 'rake/testtask'
         # MAYBE be a little more forgiving in test selection, using test/**/*_test.rb. Or create suites based on subdirectory?

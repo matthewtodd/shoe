@@ -51,3 +51,4 @@ end
 
 require 'shoe/tasks/clean'
 require 'shoe/tasks/rdoc'
+require 'shoe/tasks/shell'
