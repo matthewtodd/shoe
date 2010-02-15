@@ -1,3 +1,3 @@
-class Shoe
+module Shoe
   VERSION = '0.1.3'
 end
