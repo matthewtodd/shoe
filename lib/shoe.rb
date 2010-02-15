@@ -120,7 +120,7 @@ class Shoe
           sh 'git tag semver'
         end
 
-        if there_is_a_remote_called_origin
+        if there_is_a_remote_called('origin')
           sh 'git push origin master'
           sh 'git push --tags origin'
         end
@@ -188,8 +188,8 @@ class Shoe
     File.file?('.git/HEAD') && File.read('.git/HEAD').strip == 'ref: refs/heads/master'
   end
 
-  def there_is_a_remote_called_origin
-    `git remote`.include?('origin')
+  def there_is_a_remote_called(name)
+    `git remote`.to_a.include?("#{name}\n")
   end
 
   # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
