@@ -2,7 +2,10 @@
 
 You probably don't want to use Shoe -- especially if you're like me!
 
-I like tinkering with my build scripts. That's why I don't use hoe[http://seattlerb.rubyforge.org/hoe] and jeweler[http://github.com/technicalpickles/jeweler] and those guys, even though they're awesome. I like to put my own thing together, so I made Shoe.
+I like tinkering with my build scripts. That's why I don't use
+hoe[http://seattlerb.rubyforge.org/hoe] and
+jeweler[http://github.com/technicalpickles/jeweler] and those guys, even though
+they're awesome. I like to put my own thing together, so I made Shoe.
 
 == Behold
 
@@ -29,13 +32,15 @@ And here's what you get, at most:
  rake shell         # Run an irb console
  rake test          # Run tests
 
-Most of the time, though, you won't see all of these: when possible, tasks are conditionally defined.
+Most of the time, though, you won't see all of these: when possible, tasks are
+conditionally defined.
 
 See what I mean by reading Shoe#define_tasks.
 
 == Getting Started
 
-It's nice to use bundler[http://github.com/carlhuda/bundler], though bootstrapping is a little chicken-and-egg-y.
+It's nice to use bundler[http://github.com/carlhuda/bundler], though
+bootstrapping is a little chicken-and-egg-y.
 
 Start with just shoe in your +Gemfile+:
 
