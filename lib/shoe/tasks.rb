@@ -34,8 +34,14 @@ module Shoe
       end
 
       def before(name, dependency)
-        desc Rake.application.lookup(dependency).comment
+        desc Rake::Task[dependency].comment
         task name => dependency
+      end
+
+      def before_existing(name, dependency)
+        if Rake::Task.task_defined?(name)
+          task name => dependency
+        end
       end
 
       def define
@@ -60,5 +66,8 @@ require 'shoe/tasks/release'
 require 'shoe/tasks/shell'
 require 'shoe/tasks/test'
 
-# put cucumber last so tests will run before features
+# put cucumber toward the end so tests will run before features
 require 'shoe/tasks/cucumber'
+
+# put compile last so it can register itself as a dependency
+require 'shoe/tasks/compile'
