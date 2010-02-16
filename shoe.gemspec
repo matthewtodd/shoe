@@ -2,17 +2,17 @@
 
 Gem::Specification.new do |s|
   s.name = %q{shoe}
-  s.version = "0.1.13"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew Todd"]
-  s.date = %q{2009-12-26}
+  s.date = %q{2010-02-16}
   s.default_executable = %q{shoe}
   s.email = %q{matthew.todd@gmail.com}
   s.executables = ["shoe"]
-  s.extra_rdoc_files = ["README.rdoc"]
-  s.files = ["Rakefile", "shoe.gemspec", "README.rdoc", "bin/shoe", "features/cucumber.feature", "features/getting_started.feature", "features/release.feature", "features/step_definitions", "features/step_definitions/shoe_steps.rb", "features/support", "features/support/env.rb", "lib/shoe.rb"]
-  s.rdoc_options = ["--main", "README.rdoc", "--title", "shoe-0.1.13", "--inline-source"]
+  s.extra_rdoc_files = ["BUNDLER.rdoc", "README.rdoc"]
+  s.files = ["Rakefile", "lib/shoe", "lib/shoe/cli.rb", "lib/shoe/project.rb", "lib/shoe/tasks", "lib/shoe/tasks/bin.rb", "lib/shoe/tasks/clean.rb", "lib/shoe/tasks/compile.rb", "lib/shoe/tasks/cucumber.rb", "lib/shoe/tasks/gemspec.rb", "lib/shoe/tasks/rdoc.rb", "lib/shoe/tasks/release.rb", "lib/shoe/tasks/resources.rb", "lib/shoe/tasks/shell.rb", "lib/shoe/tasks/shoulda.rb", "lib/shoe/tasks/test.rb", "lib/shoe/tasks.rb", "lib/shoe/templates", "lib/shoe/templates/gemfile.erb", "lib/shoe/templates/rakefile.erb", "lib/shoe/templates/readme.erb", "lib/shoe/templates/version.erb", "lib/shoe/version.rb", "lib/shoe.rb", "bin/shoe", "BUNDLER.rdoc", "README.rdoc", "shoe.gemspec", "features/cucumber.feature", "features/getting_started.feature", "features/release.feature", "features/step_definitions", "features/step_definitions/shoe_steps.rb", "features/support", "features/support/env.rb"]
+  s.rdoc_options = ["--main", "README.rdoc", "--title", "shoe-0.2.0", "--inline-source"]
   s.require_paths = ["lib"]
   s.requirements = ["git"]
   s.rubygems_version = %q{1.3.5}
@@ -23,17 +23,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<cucumber>, [">= 0"])
-      s.add_runtime_dependency(%q<gemcutter>, [">= 0"])
       s.add_runtime_dependency(%q<rake>, [">= 0"])
     else
-      s.add_dependency(%q<cucumber>, [">= 0"])
-      s.add_dependency(%q<gemcutter>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
     end
   else
-    s.add_dependency(%q<cucumber>, [">= 0"])
-    s.add_dependency(%q<gemcutter>, [">= 0"])
     s.add_dependency(%q<rake>, [">= 0"])
   end
 end
