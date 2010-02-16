@@ -42,8 +42,21 @@ module Shoe
           end
 
           sh "gem build #{spec.name}.gemspec"
+
           if Gem::CommandManager.instance.command_names.include?('push')
             sh "gem push #{spec.file_name}"
+          else
+            $stderr.puts <<-END.gsub(/^ +/, '')
+            ---------------------------------------------
+            GEMCUTTER WARNING
+
+            It seems you don't have gemcutter installed.
+
+            Please `gem install gemcutter` and
+            `gem push #{spec.file_name}`
+            if you would like to make a public release.
+            ---------------------------------------------
+            END
           end
         end
       end
