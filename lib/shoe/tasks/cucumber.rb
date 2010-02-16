@@ -34,6 +34,7 @@ module Shoe
         end
 
         before(:default, 'cucumber:ok')
+        before(:default, 'cucumber:wip')
       end
     end
 
