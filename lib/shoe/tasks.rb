@@ -1,29 +1,38 @@
 module Shoe
   module Tasks
 
-    module Registration
-      def register(task)
-        tasks.push(task)
-      end
+    autoload :Bin,       'shoe/tasks/bin'
+    autoload :Clean,     'shoe/tasks/clean'
+    autoload :Compile,   'shoe/tasks/compile'
+    autoload :Cucumber,  'shoe/tasks/cucumber'
+    autoload :Gemspec,   'shoe/tasks/gemspec'
+    autoload :Rdoc,      'shoe/tasks/rdoc'
+    autoload :Release,   'shoe/tasks/release'
+    autoload :Resources, 'shoe/tasks/resources'
+    autoload :Shell,     'shoe/tasks/shell'
+    autoload :Shoulda,   'shoe/tasks/shoulda'
+    autoload :Test,      'shoe/tasks/test'
 
-      def each(&block)
-        tasks.each(&block)
-      end
+    LOAD_ORDER = %w(
+      Bin
+      Clean
+      Gemspec
+      Rdoc
+      Release
+      Resources
+      Shell
+      Shoulda
+      Test
+      Cucumber
+      Compile
+    )
 
-      private
-
-      def tasks
-        @tasks ||= []
-      end
+    def self.each
+      LOAD_ORDER.map { |name| const_get name }.
+                each { |task| yield task }
     end
 
-    extend Registration
-
-    class AbstractTask < Struct.new(:spec)
-      def self.inherited(subclass)
-        Shoe::Tasks.register(subclass)
-      end
-
+    class AbstractTask
       def self.define(spec)
         task = new(spec)
 
@@ -33,6 +42,12 @@ module Shoe
         end
 
         task
+      end
+
+      attr_reader :spec
+
+      def initialize(spec)
+        @spec = spec
       end
 
       def active?
@@ -63,19 +78,3 @@ module Shoe
 
   end
 end
-
-require 'shoe/tasks/bin'
-require 'shoe/tasks/clean'
-require 'shoe/tasks/gemspec'
-require 'shoe/tasks/rdoc'
-require 'shoe/tasks/release'
-require 'shoe/tasks/resources'
-require 'shoe/tasks/shell'
-require 'shoe/tasks/shoulda'
-require 'shoe/tasks/test'
-
-# put cucumber toward the end so tests will run before features
-require 'shoe/tasks/cucumber'
-
-# put compile last so it can register itself as a dependency
-require 'shoe/tasks/compile'
