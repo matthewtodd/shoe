@@ -40,22 +40,24 @@ See what I mean by reading <tt>Shoe#define_tasks</tt>.
 
 === With Bundler[http://github.com/carlhuda/bundler]
 
-Start with just shoe in your +Gemfile+:
+1. Start with just shoe in your +Gemfile+:
 
- source :gemcutter
- gem 'shoe'
+    source :gemcutter
+    gem 'shoe'
 
-Open a sub-shell configured for the bundler environment: (See Notes on <tt>`bundle exec bash`</tt>, below.)
+2. Open a sub-shell configured for the bundler environment:
 
- $ bundle exec $SHELL
+    $ bundle exec $SHELL
 
-Use +shoe+ to generate some skeleton project files:
+   (See BUNDLER.rdoc if you run into trouble with <tt>`bundle exec`</tt>.)
 
- $ shoe
+3. Use +shoe+ to generate some skeleton project files:
 
-And then you can poke around with
+    $ shoe
 
- $ rake -T
+4. And then you can poke around with
+
+    $ rake -T
 
 === Without Bundler
 
@@ -72,42 +74,3 @@ And then <tt>require 'shoe'</tt> and add a <tt>Shoe.tie</tt> clause to your +Rak
 
 Shoe also assumes you have a <tt>README.rdoc</tt>, so you'll need to create one if you
 want to avoid warnings running <tt>`rake rdoc`</tt>.
-
-== Notes on <tt>`bundle exec bash`</tt>
-
-If your <tt>$SHELL</tt> happens to be +bash+, you may run into some of the same problems I did.
-
-Here they are, with fixes:
-
-=== Functions and Aliases Aren't Available
-
-I had all of my +bash+ configuration in <tt>~/.profile</tt>. But,
-<tt>~/.profile</tt> isn't read when you execute +bash+ from the command-line
-(i.e. as a non-login shell), and only environment variables are inherited from
-the parent shell; not functions, aliases, or completion rules.
-
-So, just move all your non-environment-variable configuration out of
-<tt>~/.profile</tt> and into <tt>~/.bashrc</tt>, and then add something like
-this to your <tt>~/.profile</tt>:
-
- if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
- fi
-
-=== Prompts are SLOW!
-
-Once I got that sorted, I still had the problem that my bash prompts were way
-slow to generate. I was using the <tt>__git_ps1</tt> function and had the
-standalone version of Chris Wanstrath's hub[http://github.com/defunkt/hub]
-installed, with <tt>alias git=hub</tt> in my <tt>~/.bashrc</tt>.
-
-The issue is that <tt>`bundle exec`</tt> adds <tt>-rbundler/setup</tt> to the
-+RUBYOPT+ environment variable, so every +ruby+ invocation first requires all
-of your bundled gems. Since +hub+ is a ruby script, and <tt>__git_ps1</tt>
-invokes +git+ multiple times, generating a prompt gets expensive quickly. I was
-seeing something like 3-second delays!
-
-One way to work around this issue is to change the way you call +hub+, clearing
-out +RUBYOPT+ first:
-
- $ alias git='RUBYOPT= hub'
