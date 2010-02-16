@@ -10,17 +10,9 @@ module Shoe
         begin
           require 'cucumber/rake/task'
         rescue LoadError
-          $stderr.puts <<-END.gsub(/^ +/, '')
-          ---------------------------------------------
-          CUCUMBER WARNING
-
-          Although you have a features directory,
-          it seems you don't have cucumber installed.
-
-          You probably want to add a "gem 'cucumber'"
-          line to your Gemfile.
-          ---------------------------------------------
-          END
+          warn 'cucumber',
+            "Although you have a features directory, it seems you don't have cucumber installed.",
+            "You probably want to add a \"gem 'cucumber'\" to your Gemfile."
         else
           define_tasks
         end

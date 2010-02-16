@@ -74,6 +74,35 @@ module Shoe
           task name => dependency
         end
       end
+
+      def warn(subject, *paragraphs)
+        message = StringIO.new
+        width   = 72
+
+        message.puts '-' * width
+        message.puts "#{subject} warning from shoe".upcase
+        paragraphs.each do |paragraph|
+          message.puts
+          message.puts wrap(paragraph, width)
+        end
+        message.puts '-' * width
+
+        $stderr.write yellow(message.string)
+        $stderr.flush
+      end
+
+      # blatantly stolen from Gem::Command
+      def wrap(text, width)
+        text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
+      end
+
+      def yellow(string)
+        if $stderr.tty?
+          "\e[33m#{string}\e[0m"
+        else
+          string
+        end
+      end
     end
 
   end

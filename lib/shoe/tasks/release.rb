@@ -22,18 +22,10 @@ module Shoe
           sh "git tag #{version_tag(spec.version)}"
 
           if there_is_no_tag_for('semver')
-            $stderr.puts <<-END.gsub(/^ +/, '')
-            ---------------------------------------------
-            SEMANTIC VERSIONING WARNING
-
-            It seems you don't yet have a 'semver' tag.
-
-            Please read more about the emerging consensus
-            around semantic versioning:
-
-            http://semver.org/
-            ---------------------------------------------
-            END
+            warn 'semantic versioning',
+              "It seems you don't yet have a 'semver' tag.",
+              'Please read more about the emerging consensus around semantic versioning:',
+              'http://semver.org'
           end
 
           if there_is_a_remote_called('origin')
@@ -46,17 +38,9 @@ module Shoe
           if Gem::CommandManager.instance.command_names.include?('push')
             sh "gem push #{spec.file_name}"
           else
-            $stderr.puts <<-END.gsub(/^ +/, '')
-            ---------------------------------------------
-            GEMCUTTER WARNING
-
-            It seems you don't have gemcutter installed.
-
-            Please `gem install gemcutter` and
-            `gem push #{spec.file_name}`
-            if you would like to make a public release.
-            ---------------------------------------------
-            END
+            warn 'gemcutter',
+              "It seems you don't have gemcutter installed.",
+              "Please `gem install gemcutter` and `gem push #{spec.file_name}` if you would like to make a public release."
           end
         end
       end
