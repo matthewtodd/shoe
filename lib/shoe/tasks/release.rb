@@ -22,7 +22,18 @@ module Shoe
           sh "git tag #{version_tag(spec.version)}"
 
           if there_is_no_tag_for('semver')
-            sh 'git tag semver'
+            $stderr.puts <<-END.gsub(/^ +/, '')
+            ---------------------------------------------
+            SEMANTIC VERSIONING WARNING
+
+            It seems you don't yet have a 'semver' tag.
+
+            Please read more about the emerging consensus
+            around semantic versioning:
+
+            http://semver.org/
+            ---------------------------------------------
+            END
           end
 
           if there_is_a_remote_called('origin')
