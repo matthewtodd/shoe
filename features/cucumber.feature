@@ -10,6 +10,7 @@ Feature: Cucumber
 
   Scenario: Running rake --tasks in a shoe project with Cucumber features
     Given I have created a project called "my_project"
+    And I have appended "gem 'cucumber'" to "my_project/Gemfile"
     And I have created a directory called "my_project/features"
     When I run bundle exec rake --tasks inside "my_project"
     Then I should see "rake cucumber" on standard out

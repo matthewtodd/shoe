@@ -19,6 +19,10 @@ Given /^I have created a file called "([^\"]*)" containing:$/ do |path, contents
   create_file(path, contents)
 end
 
+Given /^I have appended "([^\"]*)" to "([^\"]*)"$/ do |contents, path|
+  append_file(path, contents)
+end
+
 When /^I replace "([^\"]*)" with "([^\"]*)" in the file "([^\"]*)"$/ do |search, replace, path|
   edit_file(path, search, replace)
 end
