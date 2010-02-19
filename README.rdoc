@@ -49,7 +49,8 @@ See what I mean by reading <tt>Shoe#define_tasks</tt>.
 
     $ bundle exec $SHELL
 
-   (See BUNDLER.rdoc if you run into trouble with <tt>`bundle exec`</tt>.)
+   (If you run into trouble, {this blog
+   post}[http://matthewtodd.org/2010/02/19/bundle-exec-bash.html] may help.)
 
 3. Use +shoe+ to generate some skeleton project files:
 
