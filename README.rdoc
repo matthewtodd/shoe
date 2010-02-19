@@ -1,17 +1,19 @@
 = Shoe
 
-You probably don't want to use shoe -- especially if you're like me!
+Shoe defines some handy Rake tasks for your project, all built around your
+Gem::Specification.
 
-I like tinkering with my build scripts, so I made shoe, even though
+Shoe is a small blip in the grand tradition of more popular projects like
 hoe[http://seattlerb.rubyforge.org/hoe] and
-jeweler[http://github.com/technicalpickles/jeweler] are awesome.
+jeweler[http://github.com/technicalpickles/jeweler]. I had an itch to scratch,
+you understand.
 
 == Behold
 
 Here's how your +Rakefile+ looks:
 
- require 'shoe'
  require 'my_project/version'
+ require 'shoe'
 
  Shoe.tie('my_project', MyProject::VERSION, "This is my project, and it's awesome!") do |spec|
    # do whatever you want with the Gem::Specification here, for example:
@@ -34,7 +36,7 @@ And here's what you get, at most:
 Most of the time, though, you won't see all of these: when possible, tasks are
 conditionally defined.
 
-See what I mean by reading <tt>Shoe#define_tasks</tt>.
+See what I mean by clicking through the various <tt>Shoe::Tasks</tt>.
 
 == Getting Started
 
