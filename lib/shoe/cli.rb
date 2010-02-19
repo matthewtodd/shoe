@@ -3,7 +3,7 @@
 require 'erb'
 require 'pathname'
 
-class Shoe
+module Shoe
   class CLI
     class << self
       def run
