@@ -44,7 +44,7 @@ See what I mean by clicking through the various <tt>Shoe::Tasks</tt>.
 
 1. Start with just shoe in your +Gemfile+:
 
-    source :gemcutter
+    source :rubygems
     gem 'shoe'
 
 2. Open a sub-shell configured for the bundler environment:

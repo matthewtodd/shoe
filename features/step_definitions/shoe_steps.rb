@@ -1,7 +1,7 @@
 Given /^I have created a project called "([^\"]*)"$/ do |name|
   create_directory(name)
   create_file("#{name}/Gemfile", <<-END.gsub(/^\s*/, ''))
-    source :gemcutter
+    source :rubygems
     gem 'shoe'
   END
   run('bundle exec shoe', name)

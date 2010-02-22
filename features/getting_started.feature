@@ -7,7 +7,7 @@ Feature: Getting started
     Given I have created a directory called "my_project"
     And I have created a file called "my_project/Gemfile" containing:
       """
-      source :gemcutter
+      source :rubygems
       gem 'shoe'
       """
     When I run bundle exec shoe inside "my_project"
@@ -20,7 +20,7 @@ Feature: Getting started
     Given I have created a directory called "my_project"
     And I have created a file called "my_project/Gemfile" containing:
       """
-      source :gemcutter
+      source :rubygems
       gem 'shoe'
       """
     And I have created a file called "my_project/Rakefile" containing "# RAKEFILE CONTENTS"
