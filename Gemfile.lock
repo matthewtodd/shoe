@@ -1,0 +1,41 @@
+--- 
+dependencies: 
+  shoe: 
+    group: 
+    - :default
+    version: ">= 0"
+  rake: 
+    group: 
+    - :default
+    version: ">= 0"
+  cucumber: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- rake: 
+    version: 0.8.7
+- builder: 
+    version: 2.1.2
+- diff-lcs: 
+    version: 1.1.2
+- json_pure: 
+    version: 1.2.3
+- polyglot: 
+    version: 0.3.1
+- term-ansicolor: 
+    version: 1.0.5
+- treetop: 
+    version: 1.4.5
+- cucumber: 
+    version: 0.6.3
+- shoe: 
+    version: 0.2.0
+    source: 0
+hash: 5ca402585f4cc8f2b8f43c7822f48e15ffcac6b4
+sources: 
+- Path: 
+    path: !ruby/object:Pathname 
+      path: /Users/matthew/Code/.inactive/shoe
+- Rubygems: 
+    uri: http://gemcutter.org
