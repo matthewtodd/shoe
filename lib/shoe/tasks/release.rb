@@ -1,3 +1,5 @@
+require 'rubygems/command_manager'
+
 module Shoe
   module Tasks
 
