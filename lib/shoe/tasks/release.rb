@@ -1,5 +1,3 @@
-require 'rubygems/command_manager'
-
 module Shoe
   module Tasks
 
@@ -36,14 +34,7 @@ module Shoe
           end
 
           sh "gem build #{spec.name}.gemspec"
-
-          if Gem::CommandManager.instance.command_names.include?('push')
-            sh "gem push #{spec.file_name}"
-          else
-            warn 'rubygems',
-              "It seems you don't have rubygems 1.3.6 installed.",
-              "Please `gem update --system` and `gem push #{spec.file_name}` if you would like to make a public release."
-          end
+          sh "gem push #{spec.file_name}"
         end
       end
 
