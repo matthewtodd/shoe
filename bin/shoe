@@ -1,3 +1,4 @@
-require 'shoe/cli'
+#!/usr/bin/env ruby
 
+require 'shoe/cli'
 Shoe::CLI.run

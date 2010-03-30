@@ -8,6 +8,10 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  bundler: 
+    group: 
+    - :default
+    version: ">= 0"
   cucumber: 
     group: 
     - :default
@@ -17,6 +21,8 @@ specs:
     version: 0.8.7
 - builder: 
     version: 2.1.2
+- bundler: 
+    version: 0.9.13
 - diff-lcs: 
     version: 1.1.2
 - json_pure: 
@@ -32,7 +38,7 @@ specs:
 - shoe: 
     version: 0.2.0
     source: 0
-hash: 5ca402585f4cc8f2b8f43c7822f48e15ffcac6b4
+hash: da92e6d0d1efc7690c0eda0c3ee7e3c4c6fc3a13
 sources: 
 - Path: 
     path: !ruby/object:Pathname 
