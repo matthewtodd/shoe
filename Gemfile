@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'shoe', :path => File.expand_path('..', __FILE__)
+gem 'shoe', :path => '.'
 
 gem 'bundler'
 gem 'cucumber'

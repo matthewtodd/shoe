@@ -38,10 +38,10 @@ specs:
 - shoe: 
     version: 0.3.0
     source: 0
-hash: da92e6d0d1efc7690c0eda0c3ee7e3c4c6fc3a13
+hash: a62f745ea4d49230a28f18d4a72b2dd810e20037
 sources: 
 - Path: 
     path: !ruby/object:Pathname 
-      path: /Users/matthew/Code/.inactive/shoe
+      path: .
 - Rubygems: 
     uri: http://gemcutter.org
