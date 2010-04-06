@@ -27,31 +27,43 @@ module Shoe
       end
 
       def warn(subject, *paragraphs)
-        message = StringIO.new
-        width   = 72
+        WarningMessage.new(subject, paragraphs).write($stderr)
+      end
 
-        message.puts '-' * width
-        message.puts "#{subject} warning from shoe".upcase
-        paragraphs.each do |paragraph|
-          message.puts
-          message.puts wrap(paragraph, width)
+      class WarningMessage
+        def initialize(subject, paragraphs)
+          @subject    = subject
+          @paragraphs = paragraphs
+          @width      = 72
         end
-        message.puts '-' * width
 
-        $stderr.write yellow(message.string)
-        $stderr.flush
-      end
+        def write(stream)
+          stream.write("\e[33m") if stream.tty?
+          stream.write(self)
+          stream.write("\e[0m") if stream.tty?
+          stream.flush
+        end
 
-      # blatantly stolen from Gem::Command
-      def wrap(text, width)
-        text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
-      end
+        def to_s
+          buffer = StringIO.new
 
-      def yellow(string)
-        if $stderr.tty?
-          "\e[33m#{string}\e[0m"
-        else
-          string
+          buffer.puts '-' * @width
+          buffer.puts "#{@subject} warning from shoe".upcase
+
+          @paragraphs.each do |paragraph|
+            buffer.puts
+            buffer.puts wrap(paragraph, @width)
+          end
+
+          buffer.puts '-' * @width
+          buffer.string
+        end
+
+        private
+
+        # blatantly stolen from Gem::Command
+        def wrap(text, width)
+          text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
         end
       end
     end
