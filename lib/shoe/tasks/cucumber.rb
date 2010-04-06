@@ -1,7 +1,7 @@
 module Shoe
   module Tasks
 
-    class Cucumber < AbstractTask
+    class Cucumber < Abstract
       def active?
         File.directory?('features')
       end

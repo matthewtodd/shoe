@@ -3,7 +3,7 @@ require 'rubygems/ext'
 module Shoe
   module Tasks
 
-    class Compile < AbstractTask
+    class Compile < Abstract
       def active?
         File.directory?('ext')
       end

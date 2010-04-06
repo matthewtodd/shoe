@@ -1,7 +1,7 @@
 module Shoe
   module Tasks
 
-    class Release < AbstractTask
+    class Release < Abstract
       def active?
         spec.extend(VersionExtensions)
 

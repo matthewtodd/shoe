@@ -3,7 +3,7 @@ require 'rubygems/doc_manager'
 module Shoe
   module Tasks
 
-    class Rdoc < AbstractTask
+    class Rdoc < Abstract
       def active?
         File.directory?('lib')
       end

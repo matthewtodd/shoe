@@ -1,7 +1,7 @@
 module Shoe
   module Tasks
 
-    class Clean < AbstractTask
+    class Clean < Abstract
       def active?
         File.directory?('.git')
       end

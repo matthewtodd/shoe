@@ -5,7 +5,7 @@ module Shoe
 
     # MAYBE be a little more forgiving in test selection, using
     # test/**/*_test.rb. Or create suites based on subdirectory?
-    class Test < AbstractTask
+    class Test < Abstract
       def active?
         File.directory?('test')
       end
