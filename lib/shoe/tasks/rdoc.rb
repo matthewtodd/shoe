@@ -4,10 +4,6 @@ module Shoe
   module Tasks
 
     class Rdoc < Abstract
-      def active?
-        File.directory?('lib')
-      end
-
       def define
         desc 'Generate documentation'
         task :rdoc do
@@ -28,7 +24,7 @@ module Shoe
 
       # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
       # rdoc *exactly* as users who install your gem will.
-      class LocalDocManager < Gem::DocManager #:nodoc:
+      class LocalDocManager < Gem::DocManager
         def initialize(spec)
           @spec      = spec
           @doc_dir   = Dir.pwd
