@@ -5,24 +5,14 @@ require 'pathname'
 
 module Shoe
   class Generator
-    class << self
-      def run
-        new.run
-      end
-    end
-
-    attr_reader :root
-    attr_reader :template_path
-
     def initialize
       @root          = Pathname.pwd.expand_path
       @template_path = Pathname.new(__FILE__).dirname.join('templates')
     end
 
     def run
-      path('Gemfile').update template('gemfile.erb')
-
       path('README.rdoc').install template('readme.erb')
+      path('Gemfile').update      template('gemfile.erb')
       path('Rakefile').install    template('rakefile.erb')
       path(version_path).install  template('version.erb')
       path(gemspec_path).install  template('gemspec.erb')
@@ -31,7 +21,7 @@ module Shoe
     private
 
     def project_name
-      root.basename.to_s
+      @root.basename.to_s
     end
 
     def project_module
@@ -55,11 +45,11 @@ module Shoe
     end
 
     def template_contents(name)
-      template_path.join(name).read
+      @template_path.join(name).read
     end
 
     def path(name)
-      path = root.join(name)
+      path = @root.join(name)
       path.dirname.mkpath
       path.extend(PathExtensions)
     end
@@ -74,7 +64,11 @@ module Shoe
       end
 
       def update(contents)
-        write(contents, 'a')
+        if exist?
+          write(contents, 'a')
+        else
+          $stderr.puts "#{to_s} does not exist. Not updating."
+        end
       end
 
       private

@@ -16,14 +16,14 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake'
 
   def spec.git_files(glob=nil)
-    `git ls-files -z #{glob}`.split("\0")
+    `git ls-files -z --cached --other --exclude-standard #{glob}`.split("\0")
   end
 
   spec.files       = spec.git_files
   spec.executables = spec.git_files('bin/*').map { |f| File.basename(f) }
   spec.extensions  = spec.git_files('ext/**/extconf.rb')
 
-  spec.extra_rdoc_files = spec.git_files('**/*.rdoc')
+  spec.extra_rdoc_files = spec.git_files('{,**/}*.rdoc')
   spec.rdoc_options     = %W(
     --main README.rdoc
     --title #{spec.full_name}

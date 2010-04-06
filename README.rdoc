@@ -1,79 +1,53 @@
 = Shoe
 
-Shoe defines some handy Rake tasks for your project, all built around your
-Gem::Specification.
+Shoe generates new Rubygems projects and provides some helpful Rake tasks.
 
-Shoe is a small blip in the grand tradition of more popular projects like
+As compared with
 hoe[http://seattlerb.rubyforge.org/hoe] and
-jeweler[http://github.com/technicalpickles/jeweler]. I had an itch to scratch,
-you understand.
+jeweler[http://github.com/technicalpickles/jeweler], shoe treats your gemspec
+as an authoritative, rather than a generated, file. This approach allows your gem to
+be built without dependencies, and it keeps contributors from inadvertently
+modifying your gemspec.
 
-== Behold
+== Install
 
-Here's how your +Rakefile+ looks:
+ $ gem install shoe
 
- require 'my_project/version'
+== Generate Your Project
+
+This generator step is an optional convenience when you're getting started.
+
+Shoe will generate a skeleton README, Rakefile, gemspec, and version file. It
+will also append my_project to your Gemfile if you have one.
+
+ $ mkdir my_project
+ $ cd my_project
+ $ shoe
+
+== Use the Shoe-Provided Rake Tasks
+
+From your Rakefile, just require shoe and tell it about your gemspec: (Note
+that the shoe generator does this for you.)
+
  require 'shoe'
+ Shoe::Tasks.define('my_project.gemspec')
 
- Shoe.tie('my_project', MyProject::VERSION, "This is my project, and it's awesome!") do |spec|
-   # do whatever you want with the Gem::Specification here, for example:
-   # spec.add_runtime_dependency 'dnssd'
- end
-
-And here's what you get, at most:
+Then you'll see the following rake tasks available:
 
  rake clean         # Remove ignored files
  rake compile       # Compile C extensions
  rake cucumber:ok   # Run features
  rake cucumber:wip  # Run work-in-progress features
- rake default       # Run features
- rake gemspec       # Show latest gemspec contents
+ rake default       # Run tests / Run features
  rake rdoc          # Generate documentation
  rake release       # Release myproject-0.1.0
- rake shell         # Run an irb console
  rake test          # Run tests
 
 Most of the time, though, you won't see all of these: when possible, tasks are
 conditionally defined.
 
-See what I mean by clicking through the various <tt>Shoe::Tasks</tt>.
+== Send Me Feedback
 
-== Getting Started
+A number of these tasks are maybe less useful for you than they could be, probably because you and I use different conventions. If you have some ideas for making Shoe better, I'd love to hear them! Feel free to send issues / pull requests / messages through GitHub.
 
-=== With Bundler[http://github.com/carlhuda/bundler]
-
-1. Start with just shoe in your +Gemfile+:
-
-    source :rubygems
-    gem 'shoe'
-
-2. Open a sub-shell configured for the bundler environment:
-
-    $ bundle exec $SHELL
-
-   (If you run into trouble, {this blog
-   post}[http://matthewtodd.org/2010/02/19/bundle-exec-bash.html] may help.)
-
-3. Use +shoe+ to generate some skeleton project files:
-
-    $ shoe
-
-4. And then you can poke around with
-
-    $ rake -T
-
-=== Without Bundler
-
-If you're not using bundler, it's probably best not to use the +shoe+
-generator. Instead, just install shoe normally:
-
- $ gem install shoe
-
-And then <tt>require 'shoe'</tt> and add a <tt>Shoe.tie</tt> clause to your +Rakefile+:
-
- Shoe.tie('my_project', '0.0.0', 'My project is awesome.') do |spec|
-   # spec.add_runtime_dependency 'dnssd' # or whatever...
- end
-
-Shoe also assumes you have a <tt>README.rdoc</tt>, so you'll need to create one if you
-want to avoid warnings running <tt>`rake rdoc`</tt>.
+Cheers,  -- Matthew
