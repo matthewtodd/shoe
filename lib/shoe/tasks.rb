@@ -21,7 +21,7 @@ module Shoe
     def self.define(spec_path)
       spec = Gem::Specification.load(spec_path)
       each do |task|
-        task.define spec
+        task.new(spec)
       end
     end
 

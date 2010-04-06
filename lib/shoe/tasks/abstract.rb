@@ -2,20 +2,11 @@ module Shoe
   module Tasks
 
     class Abstract
-      def self.define(spec)
-        task = new(spec)
-
-        if task.active?
-          task.define
-        end
-
-        task
-      end
-
       attr_reader :spec
 
       def initialize(spec)
         @spec = spec
+        define if active?
       end
 
       def active?
