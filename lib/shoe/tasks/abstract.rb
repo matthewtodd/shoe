@@ -13,10 +13,6 @@ module Shoe
         true
       end
 
-      def define
-        # no-op
-      end
-
       private
 
       def before(name, dependency)
