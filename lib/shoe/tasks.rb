@@ -25,9 +25,8 @@ module Shoe
       end
     end
 
-    def self.each
-      LOAD_ORDER.map { |name| const_get name }.
-                each { |task| yield task }
+    def self.each(&block)
+      LOAD_ORDER.map { |name| const_get name }.each(&block)
     end
 
   end
