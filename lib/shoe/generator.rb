@@ -4,7 +4,7 @@ require 'erb'
 require 'pathname'
 
 module Shoe
-  class CLI
+  class Generator
     class << self
       def run
         new.run

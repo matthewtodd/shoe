@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'shoe'
-Shoe::CLI.run
+Shoe::Generator.run

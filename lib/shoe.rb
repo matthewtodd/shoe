@@ -1,4 +1,4 @@
 module Shoe
-  autoload :CLI,     'shoe/cli'
-  autoload :Tasks,   'shoe/tasks'
+  autoload :Generator, 'shoe/generator'
+  autoload :Tasks,     'shoe/tasks'
 end
