@@ -1,8 +1,7 @@
-require 'shoe'
-require 'shoe/version'
+require 'shoe/tasks'
 
-Shoe.tie('shoe', Shoe::VERSION, 'Another take on hoe, jeweler & friends.') do |spec|
-  spec.requirements = ['git']
-  spec.required_rubygems_version = '>= 1.3.6'
-  spec.add_runtime_dependency 'rake'
+gemspec = Gem::Specification.load(Dir['*.gemspec'].first)
+
+Shoe::Tasks.each do |task|
+  task.define gemspec
 end

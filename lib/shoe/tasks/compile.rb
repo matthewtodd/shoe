@@ -35,11 +35,6 @@ module Shoe
           before_existing(name, :compile)
         end
       end
-
-      def update_spec
-        spec.files      += Rake::FileList['ext/**/extconf.rb', 'ext/**/*.c']
-        spec.extensions += Rake::FileList['ext/**/extconf.rb']
-      end
     end
 
   end

@@ -18,10 +18,6 @@ module Shoe
         end
       end
 
-      def update_spec
-        spec.files += Rake::FileList['features/**/*']
-      end
-
       private
 
       def define_tasks

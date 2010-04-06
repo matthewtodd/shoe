@@ -13,10 +13,6 @@ module Shoe
       def define
         desc "Release #{spec.full_name}"
         task :release do
-          File.open("#{spec.name}.gemspec", 'w') do |stream|
-            stream.write(spec.to_ruby)
-          end
-
           sh "git add #{spec.name}.gemspec"
           sh "git commit -a -m 'Release #{spec.version}'"
           sh "git tag #{version_tag(spec.version)}"
@@ -36,10 +32,6 @@ module Shoe
           sh "gem build #{spec.name}.gemspec"
           sh "gem push #{spec.file_name}"
         end
-      end
-
-      def update_spec
-        spec.files += Rake::FileList['*.gemspec']
       end
 
       private

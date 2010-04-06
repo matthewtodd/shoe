@@ -1,27 +1,19 @@
 module Shoe
   module Tasks
 
-    autoload :Bin,       'shoe/tasks/bin'
     autoload :Clean,     'shoe/tasks/clean'
     autoload :Compile,   'shoe/tasks/compile'
     autoload :Cucumber,  'shoe/tasks/cucumber'
-    autoload :Gemspec,   'shoe/tasks/gemspec'
     autoload :Rdoc,      'shoe/tasks/rdoc'
     autoload :Release,   'shoe/tasks/release'
-    autoload :Resources, 'shoe/tasks/resources'
     autoload :Shell,     'shoe/tasks/shell'
-    autoload :Shoulda,   'shoe/tasks/shoulda'
     autoload :Test,      'shoe/tasks/test'
 
     LOAD_ORDER = %w(
-      Bin
       Clean
-      Gemspec
       Rdoc
       Release
-      Resources
       Shell
-      Shoulda
       Test
       Cucumber
       Compile
@@ -37,7 +29,6 @@ module Shoe
         task = new(spec)
 
         if task.active?
-          task.update_spec
           task.define
         end
 
@@ -55,10 +46,6 @@ module Shoe
       end
 
       def define
-        # no-op
-      end
-
-      def update_spec
         # no-op
       end
 

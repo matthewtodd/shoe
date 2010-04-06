@@ -1,7 +1,7 @@
-require '<%= project %>/version'
-require 'shoe'
+require 'shoe/tasks'
 
-Shoe.tie('<%= project %>', <%= project_class %>::VERSION, 'TODO write a summary of <%= project_class %> here.') do |spec|
-  # do whatever you want with the Gem::Specification here, for example:
-  # spec.add_runtime_dependency 'dnssd'
+gemspec = Gem::Specification.load(Dir['*.gemspec'].first)
+
+Shoe::Tasks.each do |task|
+  task.define gemspec
 end

@@ -24,20 +24,6 @@ module Shoe
         end
       end
 
-      def update_spec
-        spec.files += Rake::FileList['**/*.rdoc', 'examples/**/*']
-
-        spec.rdoc_options = %W(
-          --main README.rdoc
-          --title #{spec.full_name}
-          --inline-source
-        )
-
-        spec.extra_rdoc_files += Rake::FileList['**/*.rdoc']
-
-        spec.has_rdoc = true
-      end
-
       private
 
       # Using Gem::DocManager instead of Rake::RDocTask means you get to see your

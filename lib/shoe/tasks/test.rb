@@ -18,10 +18,6 @@ module Shoe
 
         before(:default, :test)
       end
-
-      def update_spec
-        spec.files += Rake::FileList['test/**/*']
-      end
     end
 
   end
