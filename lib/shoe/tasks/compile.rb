@@ -5,7 +5,7 @@ module Shoe
 
     class Compile < Abstract
       def active?
-        File.directory?('ext')
+        !spec.extensions.empty?
       end
 
       def define
