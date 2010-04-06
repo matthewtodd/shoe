@@ -6,14 +6,12 @@ module Shoe
     autoload :Cucumber,  'shoe/tasks/cucumber'
     autoload :Rdoc,      'shoe/tasks/rdoc'
     autoload :Release,   'shoe/tasks/release'
-    autoload :Shell,     'shoe/tasks/shell'
     autoload :Test,      'shoe/tasks/test'
 
     LOAD_ORDER = %w(
       Clean
       Rdoc
       Release
-      Shell
       Test
       Cucumber
       Compile
