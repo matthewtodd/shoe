@@ -17,6 +17,13 @@ module Shoe
       Compile
     )
 
+    def self.define(spec_path)
+      spec = Gem::Specification.load(spec_path)
+      each do |task|
+        task.define spec
+      end
+    end
+
     def self.each
       LOAD_ORDER.map { |name| const_get name }.
                 each { |task| yield task }

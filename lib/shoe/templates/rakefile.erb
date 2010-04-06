@@ -1,7 +1,3 @@
-require 'shoe/tasks'
+require 'shoe'
 
-gemspec = Gem::Specification.load(Dir['*.gemspec'].first)
-
-Shoe::Tasks.each do |task|
-  task.define gemspec
-end
+Shoe::Tasks.define('<%= gemspec_path %>')
