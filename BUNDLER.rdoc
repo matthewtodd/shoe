@@ -3,7 +3,7 @@
 Bootstrapping is a little chicken-and-egg-y, but with the following initial <tt>Gemfile</tt>:
 
  source :rubygems
- gem 'shoe'
+ gem 'shoe', :group => :development
 
 You should be able to:
 

@@ -8,7 +8,7 @@ Feature: Getting started
     And I have created a file called "my_project/Gemfile" containing:
       """
       source :rubygems
-      gem 'shoe'
+      gem 'shoe', :group => :development
       """
     When I run bundle exec shoe inside "my_project"
     Then I should see a file "my_project/Rakefile"
@@ -21,7 +21,7 @@ Feature: Getting started
     And I have created a file called "my_project/Gemfile" containing:
       """
       source :rubygems
-      gem 'shoe'
+      gem 'shoe', :group => :development
       """
     And I have created a file called "my_project/Rakefile" containing "# RAKEFILE CONTENTS"
     When I run bundle exec shoe inside "my_project"
