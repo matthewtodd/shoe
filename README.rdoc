@@ -3,8 +3,9 @@
 Shoe is a library of Rake tasks that honor your gemspec.
 
 Hoe[http://seattlerb.rubyforge.org/hoe] and
-Jeweler[http://github.com/technicalpickles/jeweler] (currently) generate the gemspec for
-you, but it's better {just to let it be its own thing}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].
+Jeweler[http://github.com/technicalpickles/jeweler] (currently) generate the
+gemspec for you, but it's often better {just to let it be its own
+thing}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].
 
 == Install
 
@@ -33,7 +34,7 @@ I say "at most" because, when possible, tasks are conditionally defined: you
 won't see "rake compile" if you don't specify any extensions in your gemspec,
 for example.
 
-== Bootstrapping
+== Bootstrap
 
 If you like, you can also use the provided <tt>shoe</tt> executable to generate
 some starter files for your new project:
