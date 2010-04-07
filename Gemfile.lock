@@ -4,21 +4,15 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
-  bundler: 
-    group: 
-    - :default
-    version: ">= 0"
   cucumber: 
     group: 
-    - :default
+    - :development
     version: ">= 0"
 specs: 
 - rake: 
     version: 0.8.7
 - builder: 
     version: 2.1.2
-- bundler: 
-    version: 0.9.16
 - diff-lcs: 
     version: 1.1.2
 - json_pure: 
@@ -31,7 +25,7 @@ specs:
     version: 1.4.5
 - cucumber: 
     version: 0.6.3
-hash: 637e4aac4e0ca15fd7c3a0ff8a479f155463aa67
+hash: bec7b29765230914672db7983d163d805c4afdb1
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

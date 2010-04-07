@@ -1,5 +1,7 @@
 source :rubygems
 
-gem 'bundler'
-gem 'cucumber'
 gem 'rake'
+
+group :development do
+  gem 'cucumber'
+end
