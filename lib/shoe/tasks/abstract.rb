@@ -32,7 +32,7 @@ module Shoe
                 message(subject, paragraphs)
       end
 
-      module Colored
+      module Colored #:nodoc:
         YELLOW = "\e[33m"
         CLEAR  = "\e[0m"
 
@@ -43,7 +43,7 @@ module Shoe
         end
       end
 
-      module Formatted
+      module Formatted #:nodoc:
         WIDTH = 72
         WRAP  = /(.{1,#{WIDTH}})( +|$\n?)|(.{1,#{WIDTH}})/
 

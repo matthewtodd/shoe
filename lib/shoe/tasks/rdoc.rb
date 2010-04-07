@@ -24,7 +24,7 @@ module Shoe
 
       # Using Gem::DocManager instead of Rake::RDocTask means you get to see your
       # rdoc *exactly* as users who install your gem will.
-      class LocalDocManager < Gem::DocManager
+      class LocalDocManager < Gem::DocManager #:nodoc:
         def initialize(spec)
           @spec      = spec
           @doc_dir   = Dir.pwd

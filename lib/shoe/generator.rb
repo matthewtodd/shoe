@@ -52,7 +52,7 @@ module Shoe
       path.extend(PathExtensions)
     end
 
-    module PathExtensions
+    module PathExtensions #:nodoc:
       def install(contents)
         if exist?
           $stderr.puts "#{to_s} exists. Not clobbering."

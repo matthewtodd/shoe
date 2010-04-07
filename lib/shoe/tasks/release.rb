@@ -36,7 +36,7 @@ module Shoe
 
       private
 
-      module VersionExtensions
+      module VersionExtensions #:nodoc:
         def has_version_greater_than?(string)
           version > Gem::Version.new(string)
         end

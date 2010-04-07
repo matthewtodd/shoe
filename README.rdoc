@@ -1,38 +1,24 @@
 = Shoe
 
-Shoe generates new Rubygems projects and provides some helpful Rake tasks.
+Shoe is a library of Rake tasks that honor your gemspec.
 
-As compared with
-hoe[http://seattlerb.rubyforge.org/hoe] and
-jeweler[http://github.com/technicalpickles/jeweler], shoe treats your gemspec
-as an authoritative, rather than a generated, file. This approach allows your gem to
-be built without dependencies, and it keeps contributors from inadvertently
-modifying your gemspec.
+Hoe[http://seattlerb.rubyforge.org/hoe] and
+Jeweler[http://github.com/technicalpickles/jeweler] (currently) generate the gemspec for
+you, but it's better {just to let it be its own thing}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].
 
 == Install
 
  $ gem install shoe
 
-== Generate Your Project
+== Use
 
-This generator step is an optional convenience when you're getting started.
-
-Shoe will generate a skeleton README, Rakefile, gemspec, and version file. It
-will also append my_project to your Gemfile if you have one.
-
- $ mkdir my_project
- $ cd my_project
- $ shoe
-
-== Use the Shoe-Provided Rake Tasks
-
-From your Rakefile, just require shoe and tell it about your gemspec: (Note
-that the shoe generator does this for you.)
+In your <tt>Rakefile</tt>:
 
  require 'shoe'
+
  Shoe::Tasks.define('my_project.gemspec')
 
-Then you'll see the following rake tasks available:
+Then you'll see (at most) the following rake tasks available:
 
  rake clean         # Remove ignored files
  rake compile       # Compile C extensions
@@ -43,11 +29,25 @@ Then you'll see the following rake tasks available:
  rake release       # Release myproject-0.1.0
  rake test          # Run tests
 
-Most of the time, though, you won't see all of these: when possible, tasks are
-conditionally defined.
+I say "at most" because, when possible, tasks are conditionally defined: you
+won't see "rake compile" if you don't specify any extensions in your gemspec,
+for example.
+
+== Bootstrapping
+
+If you like, you can also use the provided <tt>shoe</tt> executable to generate
+some starter files for your new project:
+
+ $ mkdir foo
+ $ cd foo
+ $ shoe
+
+This will generate <tt>README.rdoc</tt>, <tt>Rakefile</tt>,
+<tt>foo.gemspec</tt>, and <tt>lib/foo/version.rb</tt>. It will also append the
+line <tt>gem 'foo', :path => '.'</tt> to your <tt>Gemfile</tt> if you have one.
 
 == Send Me Feedback
 
 A number of these tasks are maybe less useful for you than they could be, probably because you and I use different conventions. If you have some ideas for making Shoe better, I'd love to hear them! Feel free to send issues / pull requests / messages through GitHub.
 
-Cheers,  -- Matthew
+All the best,  -- Matthew
