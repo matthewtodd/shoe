@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.files       = spec.git_files
-  spec.executables = spec.git_files('bin/*').map { |f| File.basename(f) }
+  spec.executables = spec.git_files('bin/*').map &File.method(:basename)
   spec.extensions  = spec.git_files('ext/**/extconf.rb')
 
   spec.extra_rdoc_files = spec.git_files('{,**/}*.rdoc')
