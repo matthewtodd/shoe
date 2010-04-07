@@ -11,6 +11,8 @@ module Shoe
                   Gem::Specification.load(spec)
                 end
 
+        @spec.extend(LocalGemspecExtensions)
+
         if active?
           define
         end
@@ -21,6 +23,12 @@ module Shoe
       end
 
       private
+
+      module LocalGemspecExtensions #:nodoc:
+        def full_gem_path
+          Dir.pwd
+        end
+      end
 
       def before(name, dependency)
         desc Rake::Task[dependency].comment

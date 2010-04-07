@@ -1,22 +1,38 @@
-require 'rake/testtask'
+require 'rubygems/validator'
 
 module Shoe
   module Tasks
 
-    # MAYBE be a little more forgiving in test selection, using
-    # test/**/*_test.rb. Or create suites based on subdirectory?
     class Test < Abstract
       def active?
-        File.directory?('test')
+        !spec.test_files.empty?
       end
 
       def define
-        Rake::TestTask.new do |task|
-          task.libs    = ['lib', 'test']
-          task.pattern = 'test/*_test.rb'
+        desc 'Run tests'
+        task :test do
+          Gem.source_index.extend(LocalGemSourceIndex)
+          Gem.source_index.local_gemspec = spec
+          Gem::Validator.new.unit_test(spec)
         end
 
         before(:default, :test)
+      end
+
+      private
+
+      module LocalGemSourceIndex #:nodoc:
+        def find_name(*args)
+          if args.first == @local_gemspec.name
+            [@local_gemspec]
+          else
+            super
+          end
+        end
+
+        def local_gemspec=(local_gemspec)
+          @local_gemspec = local_gemspec
+        end
       end
     end
 

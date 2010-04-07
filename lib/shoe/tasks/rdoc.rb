@@ -29,16 +29,8 @@ module Shoe
           @spec      = spec
           @doc_dir   = Dir.pwd
           @rdoc_args = []
-          adjust_spec_so_that_we_can_generate_rdoc_locally
-        end
-
-        def adjust_spec_so_that_we_can_generate_rdoc_locally
-          def @spec.full_gem_path
-            Dir.pwd
-          end
         end
       end
-
     end
 
   end
