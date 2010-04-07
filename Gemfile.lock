@@ -1,9 +1,5 @@
 --- 
 dependencies: 
-  shoe: 
-    group: 
-    - :default
-    version: ">= 0"
   rake: 
     group: 
     - :default
@@ -35,13 +31,7 @@ specs:
     version: 1.4.5
 - cucumber: 
     version: 0.6.3
-- shoe: 
-    version: 0.3.0
-    source: 0
-hash: a62f745ea4d49230a28f18d4a72b2dd810e20037
+hash: 637e4aac4e0ca15fd7c3a0ff8a479f155463aa67
 sources: 
-- Path: 
-    path: !ruby/object:Pathname 
-      path: .
 - Rubygems: 
     uri: http://gemcutter.org
