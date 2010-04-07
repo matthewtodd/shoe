@@ -5,8 +5,15 @@ module Shoe
       attr_reader :spec
 
       def initialize(spec)
-        @spec = spec
-        define if active?
+        @spec = if spec.respond_to?(:rubygems_version)
+                  spec
+                else
+                  Gem::Specification.load(spec)
+                end
+
+        if active?
+          define
+        end
       end
 
       def active?
