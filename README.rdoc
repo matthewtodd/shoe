@@ -1,11 +1,22 @@
 = Shoe
 
-Shoe is a library of Rake tasks that honor your gemspec.
-
+Shoe is a library of Rake tasks that (unlike
 Hoe[http://seattlerb.rubyforge.org/hoe] and
-Jeweler[http://github.com/technicalpickles/jeweler] (currently) generate the
-gemspec for you, but it's often better {just to let it be its own
-thing}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].
+Jeweler[http://github.com/technicalpickles/jeweler]) honors your gemspec.
+(Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
+
+Shoe's Rake tasks accept *zero* configuration parameters. All configuration
+should be performed in your (checked into version control) gemspec. This way,
+Shoe can lean on Rubygems for the things it's already good at, using
+{Gem::Ext::ExtConfBuilder}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
+and
+{Gem::DocManager}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
+instead of {ad-hoc}[http://github.com/luislavena/rake-compiler/] {Rake
+tasks}[http://rake.rubyforge.org/classes/Rake/RDocTask.html] -- indeed, this is
+what your users will be doing when they install your gem!
+
+(I have a pipe dream of one day running tests strictly with
+{Gem::Validator}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].)
 
 == Install
 
