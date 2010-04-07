@@ -56,7 +56,7 @@ some starter files for your new project:
 
 This will generate <tt>README.rdoc</tt>, <tt>Rakefile</tt>,
 <tt>foo.gemspec</tt>, and <tt>lib/foo/version.rb</tt>. It will also append the
-line <tt>gem 'foo', :path => '.'</tt> to your <tt>Gemfile</tt> if you have one.
+line <tt>gem 'foo', :path => '.'</tt> to your <tt>Gemfile</tt> if you have one. (See {BUNDLER.rdoc}[link:files/BUNDLER_rdoc.html] for more.)
 
 == Send Me Feedback
 
