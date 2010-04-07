@@ -27,43 +27,52 @@ module Shoe
       end
 
       def warn(subject, *paragraphs)
-        WarningMessage.new(subject, paragraphs).write($stderr)
+        $stderr.extend(Colored).
+                extend(Formatted).
+                message(subject, paragraphs)
       end
 
-      class WarningMessage
-        def initialize(subject, paragraphs)
-          @subject    = subject
-          @paragraphs = paragraphs
-          @width      = 72
+      module Colored
+        YELLOW = "\e[33m"
+        CLEAR  = "\e[0m"
+
+        def write(string)
+          super(YELLOW) if tty?
+          super
+          super(CLEAR) if tty?
         end
+      end
 
-        def write(stream)
-          stream.write("\e[33m") if stream.tty?
-          stream.write(self)
-          stream.write("\e[0m") if stream.tty?
-          stream.flush
-        end
+      module Formatted
+        WIDTH = 72
+        WRAP  = /(.{1,#{WIDTH}})( +|$\n?)|(.{1,#{WIDTH}})/
 
-        def to_s
-          buffer = StringIO.new
-
-          buffer.puts '-' * @width
-          buffer.puts "#{@subject} warning from shoe".upcase
-
-          @paragraphs.each do |paragraph|
-            buffer.puts
-            buffer.puts wrap(paragraph, @width)
-          end
-
-          buffer.puts '-' * @width
-          buffer.string
+        def message(subject, paragraphs)
+          border
+          heading(subject)
+          body(paragraphs)
+          border
         end
 
         private
 
-        # blatantly stolen from Gem::Command
-        def wrap(text, width)
-          text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
+        def border
+          puts '-' * WIDTH
+        end
+
+        def heading(string)
+          puts "#{string} warning from shoe".upcase
+        end
+
+        def body(paragraphs)
+          paragraphs.each do |paragraph|
+            puts
+            puts wrap(paragraph)
+          end
+        end
+
+        def wrap(string)
+          string.gsub(WRAP, "\\1\\3\n")
         end
       end
     end
