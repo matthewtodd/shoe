@@ -1,11 +1,15 @@
-== Git
+== 0.5.1 -- 2010 April 7
+
+* Include summary in description.
+
+== 0.5.0 -- 2010 April 7
 
 * Lean on cucumber.yml to define cucumber tasks.
 * Lean on spec.test_files and Gem::Validator to run tests.
 * Shoe::Tasks can now be used a la carte.
 * The shoe generator script now requires a path argument.
 
-== 0.4.0
+== 0.4.0 -- 2010 April 6
 
 * Don't generate the gemspec; *use* it instead.
 
