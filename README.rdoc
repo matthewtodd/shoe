@@ -2,13 +2,25 @@
 
 Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
-* Shoe <b>reads your gemspec</b> instead of writing it, like Hoe[http://seattlerb.rubyforge.org/hoe] and Jeweler[http://github.com/technicalpickles/jeweler] do. (Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
+* Shoe <b>reads your gemspec</b> instead of writing it, like
+  Hoe[http://seattlerb.rubyforge.org/hoe] and
+  Jeweler[http://github.com/technicalpickles/jeweler] do.
+  (Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
 
-* Shoe <b>uses Rubygems</b> {for}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html] {common}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html] {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html], rather than {reinventing}[http://github.com/luislavena/rake-compiler/] {the}[http://rake.rubyforge.org/classes/Rake/RDocTask.html] {wheel}[http://rake.rubyforge.org/classes/Rake/TestTask.html].
+* Shoe <b>uses Rubygems</b>
+  {for}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
+  {common}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
+  {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html],
+  rather than
+  {reinventing}[http://github.com/luislavena/rake-compiler/]
+  {the}[http://rake.rubyforge.org/classes/Rake/RDocTask.html]
+  {wheel}[http://rake.rubyforge.org/classes/Rake/TestTask.html].
+
 
 == Install
 
  $ gem install shoe
+
 
 == Use
 
@@ -16,31 +28,60 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
  Shoe::Tasks.define('my_project.gemspec')
 
+
 == Configure
 
 Shoe::Tasks accept no direct configuration. Instead, they rely on your project environment:
 
-* Shoe::Tasks::Clean calls <tt>`git clean -fdX`</tt>.
-* Shoe::Tasks::Compile builds the <tt>extensions[http://docs.rubygems.org/read/chapter/20#extensions]</tt> in your gemspec.
-* Shoe::Tasks::Cucumber supports each profile in your <tt>cucumber.yml</tt>.
-* Shoe::Tasks::Rdoc uses the <tt>rdoc_options[http://docs.rubygems.org/read/chapter/20#rdoc_options]</tt> and <tt>extra_rdoc_files[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]</tt> in your gemspec.
-* Shoe::Tasks::Release calls <tt>`git tag`</tt>, <tt>`git push`</tt>, <tt>`gem build`</tt> and <tt>`gem push`</tt>, of course.
-* Shoe::Tasks::Test runs the <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt> in your gemspec.
+Shoe::Tasks::Clean::
+  calls <tt>`git clean -fdX`</tt>.
 
-For specific notes on configuring each task, click through to their respective definitions.
+Shoe::Tasks::Compile::
+  builds the
+  <tt>extensions[http://docs.rubygems.org/read/chapter/20#extensions]</tt> in
+  your gemspec.
+
+Shoe::Tasks::Cucumber::
+  supports each profile in your
+  <tt>{cucumber.yml}[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]</tt>.
+
+Shoe::Tasks::Rdoc::
+  uses the
+  <tt>rdoc_options[http://docs.rubygems.org/read/chapter/20#rdoc_options]</tt>
+  and
+  <tt>extra_rdoc_files[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]</tt>
+  in your gemspec.
+
+Shoe::Tasks::Release::
+  calls <tt>`git tag`</tt>, <tt>`git push`</tt>, <tt>`gem build`</tt> and
+  <tt>`gem push`</tt>, of course.
+
+Shoe::Tasks::Test::
+  runs the
+  <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt> in
+  your gemspec.
+
+Each Task class definition has more specific configuration notes.
+
 
 == Bootstrap
 
-The provided <tt>shoe</tt> executable will generate a helpful gemspec and some other skeleton files for your new project:
+The provided <tt>shoe</tt> executable will generate a helpful gemspec and some
+other skeleton files for your new project:
 
  $ mkdir foo
  $ cd foo
  $ shoe
 
-If you're using {Bundler}[http://gembundler.com], see {bundler.rdoc}[link:files/doc/bundler_rdoc.html] for some helpful tips.
+If you're using {Bundler}[http://gembundler.com], see
+{bundler.rdoc}[link:files/doc/bundler_rdoc.html] for some helpful tips.
 
-== Send Me Feedback
 
-A number of these tasks are maybe less useful for you than they could be, probably because you and I use different conventions. If you have some ideas for making Shoe better, I'd love to hear them! Feel free to send issues / pull requests / messages through GitHub.
+== Contribute
+
+A number of these tasks are maybe less useful for you than they could be,
+probably because you and I use different conventions. If you have some ideas
+for making Shoe better, I'd love to hear them! Feel free to send issues / pull
+requests / messages through GitHub.
 
 All the best,  -- Matthew
