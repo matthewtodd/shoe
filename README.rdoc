@@ -37,7 +37,7 @@ The provided <tt>shoe</tt> executable will generate a helpful gemspec and some o
  $ cd foo
  $ shoe
 
-If you're using Bundler, see {BUNDLER.rdoc}[link:files/BUNDLER_rdoc.html] for some helpful tips.
+If you're using {Bundler}[http://gembundler.com], see {bundler.rdoc}[link:files/doc/bundler_rdoc.html] for some helpful tips.
 
 == Send Me Feedback
 

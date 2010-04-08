@@ -1,4 +1,4 @@
-= Using Shoe with Bundler
+= Using Shoe with {Bundler}[http://gembundler.com]
 
 Bootstrapping is a little chicken-and-egg-y, but with the following initial <tt>Gemfile</tt>:
 
