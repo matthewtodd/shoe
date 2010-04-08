@@ -18,10 +18,6 @@ module Shoe
         end
       end
 
-      def active?
-        true
-      end
-
       private
 
       module LocalGemspecExtensions #:nodoc:

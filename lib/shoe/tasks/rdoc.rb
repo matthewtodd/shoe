@@ -4,6 +4,10 @@ module Shoe
   module Tasks
 
     class Rdoc < Abstract
+      def active?
+        true
+      end
+
       def define
         desc 'Generate documentation'
         task :rdoc do
