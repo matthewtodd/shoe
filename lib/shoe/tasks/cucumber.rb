@@ -46,7 +46,7 @@ module Shoe
       def define_default_task
         task :prepare
 
-        ::Cucumber::Rake::Task.new({ :cucumber => :prepare }, 'Run Cucumber features') do |task|
+        ::Cucumber::Rake::Task.new({ :cucumber => :prepare }, 'Run features') do |task|
           task.profile = 'default'
         end
 
@@ -58,7 +58,7 @@ module Shoe
         task :prepare
 
         namespace :cucumber do
-          ::Cucumber::Rake::Task.new({ profile => :prepare }, "Run #{profile} Cucumber features") do |task|
+          ::Cucumber::Rake::Task.new({ profile => :prepare }, "Run #{profile} features") do |task|
             task.profile = profile
           end
         end
