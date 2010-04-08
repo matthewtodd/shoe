@@ -5,8 +5,13 @@ Gem::Specification.new do |spec|
   spec.name    = 'shoe'
   spec.version = Shoe::VERSION
 
-  spec.summary = 'Another take on hoe, jeweler & friends.'
-  spec.description = spec.summary
+  spec.summary = 'An ecosystem-friendly library of Rake tasks for your gem.'
+  spec.description = <<-END.gsub(/^\s*/, '')
+    Shoe assumes you could be using any number of other tools -- bundler,
+    cucumber, git, rip, rubygems -- and so leans hard on them for the things
+    they do well, relegating command-line rake to mere syntactic sugar.
+  END
+
   spec.author = 'Matthew Todd'
   spec.email  = 'matthew.todd@gmail.com'
   spec.homepage = 'http://github.com/matthewtodd/shoe'
