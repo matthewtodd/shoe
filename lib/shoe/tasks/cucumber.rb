@@ -3,7 +3,7 @@ module Shoe
 
     class Cucumber < Abstract
       def active?
-        File.directory?('features')
+        File.exist?('cucumber.yml')
       end
 
       def define
@@ -11,7 +11,7 @@ module Shoe
           require 'cucumber/rake/task'
         rescue LoadError
           warn 'cucumber',
-            "Although you have a features directory, it seems you don't have cucumber installed.",
+            "Although you have a cucumber.yml, it seems you don't have cucumber installed.",
             "You probably want to add a \"gem 'cucumber'\" to your Gemfile."
         else
           define_tasks
@@ -21,18 +21,35 @@ module Shoe
       private
 
       def define_tasks
-        namespace :cucumber do
-          ::Cucumber::Rake::Task.new(:ok, 'Run features') do |task|
-            task.cucumber_opts = '--tags ~@wip'
-          end
-
-          ::Cucumber::Rake::Task.new(:wip, 'Run work-in-progress features') do |task|
-            task.cucumber_opts = '--tags @wip --wip'
+        cucumber_profiles.each do |profile|
+          if profile == 'default'
+            define_default_task
+          else
+            define_profile_task(profile)
           end
         end
+      end
 
-        before(:default, 'cucumber:ok')
-        before(:default, 'cucumber:wip')
+      def cucumber_profiles
+        YAML.load_file('cucumber.yml').keys
+      rescue
+        []
+      end
+
+      def define_default_task
+        ::Cucumber::Rake::Task.new(:cucumber, 'Run features') do |task|
+          task.profile = 'default'
+        end
+
+        before(:default, 'cucumber')
+      end
+
+      def define_profile_task(profile)
+        namespace :cucumber do
+          ::Cucumber::Rake::Task.new(profile, "Run #{profile} features") do |task|
+            task.profile = profile
+          end
+        end
       end
     end
 
