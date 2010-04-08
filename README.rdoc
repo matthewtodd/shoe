@@ -34,8 +34,8 @@ Then you'll see (at most) the following rake tasks available:
 
  rake clean         # Remove ignored files
  rake compile       # Compile C extensions
- rake cucumber:ok   # Run features
- rake cucumber:wip  # Run work-in-progress features
+ rake cucumber      # Run features
+ rake cucumber:wip  # Run wip features
  rake default       # Run tests / Run features
  rake rdoc          # Generate documentation
  rake release       # Release myproject-0.1.0
