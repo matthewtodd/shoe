@@ -69,7 +69,11 @@ module Shoe
           Gem::Validator.new.extend(LocalGemValidator).unit_test(spec)
         end
 
-        before(:default, :test)
+        task :prepare
+        task :test => :prepare
+
+        task :default
+        Rake.application[:default].prerequisites.unshift(Rake.application[:test])
       end
 
       private

@@ -26,17 +26,6 @@ module Shoe
         end
       end
 
-      def before(name, dependency)
-        desc Rake::Task[dependency].comment
-        task name => dependency
-      end
-
-      def before_existing(name, dependency)
-        if Rake::Task.task_defined?(name)
-          task name => dependency
-        end
-      end
-
       def warn(subject, *paragraphs)
         $stderr.extend(Colored).
                 extend(Formatted).

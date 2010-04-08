@@ -36,14 +36,7 @@ module Shoe
           end
         end
 
-        %w(
-          test
-          cucumber:ok
-          cucumber:wip
-          release
-        ).each do |name|
-          before_existing(name, :compile)
-        end
+        task :prepare => :compile
       end
     end
 

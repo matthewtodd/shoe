@@ -9,18 +9,18 @@ module Shoe
     autoload :Release,   'shoe/tasks/release'
     autoload :Test,      'shoe/tasks/test'
 
-    LOAD_ORDER = %w(
+    NAMES = %w(
       Clean
+      Compile
+      Cucumber
       Rdoc
       Release
       Test
-      Cucumber
-      Compile
     )
 
     def self.define(spec)
-      LOAD_ORDER.map { |name| const_get(name) }.
-                each { |task| task.new(spec)  }
+      NAMES.map { |name| const_get(name) }.
+           each { |task| task.new(spec)  }
     end
 
   end
