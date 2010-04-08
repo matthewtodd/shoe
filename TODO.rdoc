@@ -1,7 +1,6 @@
 = Next Up
 
 * Help generate man pages?
-* Find a nicer way to express task dependencies; then maybe tasks could be used a la carte?
 * How would I incorporate Gem::Specification#add_bundler_dependencies?
 * Require a path argument for the shoe executable.
 * Support any extension flavor that Rubygems supports, not just extconf.rb.

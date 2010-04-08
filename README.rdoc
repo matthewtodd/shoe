@@ -42,7 +42,7 @@ Shoe::Tasks::Compile::
   your gemspec.
 
 Shoe::Tasks::Cucumber::
-  supports each profile in your
+  runs individual profiles in your
   <tt>{cucumber.yml}[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]</tt>.
 
 Shoe::Tasks::Rdoc::
@@ -62,6 +62,17 @@ Shoe::Tasks::Test::
   your gemspec.
 
 Each Task class definition has more specific configuration notes.
+
+
+== Cherry Pick
+
+If you don't want to use all the Shoe::Tasks, just instantiate the ones you
+want:
+
+ require 'shoe'
+
+ Shoe::Tasks::Cucumber.new('my_project.gemspec')
+ Shoe::Tasks::Rdoc.new('my_project.gemspec')
 
 
 == Bootstrap
