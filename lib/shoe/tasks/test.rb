@@ -33,16 +33,14 @@ module Shoe
       private
 
       module LocalGemSourceIndex #:nodoc:
+        attr_accessor :local_gemspec
+
         def find_name(*args)
-          if args.first == @local_gemspec.name
-            [@local_gemspec]
+          if args.first == local_gemspec.name
+            [local_gemspec]
           else
             super
           end
-        end
-
-        def local_gemspec=(local_gemspec)
-          @local_gemspec = local_gemspec
         end
       end
 
