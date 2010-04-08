@@ -3,8 +3,8 @@ require 'pathname'
 
 module Shoe
   class Generator
-    def initialize
-      @root          = Pathname.pwd.expand_path
+    def initialize(root)
+      @root          = Pathname.new(root).expand_path
       @template_path = Pathname.new(__FILE__).dirname.join('templates')
     end
 

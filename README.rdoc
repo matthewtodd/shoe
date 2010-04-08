@@ -80,9 +80,7 @@ want:
 The provided <tt>shoe</tt> executable will generate a helpful gemspec and some
 other skeleton files for your new project:
 
- $ mkdir foo
- $ cd foo
- $ shoe
+ $ shoe my_project
 
 If you're using {Bundler}[http://gembundler.com], see
 {bundler.rdoc}[link:files/doc/bundler_rdoc.html] for some helpful tips.

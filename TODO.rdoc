@@ -2,6 +2,5 @@
 
 * Help generate man pages?
 * How would I incorporate Gem::Specification#add_bundler_dependencies?
-* Require a path argument for the shoe executable.
 * Support any extension flavor that Rubygems supports, not just extconf.rb.
 * Find a better way to clean; I don't want to whack .bundler and .rvmrc.

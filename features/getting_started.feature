@@ -10,7 +10,7 @@ Feature: Getting started
       source :rubygems
       gem 'shoe', :group => :development
       """
-    When I run bundle exec shoe inside "my_project"
+    When I run bundle exec shoe . inside "my_project"
     Then I should see a file "my_project/Rakefile"
     And I should see a file "my_project/README.rdoc"
     And I should see a file "my_project/lib/my_project/version.rb"
@@ -24,6 +24,6 @@ Feature: Getting started
       gem 'shoe', :group => :development
       """
     And I have created a file called "my_project/Rakefile" containing "# RAKEFILE CONTENTS"
-    When I run bundle exec shoe inside "my_project"
+    When I run bundle exec shoe . inside "my_project"
     Then I should see "Rakefile exists. Not clobbering." on standard error
     And the contents of "my_project/Rakefile" should still be "# RAKEFILE CONTENTS"

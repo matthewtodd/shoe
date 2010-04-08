@@ -4,7 +4,7 @@ Given /^I have created a project called "([^\"]*)"$/ do |name|
     source :rubygems
     gem 'shoe', :group => :development
   END
-  run('bundle exec shoe', name)
+  run('bundle exec shoe .', name)
 end
 
 Given /^I have created a directory called "([^\"]*)"$/ do |name|

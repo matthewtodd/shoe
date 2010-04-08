@@ -8,7 +8,7 @@ Bootstrapping is a little chicken-and-egg-y, but with the following initial <tt>
 You should be able to:
 
  $ bundle install
- $ bundle exec shoe
+ $ bundle exec shoe .
 
 From there, I've been preferring <tt>`bundle exec bash`</tt> over <tt>`bundle
 exec rake`</tt> or using <tt>require 'bundler/setup'</tt> in my
