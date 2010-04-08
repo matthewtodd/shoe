@@ -1,3 +1,7 @@
+== Git
+
+* Lean on cucumber.yml to define cucumber tasks.
+
 == 0.4.0
 
 * Don't generate the gemspec; *use* it instead.
