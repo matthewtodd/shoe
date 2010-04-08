@@ -1,22 +1,10 @@
 = Shoe
 
-Shoe is a library of Rake tasks that (unlike
-Hoe[http://seattlerb.rubyforge.org/hoe] and
-Jeweler[http://github.com/technicalpickles/jeweler]) honors your gemspec.
-(Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
+Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
-Shoe's Rake tasks accept *zero* configuration parameters. All configuration
-should be performed in your (checked into version control) gemspec. This way,
-Shoe can lean on Rubygems for the things it's already good at, using
-{Gem::Ext::ExtConfBuilder}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
-and
-{Gem::DocManager}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
-instead of {ad-hoc}[http://github.com/luislavena/rake-compiler/] {Rake
-tasks}[http://rake.rubyforge.org/classes/Rake/RDocTask.html] -- indeed, this is
-what your users will be doing when they install your gem!
+* Shoe <b>reads your gemspec</b> instead of writing it, like Hoe[http://seattlerb.rubyforge.org/hoe] and Jeweler[http://github.com/technicalpickles/jeweler] do. (Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
 
-(I have a pipe dream of one day running tests strictly with
-{Gem::Validator}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].)
+* Shoe <b>uses Rubygems</b> {for}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html] {common}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html] {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html], rather than {reinventing}[http://github.com/luislavena/rake-compiler/] {the}[http://rake.rubyforge.org/classes/Rake/RDocTask.html] {wheel}[http://rake.rubyforge.org/classes/Rake/TestTask.html].
 
 == Install
 
@@ -24,40 +12,32 @@ what your users will be doing when they install your gem!
 
 == Use
 
-In your <tt>Rakefile</tt>:
-
  require 'shoe'
 
  Shoe::Tasks.define('my_project.gemspec')
 
-Then you'll see (at most) the following rake tasks available:
+== Configure
 
- rake clean         # Remove ignored files
- rake compile       # Compile C extensions
- rake cucumber      # Run features
- rake cucumber:wip  # Run wip features
- rake default       # Run tests / Run features
- rake rdoc          # Generate documentation
- rake release       # Release myproject-0.1.0
- rake test          # Run tests
+Shoe::Tasks accept no direct configuration. Instead, they rely on your project environment:
 
-I say "at most" because, when possible, tasks are conditionally defined: you
-won't see "rake compile" if you don't specify any extensions in your gemspec,
-for example.
+* Shoe::Tasks::Clean calls <tt>`git clean -fdX`</tt>.
+* Shoe::Tasks::Compile builds the <tt>extensions[http://docs.rubygems.org/read/chapter/20#extensions]</tt> in your gemspec.
+* Shoe::Tasks::Cucumber supports each profile in your <tt>cucumber.yml</tt>.
+* Shoe::Tasks::Rdoc uses the <tt>rdoc_options[http://docs.rubygems.org/read/chapter/20#rdoc_options]</tt> and <tt>extra_rdoc_files[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]</tt> in your gemspec.
+* Shoe::Tasks::Release calls <tt>`git tag`</tt>, <tt>`git push`</tt>, <tt>`gem build`</tt> and <tt>`gem push`</tt>, of course.
+* Shoe::Tasks::Test runs the <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt> in your gemspec.
+
+For specific notes on configuring each task, click through to their respective definitions.
 
 == Bootstrap
 
-If you like, you can also use the provided <tt>shoe</tt> executable to generate
-some starter files for your new project:
+The provided <tt>shoe</tt> executable will generate a helpful gemspec and some other skeleton files for your new project:
 
  $ mkdir foo
  $ cd foo
  $ shoe
 
-This will generate <tt>README.rdoc</tt>, <tt>Rakefile</tt>,
-<tt>foo.gemspec</tt>, and <tt>lib/foo/version.rb</tt>.
-
-If you're using Bundler, see {BUNDLER.rdoc}[link:files/BUNDLER_rdoc.html] for more.
+If you're using Bundler, see {BUNDLER.rdoc}[link:files/BUNDLER_rdoc.html] for some helpful tips.
 
 == Send Me Feedback
 
