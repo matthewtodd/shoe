@@ -5,7 +5,7 @@ module Shoe
 
     class Cucumber < Abstract
       def active?
-        File.exist?('cucumber.yml')
+        !cucumber_profiles.empty?
       end
 
       def define
@@ -33,8 +33,7 @@ module Shoe
       end
 
       def cucumber_profiles
-        config = YAML.load_file('cucumber.yml')
-        config.respond_to?(:keys) ? config.keys : []
+        YAML.load_file('cucumber.yml').keys rescue []
       end
 
       def define_default_task
