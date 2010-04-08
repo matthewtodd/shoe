@@ -1,6 +1,7 @@
 == Git
 
 * Lean on cucumber.yml to define cucumber tasks.
+* Lean on spec.test_files and Gem::Validator to run tests.
 
 == 0.4.0
 
