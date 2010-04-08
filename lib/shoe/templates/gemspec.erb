@@ -6,7 +6,12 @@ Gem::Specification.new do |spec|
   spec.version = <%= project_module %>::VERSION
 
   spec.summary = ''
-  spec.description = spec.summary
+  spec.description = <<-END.gsub(/^ */, '')
+    #{spec.summary}
+
+    Further description here.
+  END
+
   spec.author = '<%= `git config --get user.name`.chomp %>'
   spec.email  = '<%= `git config --get user.email`.chomp %>'
   spec.homepage = 'http://github.com/<%= `git config --get github.user`.chomp %>/<%= project_name %>'

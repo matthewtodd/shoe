@@ -6,7 +6,9 @@ Gem::Specification.new do |spec|
   spec.version = Shoe::VERSION
 
   spec.summary = 'An ecosystem-friendly library of Rake tasks for your gem.'
-  spec.description = <<-END.gsub(/^\s*/, '')
+  spec.description = <<-END.gsub(/^ */, '')
+    #{spec.summary}
+
     Shoe assumes you could be using any number of other tools -- bundler,
     cucumber, git, rip, rubygems -- and so leans hard on them for the things
     they do well, relegating command-line rake to mere syntactic sugar.
