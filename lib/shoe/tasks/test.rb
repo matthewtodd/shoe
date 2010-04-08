@@ -33,20 +33,20 @@ module Shoe
     # Using <tt>Gem::Validator</tt> in this way means that you *must* use
     # <tt>Test::Unit</tt> in all of your
     # <tt>test_files[http://docs</tt>.rubygems.org/read/chapter/20#test_files]
-    # -- if you prefer Rspec[http://rspec.info], leave <tt>test_files</tt>
-    # blank and set up your own Rake task. Easy peasy.
+    # -- if you prefer Rspec[http://rspec.info], just leave <tt>test_files</tt>
+    # blank and set up your own Rake task.
     #
-    # = <tt>LOAD_PATH</tt>
+    # = <tt>$LOAD_PATH</tt>
     #
     # At test time, the root of your gem, any
     # <tt>{require_paths}[http://docs.rubygems.org/read/chapter/20#require_paths]</tt>,
     # and any
     # <tt>{dependencies}[http://docs.rubygems.org/read/chapter/20#dependencies]</tt>
-    # are on the <tt>LOAD_PATH</tt>.
+    # are on the <tt>$LOAD_PATH</tt>.
     #
     # <b>Bad:</b>
     #
-    #  # Don't do this; test_helper's not in the LOAD_PATH
+    #  # Don't do this; test_helper's not in the $LOAD_PATH
     #  require 'test_helper'
     #
     # <b>Good:</b>

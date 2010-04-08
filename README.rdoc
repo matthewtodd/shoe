@@ -2,12 +2,12 @@
 
 Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
-* Shoe <b>reads your gemspec</b> instead of writing it, like
+* It <b>reads your gemspec</b> instead of writing it like
   Hoe[http://seattlerb.rubyforge.org/hoe] and
   Jeweler[http://github.com/technicalpickles/jeweler] do.
   (Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
 
-* Shoe <b>uses Rubygems</b>
+* It <b>uses Rubygems</b>
   {for}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
   {common}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
   {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html],

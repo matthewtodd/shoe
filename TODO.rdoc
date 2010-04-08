@@ -1,7 +1,6 @@
 = Next Up
 
 * Help generate man pages?
-* Use Gem::Validator to run tests.
 * Find a nicer way to express task dependencies; then maybe tasks could be used a la carte?
 * How would I incorporate Gem::Specification#add_bundler_dependencies?
 * Require a path argument for the shoe executable.
