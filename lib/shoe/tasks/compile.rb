@@ -3,6 +3,16 @@ require 'rubygems/ext'
 module Shoe
   module Tasks
 
+    # Defines <tt>`rake compile`</tt> to build your C extensions.
+    #
+    # Uses
+    # <tt>{Gem::Ext::ExtConfBuilder}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]</tt>,
+    # so extensions are compiled locally just as they will be with <tt>`gem
+    # install`</tt>. Your users will thank you.
+    #
+    # To enable and configure, add
+    # <tt>extensions[http://docs.rubygems.org/read/chapter/20#extensions]</tt>
+    # to your gemspec.
     class Compile < Abstract
       def active?
         !spec.extensions.empty?

@@ -1,6 +1,30 @@
 module Shoe
   module Tasks
 
+    # Defines <tt>`rake release`</tt> to release your gem.
+    #
+    # To release is to: commit, tag, optionally push (with tags), and then
+    # build and push your gem.
+    #
+    # This task is enabled under very specific circumstances, to safeguard
+    # against accidental releases:
+    # 1. Your <tt>version[http://docs.rubygems.org/read/chapter/20#version]</tt> is greater than <tt>0.0.0</tt>.
+    # 2. There is no existing git tag <tt>"v#{version}"</tt>.
+    # 3. You are currently on the <tt>master</tt> branch.
+    #
+    # To configure, adjust the
+    # <tt>version[http://docs.rubygems.org/read/chapter/20#version]</tt> in
+    # your gemspec.
+    #
+    # = Semantic Versioning
+    #
+    # Shoe helps you follow the Tagging Specification of {Semantic
+    # Versioning}[http://semver.org] by tagging your releases as
+    # <tt>"v#{version}"</tt>, prefixing a <tt>"v"</tt> before the version
+    # number.
+    #
+    # Shoe additionally complains if you haven't yet created a <tt>semver</tt>
+    # tag to denote your compliance.
     class Release < Abstract
       def active?
         spec.extend(VersionExtensions)

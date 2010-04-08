@@ -3,6 +3,13 @@ require 'yaml'
 module Shoe
   module Tasks
 
+    # Defines <tt>`rake cucumber`</tt> and <tt>`rake cucumber:<PROFILE>`</tt> to
+    # run your Cucumber[http://cukes.info] features.
+    #
+    # <tt>`rake cucumber`</tt> will run features according to the <tt>default</tt> profile; <tt>`rake cucumber:foo`</tt> according to the <tt>foo</tt> profile.
+    #
+    # To enable and configure, create and edit your
+    # <tt>{cucumber.yml}[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]</tt>.
     class Cucumber < Abstract
       def active?
         !cucumber_profiles.empty?
