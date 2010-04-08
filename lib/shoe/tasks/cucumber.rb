@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Shoe
   module Tasks
 
@@ -31,9 +33,8 @@ module Shoe
       end
 
       def cucumber_profiles
-        YAML.load_file('cucumber.yml').keys
-      rescue
-        []
+        config = YAML.load_file('cucumber.yml')
+        config.respond_to?(:keys) ? config.keys : []
       end
 
       def define_default_task
