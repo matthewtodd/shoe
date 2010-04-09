@@ -1,11 +1,12 @@
 $:.unshift File.expand_path('../lib', __FILE__)
 require '<%= project_name %>/version'
 
+# Feel free to change whatever you like! This file is yours now.
 Gem::Specification.new do |spec|
   spec.name    = '<%= project_name %>'
   spec.version = <%= project_module %>::VERSION
 
-  spec.summary = ''
+  spec.summary = '<%= project_module %> is one of my favorite things!'
   spec.description = <<-END.gsub(/^ */, '')
     #{spec.summary}
 
@@ -23,19 +24,27 @@ Gem::Specification.new do |spec|
   # spec.add_runtime_dependency 'nokogiri' # Or what have you
   spec.add_development_dependency 'shoe'
 
+  # This may not be the best way to select files for inclusion in your gem, but
+  # it does at least honor your .gitignore, keeping that bit of your
+  # configuration DRY. Alternatively, you could use more explicit Dir.glob
+  # patterns or even try reading a Manifest file, hoe-style.
   def spec.git_files(glob=nil)
     `git ls-files -z --cached --other --exclude-standard #{glob}`.split("\0")
   end
 
-  spec.files       = spec.git_files
-  spec.executables = spec.git_files('bin/*').map &File.method(:basename)
-  spec.extensions  = spec.git_files('ext/**/extconf.rb')
-  spec.test_files  = spec.git_files('test/{,**/}*_test.rb')
-
+  # The kooky &File.method(:basename) trick keeps us from accidentally
+  # shadowing a variable named "file" in the context that evaluates this
+  # gemspec. I actually ran into this problem with Bundler!
+  spec.files            = spec.git_files
+  spec.executables      = spec.git_files('bin/*').map &File.method(:basename)
+  spec.extensions       = spec.git_files('ext/**/extconf.rb')
   spec.extra_rdoc_files = spec.git_files('{,**/}*.rdoc')
-  spec.rdoc_options     = %W(
+  spec.test_files       = spec.git_files('test/{,**/}*_test.rb')
+
+  spec.rdoc_options = %W(
     --main README.rdoc
     --title #{spec.full_name}
     --inline-source
+    --webcvs http://github.com/<%= `git config --get github.user`.chomp %>/<%= project_name %>/blob/v#{spec.version}/
   )
 end

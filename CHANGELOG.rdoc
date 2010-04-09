@@ -1,3 +1,7 @@
+== Git
+
+* Add --webcvs to rdoc_options in generated gemspec.
+
 == 0.5.1 -- 2010 April 7
 
 * Include summary in description.

@@ -37,5 +37,6 @@ Gem::Specification.new do |spec|
     --main README.rdoc
     --title #{spec.full_name}
     --inline-source
+    --webcvs http://github.com/matthewtodd/shoe/blob/v#{spec.version}/
   )
 end
