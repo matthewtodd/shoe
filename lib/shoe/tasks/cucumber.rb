@@ -6,7 +6,9 @@ module Shoe
     # Defines <tt>`rake cucumber`</tt> and <tt>`rake cucumber:<PROFILE>`</tt> to
     # run your Cucumber[http://cukes.info] features.
     #
-    # <tt>`rake cucumber`</tt> will run features according to the <tt>default</tt> profile; <tt>`rake cucumber:foo`</tt> according to the <tt>foo</tt> profile.
+    # <tt>`rake cucumber`</tt> will run features according to the
+    # <tt>default</tt> profile; <tt>`rake cucumber:foo`</tt> according to the
+    # <tt>foo</tt> profile.
     #
     # To enable and configure, create and edit your
     # <tt>{cucumber.yml}[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]</tt>.
@@ -50,8 +52,7 @@ module Shoe
           task.profile = 'default'
         end
 
-        task :default
-        Rake.application[:default].prerequisites.push(Rake.application[:cucumber])
+        task :default => :cucumber
       end
 
       def define_profile_task(profile)
