@@ -5,7 +5,7 @@ module Shoe
   class Generator
     def initialize(root)
       @root          = Pathname.new(root).expand_path
-      @template_path = Pathname.new(__FILE__).dirname.join('templates')
+      @template_path = Pathname.new(Shoe.datadir).join('templates')
     end
 
     def run
