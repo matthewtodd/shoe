@@ -22,7 +22,7 @@ module Shoe
 
       path('README.rdoc').install template('readme.erb')
       path('Rakefile').install    template('rakefile.erb')
-      path(version_path).install  template('version.erb')
+      path(module_path).install   template('module.erb')
       path(gemspec_path).install  template('gemspec.erb')
     end
 
@@ -40,8 +40,8 @@ module Shoe
       '0.0.0'
     end
 
-    def version_path
-      "lib/#{project_name}/version.rb"
+    def module_path
+      "lib/#{project_name}.rb"
     end
 
     def gemspec_path
