@@ -1,3 +1,4 @@
+require 'pathname'
 require 'rbconfig'
 require 'rbconfig/datadir'
 
@@ -6,6 +7,6 @@ module Shoe
   autoload :Tasks,     'shoe/tasks'
 
   def self.datadir
-    RbConfig.datadir('shoe')
+    Pathname.new RbConfig.datadir('shoe')
   end
 end

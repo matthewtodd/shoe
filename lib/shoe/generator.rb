@@ -1,14 +1,25 @@
 require 'erb'
+require 'optparse'
 require 'pathname'
 
 module Shoe
   class Generator
-    def initialize(root)
-      @root          = Pathname.new(root).expand_path
-      @template_path = Pathname.new(Shoe.datadir).join('templates')
+    def initialize
+      @options = OptionParser.new do |opts|
+        opts.banner  = "Usage: #{File.basename($0)} [path]"
+        opts.version = Shoe::VERSION
+      end
+
+      @root = Pathname.pwd
     end
 
-    def run
+    def run(argv)
+      begin
+        @options.order(argv) { |root| @root = Pathname.new(root) }
+      rescue OptionParser::ParseError
+        @options.abort($!)
+      end
+
       path('README.rdoc').install template('readme.erb')
       path('Rakefile').install    template('rakefile.erb')
       path(version_path).install  template('version.erb')
@@ -18,7 +29,7 @@ module Shoe
     private
 
     def project_name
-      @root.basename.to_s
+      @root.expand_path.basename.to_s
     end
 
     def project_module
@@ -42,7 +53,7 @@ module Shoe
     end
 
     def template_contents(name)
-      @template_path.join(name).read
+      Shoe.datadir.join('templates', name).read
     end
 
     def path(name)

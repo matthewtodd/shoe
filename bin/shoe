@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'shoe'
-Shoe::Generator.new(*ARGV).run
+Shoe::Generator.new.run(ARGV)

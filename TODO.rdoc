@@ -1,6 +1,5 @@
 = Next Up
 
-* Use optparse for a more resilient shoe executable?
 * Help generate man pages?
 * How would I incorporate Gem::Specification#add_bundler_dependencies?
 * Support any extension flavor that Rubygems supports, not just extconf.rb.
