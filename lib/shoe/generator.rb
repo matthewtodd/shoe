@@ -10,12 +10,12 @@ module Shoe
         opts.version = Shoe::VERSION
       end
 
-      @root = Pathname.pwd
+      @path = Pathname.pwd
     end
 
     def run(argv)
       begin
-        @options.order(argv) { |root| @root = Pathname.new(root) }
+        @options.order(argv) { |path| @path = Pathname.new(path) }
       rescue OptionParser::ParseError
         @options.abort($!)
       end
@@ -29,7 +29,7 @@ module Shoe
     private
 
     def project_name
-      @root.expand_path.basename.to_s
+      @path.expand_path.basename.to_s
     end
 
     def project_module
@@ -57,7 +57,7 @@ module Shoe
     end
 
     def path(name)
-      path = @root.join(name)
+      path = @path.join(name)
       path.dirname.mkpath
       path.extend(PathExtensions)
     end
