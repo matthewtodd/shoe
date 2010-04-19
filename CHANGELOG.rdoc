@@ -5,6 +5,7 @@
 * Generate a top-level project module.
 * Move generated VERSION constant out of foo/version.rb, into foo.rb
 * The shoe generator accepts an --application option to generate an executable stub.
+* The shoe generator accepts a --data option to generate a data directory.
 * Shoe::Tasks may no longer be built with a Gem::Specification object; pass the path to a gemspec file instead.
 
 == 0.5.1 -- 2010 April 7

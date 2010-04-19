@@ -10,11 +10,15 @@ module Shoe
         opts.extend(Extensions::OptionParser)
 
         opts.banner   = "Usage: #{File.basename($0)} [options] [path]"
-        opts.defaults = %w(--no-application .)
+        opts.defaults = %w(--no-application --no-data .)
         opts.version  = Shoe::VERSION
 
         opts.on('-a', '--[no-]application', 'Generate a command-line application.') do |application|
           @options[:application] = application
+        end
+
+        opts.on('-d', '--[no-]data', 'Generate a data directory.') do |data|
+          @options[:data] = data
         end
       end
     end
@@ -44,6 +48,10 @@ module Shoe
           install('executable.erb',  "bin/#{name}", 0755)
           install('application.erb', "lib/#{name}/application.rb")
         end
+
+        if data?
+          install('gitkeep.erb', "data/#{name}/.gitkeep")
+        end
       end
 
       def install(template, path, mode=0644)
@@ -51,6 +59,14 @@ module Shoe
       end
 
       private
+
+      def application?
+        @options[:application]
+      end
+
+      def data?
+        @options[:data]
+      end
 
       def name
         @path.expand_path.basename.to_s
@@ -62,10 +78,6 @@ module Shoe
 
       def version
         '0.0.0'
-      end
-
-      def application?
-        @options[:application]
       end
 
       def installable_path(name)

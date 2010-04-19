@@ -1,7 +1,19 @@
+<% if data? %>
+require 'pathname'
+require 'rbconfig'
+require 'rbconfig/datadir'
+
+<% end %>
 module <%= module_name %>
   VERSION = '<%= version %>'
 <% if application? %>
 
   autoload :Application, '<%= name %>/application'
+<% end %>
+<% if data? %>
+
+  def self.datadir
+    @@datadir ||= Pathname.new(RbConfig.datadir('<%= name %>'))
+  end
 <% end %>
 end

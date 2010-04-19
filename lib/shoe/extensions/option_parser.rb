@@ -7,7 +7,7 @@ module Shoe
       def order(*args, &block)
         begin
           super(defaults.dup.concat(*args), &block)
-        rescue OptionParser::ParseError
+        rescue ::OptionParser::ParseError
           abort($!)
         end
       end
