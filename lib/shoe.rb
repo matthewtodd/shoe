@@ -15,6 +15,6 @@ module Shoe
   end
 
   def self.logger
-    @@logger ||= Logger.new(STDERR)
+    @@logger ||= Logger.new(STDERR).extend(Extensions::Logger)
   end
 end

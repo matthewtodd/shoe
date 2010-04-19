@@ -21,9 +21,9 @@ module Shoe
         begin
           require 'cucumber/rake/task'
         rescue LoadError
-          warn 'cucumber',
+          Shoe.logger.warn ['cucumber',
             "Although you have a cucumber.yml, it seems you don't have cucumber installed.",
-            "You probably want to add a \"gem 'cucumber'\" to your Gemfile."
+            "You probably want to add a \"gem 'cucumber'\" to your Gemfile."]
         else
           define_tasks
         end
