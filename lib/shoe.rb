@@ -5,8 +5,9 @@ require 'rbconfig/datadir'
 module Shoe
   VERSION = '0.5.1'
 
-  autoload :Generator, 'shoe/generator'
-  autoload :Tasks,     'shoe/tasks'
+  autoload :Extensions, 'shoe/extensions'
+  autoload :Generator,  'shoe/generator'
+  autoload :Tasks,      'shoe/tasks'
 
   def self.datadir
     Pathname.new RbConfig.datadir('shoe')

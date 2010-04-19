@@ -7,7 +7,7 @@ module Shoe
     def initialize
       @options = {}
       @parser  = OptionParser.new do |opts|
-        opts.extend(OptionParserExtensions)
+        opts.extend(Extensions::OptionParser)
 
         opts.banner   = "Usage: #{File.basename($0)} [options] [path]"
         opts.defaults = %w(--no-application .)
@@ -27,38 +27,8 @@ module Shoe
 
     private
 
-    module OptionParserExtensions #:nodoc:
-      attr_accessor :defaults
 
-      def order(*args, &block)
-        begin
-          super(defaults.dup.concat(*args), &block)
-        rescue OptionParser::ParseError
-          abort($!)
-        end
-      end
-
-      def summarize(*args, &block)
-        return <<-END.gsub(/^ {10}/, '')
-          #{super}
-          Defaults:
-          #{summary_indent}#{defaults.join(' ')}
-        END
-      end
-    end
-
-    module PathnameExtensions #:nodoc:
-      def install(contents, mode)
-        if exist?
-          $stderr.puts "#{to_s} exists. Not clobbering."
-        else
-          open('w') { |file| file.write(contents) }
-          chmod(mode)
-        end
-      end
-    end
-
-    class Project #:nodoc:
+    class Project
       def initialize(path, options)
         @path    = Pathname.new(path)
         @options = options
@@ -101,7 +71,7 @@ module Shoe
       def installable_path(name)
         path = @path.join(name)
         path.dirname.mkpath
-        path.extend(PathnameExtensions)
+        path.extend(Extensions::Pathname)
       end
 
       def contents(template)
@@ -109,7 +79,7 @@ module Shoe
       end
     end
 
-    class Template #:nodoc:
+    class Template
       def initialize(name)
         @name = name
       end
