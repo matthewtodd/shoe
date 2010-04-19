@@ -5,17 +5,9 @@ module Shoe
       attr_reader :spec
 
       def initialize(spec)
-        @spec = if spec.respond_to?(:rubygems_version)
-                  spec
-                else
-                  Gem::Specification.load(spec)
-                end
-
+        @spec = Gem::Specification.load(spec)
         @spec.extend(Extensions::Specification)
-
-        if active?
-          define
-        end
+        define if active?
       end
 
       private
