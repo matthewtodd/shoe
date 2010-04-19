@@ -1,0 +1,65 @@
+.\" generated with Ronn/v0.5
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "SHOE" "1" "April 2010" "MATTHEW TODD" ""
+.
+.SH "NAME"
+\fBshoe\fR \-\- generate a rubygems project
+.
+.SH "SYNOPSIS"
+\fBshoe\fR [\-\fBadehtv\fR] [\fIpath\fR]
+.
+.SH "DESCRIPTION"
+The \fBshoe\fR command generates a new rubygems project \fIThe Right Way\fR, giving you
+stubs that respect the \fBLOAD_PATH\fR and top\-level modules that don't do too
+much. \fBShoe\fR's built\-in \fBrake(1)\fR tasks then derive their configuration from your \fBgemspec\fR and its surrounding environment, keeping your configuration DRY.
+.
+.SH "OPTIONS"
+\fBshoe\fR's default mode of operation is to generate a basic library, its \fBRakefile\fR, and some \fBTest::Unit\fR tests in the current directory. (You may pass
+a different \fIpath\fR on the command line, if you like.)
+.
+.P
+To generate additional files, use the following options:
+.
+.TP
+\fB\-a\fR, \fB\-\-[no\-]application\fR
+Generate a command\-line application. This adds a simple executable script in
+the \fBbin\fR directory and an \fBApplication\fR class that uses the \fBoptparse\fR
+library to handle command\-line options.
+.
+.TP
+\fB\-d\fR, \fB\-\-[no\-]data\fR
+Generate a data directory. This adds a \fBdata\fR directory (perfect for HTML
+templates and other static assets) and provides a \fBdatadir\fR method in your
+top\-level module to access it.
+.
+.TP
+\fB\-e\fR, \fB\-\-[no\-]extension\fR
+Generate a C extension. This adds an \fBext\fR directory with an \fBextconf.rb\fR and
+a bare\-bones \fBextension.c\fR defining a module named \fBExtension\fR.
+.
+.TP
+\fB\-t\fR, \fB\-\-[no\-]test\-unit\fR
+Generate Test::Unit tests. This adds a \fBtest\fR directory with a \fBhelper.rb\fR
+and a single passing test.
+.
+.P
+\fBshoe\fR also responds to the following standard options:
+.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print a help message and exit.
+.
+.TP
+\fB\-v\fR, \fB\-\-version\fR[=all]
+Print \fBshoe\fR's version number and exit. If \fB=all\fR is given, also print
+version numbers of \fBshoe\fR's dependencies. (This is standard \fBoptparse\fR behavior
+that deserves more attention!)
+.
+.SH "AUTHOR"
+\fBshoe\fR is the fanatical side project of Matthew Todd, who would love to discuss
+it with you. He can be reached on email at \fImatthew.todd@gmail.com\fR or as \fI@matthewtodd\fR on Twitter.
+.
+.SH "SEE ALSO"
+\fBshoe\fR is heavily inspired by \fBhoe\fR, \fBjeweler\fR, and \fBnewgem\fR and heavily influenced by
+the conversations around \fBrip\fR, \fBbundler\fR, and the \fBRuby Packaging Standard\fR.

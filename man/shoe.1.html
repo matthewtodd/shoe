@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.5'>
+  <title>shoe(1) -- generate a rubygems project</title>
+  <style type='text/css'>
+    body {margin:0}
+    #man, #man code, #man pre, #man tt, #man kbd, #man samp {
+      font-family:consolas,monospace;
+      font-size:16px;
+      line-height:1.3;
+      color:#343331;
+      background:#fff; }
+    #man { max-width:89ex; text-align:justify; margin:0 25px 25px 25px }
+    #man h1, #man h2, #man h3 { color:#232221;clear:left }
+    #man h1 { font-size:28px; margin:15px 0 30px 0; text-align:center }
+    #man h2 { font-size:18px; margin-bottom:0; margin-top:10px; line-height:1.3; }
+    #man h3 { font-size:16px; margin:0 0 0 4ex; }
+    #man p, #man ul, #man ol, #man dl, #man pre { margin:0 0 18px 0; }
+    #man pre {
+      color:#333231;
+      background:#edeceb;
+      padding:5px 7px;
+      margin:0px 0 20px 0;
+      border-left:2ex solid #ddd}
+    #man pre + h2, #man pre + h3 {
+      margin-top:22px;
+    }
+    #man h2 + pre, #man h3 + pre {
+      margin-top:5px;
+    }
+    #man > p, #man > ul, #man > ol, #man > dl, #man > pre { margin-left:8ex; }
+    #man dt { margin:0; clear:left }
+    #man dt.flush { float:left; width:8ex }
+    #man dd { margin:0 0 0 9ex }
+    #man code, #man strong, #man b { font-weight:bold; color:#131211; }
+    #man pre code { font-weight:normal; color:#232221; background:inherit }
+    #man em, var, u {
+      font-style:normal; color:#333231; border-bottom:1px solid #999; }
+    #man h1.man-title { display:none; }
+    #man ol.man, #man ol.man li { margin:2px 0 10px 0; padding:0;
+      float:left; width:33%; list-style-type:none;
+      text-transform:uppercase; font-size:18px; color:#999;
+      letter-spacing:1px;}
+    #man ol.man { width:100%; }
+    #man ol.man li.tl { text-align:left }
+    #man ol.man li.tc { text-align:center;letter-spacing:4px }
+    #man ol.man li.tr { text-align:right }
+    #man ol.man a { color:#999 }
+    #man ol.man a:hover { color:#333231 }
+  </style>
+</head>
+<body>
+<div id='man'>
+
+<h1 class='man-title'>shoe(1)</h1>
+
+<ol class='head man'>
+  <li class='tl'>shoe(1)</li>
+  <li class='tc'></li>
+  <li class='tr'>shoe(1)</li>
+</ol>
+
+<h2 id='NAME'>NAME</h2>
+<p><code>shoe</code> -- generate a rubygems project</p>
+
+<h2>SYNOPSIS</h2>
+
+<p><code>shoe</code> [-<code>adehtv</code>] [<em>path</em>]</p>
+
+<h2>DESCRIPTION</h2>
+
+<p>The <code>shoe</code> command generates a new rubygems project <em>The Right Way</em>, giving you
+stubs that respect the <code>LOAD_PATH</code> and top-level modules that don't do too
+much. <code>Shoe</code>'s built-in <code>rake(1)</code> tasks then derive their configuration from your
+<code>gemspec</code> and its surrounding environment, keeping your configuration DRY.</p>
+
+<h2>OPTIONS</h2>
+
+<p><code>shoe</code>'s default mode of operation is to generate a basic library, its
+<code>Rakefile</code>, and some <code>Test::Unit</code> tests in the current directory. (You may pass
+a different <em>path</em> on the command line, if you like.)</p>
+
+<p>To generate additional files, use the following options:</p>
+
+<dl>
+<dt><code>-a</code>, <code>--[no-]application</code></dt><dd><p>Generate a command-line application. This adds a simple executable script in
+the <code>bin</code> directory and an <code>Application</code> class that uses the <code>optparse</code>
+library to handle command-line options.</p></dd>
+<dt><code>-d</code>, <code>--[no-]data</code></dt><dd><p>Generate a data directory. This adds a <code>data</code> directory (perfect for HTML
+templates and other static assets) and provides a <code>datadir</code> method in your
+top-level module to access it.</p></dd>
+<dt><code>-e</code>, <code>--[no-]extension</code></dt><dd><p>Generate a C extension. This adds an <code>ext</code> directory with an <code>extconf.rb</code> and
+a bare-bones <code>extension.c</code> defining a module named <code>Extension</code>.</p></dd>
+<dt><code>-t</code>, <code>--[no-]test-unit</code></dt><dd><p>Generate Test::Unit tests. This adds a <code>test</code> directory with a <code>helper.rb</code>
+and a single passing test.</p></dd>
+</dl>
+
+
+<p><code>shoe</code> also responds to the following standard options:</p>
+
+<dl>
+<dt><code>-h</code>, <code>--help</code></dt><dd><p>Print a help message and exit.</p></dd>
+<dt><code>-v</code>, <code>--version</code>[=all]</dt><dd><p>Print <code>shoe</code>'s version number and exit. If <code>=all</code> is given, also print
+version numbers of <code>shoe</code>'s dependencies. (This is standard <code>optparse</code> behavior
+that deserves more attention!)</p></dd>
+</dl>
+
+
+<h2>AUTHOR</h2>
+
+<p><code>shoe</code> is the fanatical side project of Matthew Todd, who would love to discuss
+it with you. He can be reached on email at <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#109;&#97;&#x74;&#116;&#104;&#x65;&#119;&#46;&#116;&#111;&#x64;&#100;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#109;&#97;&#116;&#x74;&#104;&#x65;&#119;&#46;&#x74;&#111;&#100;&#x64;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a> or as
+<var>@matthewtodd</var> on Twitter.</p>
+
+<h2>SEE ALSO</h2>
+
+<p><code>shoe</code> is heavily inspired by <code>hoe</code>, <code>jeweler</code>, and <code>newgem</code> and heavily influenced by
+the conversations around <code>rip</code>, <code>bundler</code>, and the <code>Ruby Packaging Standard</code>.</p>
+
+
+<ol class='foot man'>
+  <li class='tl'>MATTHEW TODD</li>
+  <li class='tc'>April 2010</li>
+  <li class='tr'>shoe(1)</li>
+</ol>
+
+</div>
+</body>
+</html>

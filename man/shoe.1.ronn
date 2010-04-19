@@ -1,0 +1,60 @@
+shoe(1) -- generate a rubygems project
+======================================
+
+## SYNOPSIS
+
+`shoe` [-`adehtv`] [_path_]
+
+## DESCRIPTION
+
+The `shoe` command generates a new rubygems project _The Right Way_, giving you
+stubs that respect the `LOAD_PATH` and top-level modules that don't do too
+much. `Shoe`'s built-in `rake(1)` tasks then derive their configuration from your
+`gemspec` and its surrounding environment, keeping your configuration DRY.
+
+## OPTIONS
+
+`shoe`'s default mode of operation is to generate a basic library, its
+`Rakefile`, and some `Test::Unit` tests in the current directory. (You may pass
+a different _path_ on the command line, if you like.)
+
+To generate additional files, use the following options:
+
+* `-a`, `--[no-]application`:
+  Generate a command-line application. This adds a simple executable script in
+  the `bin` directory and an `Application` class that uses the `optparse`
+  library to handle command-line options.
+
+* `-d`, `--[no-]data`:
+  Generate a data directory. This adds a `data` directory (perfect for HTML
+  templates and other static assets) and provides a `datadir` method in your
+  top-level module to access it.
+
+* `-e`, `--[no-]extension`:
+  Generate a C extension. This adds an `ext` directory with an `extconf.rb` and
+  a bare-bones `extension.c` defining a module named `Extension`.
+
+* `-t`, `--[no-]test-unit`:
+  Generate Test::Unit tests. This adds a `test` directory with a `helper.rb`
+  and a single passing test.
+
+`shoe` also responds to the following standard options:
+
+* `-h`, `--help`:
+  Print a help message and exit.
+
+* `-v`, `--version`[=all]:
+  Print `shoe`'s version number and exit. If `=all` is given, also print
+  version numbers of `shoe`'s dependencies. (This is standard `optparse` behavior
+  that deserves more attention!)
+
+## AUTHOR
+
+`shoe` is the fanatical side project of Matthew Todd, who would love to discuss
+it with you. He can be reached on email at <matthew.todd@gmail.com> or as
+<@matthewtodd> on Twitter.
+
+## SEE ALSO
+
+`shoe` is heavily inspired by `hoe`, `jeweler`, and `newgem` and heavily influenced by
+the conversations around `rip`, `bundler`, and the `Ruby Packaging Standard`.
