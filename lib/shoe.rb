@@ -1,3 +1,4 @@
+require 'logger'
 require 'pathname'
 require 'rbconfig'
 require 'rbconfig/datadir'
@@ -10,6 +11,10 @@ module Shoe
   autoload :Tasks,      'shoe/tasks'
 
   def self.datadir
-    Pathname.new RbConfig.datadir('shoe')
+    @@datadir ||= Pathname.new(RbConfig.datadir('shoe'))
+  end
+
+  def self.logger
+    @@logger ||= Logger.new(STDERR)
   end
 end
