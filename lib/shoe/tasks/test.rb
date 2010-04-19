@@ -61,12 +61,12 @@ module Shoe
       def define
         desc 'Run tests'
         task :test do
-          Gem.source_index.extend(LocalGemSourceIndex)
+          Gem.source_index.extend(Extensions::SourceIndex)
           Gem.source_index.local_gemspec = spec
 
           Gem::Validator.send(:remove_const, :TestRunner)
           Gem::Validator.const_set(:TestRunner, LocalTestRunner)
-          Gem::Validator.new.extend(LocalGemValidator).unit_test(spec)
+          Gem::Validator.new.extend(Extensions::Validator).unit_test(spec)
         end
 
         task :prepare
@@ -77,30 +77,6 @@ module Shoe
       end
 
       private
-
-      module LocalGemSourceIndex #:nodoc:
-        attr_accessor :local_gemspec
-
-        def find_name(*args)
-          if args.first == local_gemspec.name
-            [local_gemspec]
-          else
-            super
-          end
-        end
-      end
-
-      module LocalGemValidator #:nodoc:
-        def alert_error(*args)
-          # no-op
-        end
-
-        def unit_test(*args)
-          unless super.passed?
-            exit 1
-          end
-        end
-      end
 
       class LocalTestRunner < ::Test::Unit::UI::Console::TestRunner #:nodoc:
         def self.run(*args)
