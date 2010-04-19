@@ -27,8 +27,6 @@ module Shoe
     # tag to denote your compliance.
     class Release < Abstract
       def active?
-        spec.extend(VersionExtensions)
-
         spec.has_version_greater_than?('0.0.0') &&
           there_is_no_tag_for(version_tag(spec.version)) &&
           we_are_on_the_master_branch
@@ -58,12 +56,6 @@ module Shoe
       end
 
       private
-
-      module VersionExtensions #:nodoc:
-        def has_version_greater_than?(string)
-          version > Gem::Version.new(string)
-        end
-      end
 
       def there_is_a_remote_called(name)
         `git remote`.to_a.include?("#{name}\n")
