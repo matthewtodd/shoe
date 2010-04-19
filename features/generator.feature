@@ -13,7 +13,8 @@ Feature: Getting started
 
   Scenario: Running shoe with no arguments in an empty directory
     When I run bundle exec shoe inside "my_project"
-    Then I should see a file "my_project/Rakefile"
+    Then I should see a file "my_project/.gitignore"
+    And I should see a file "my_project/Rakefile"
     And I should see a file "my_project/README.rdoc"
     And I should see a file "my_project/lib/my_project.rb"
     And I should see a file "my_project/my_project.gemspec"

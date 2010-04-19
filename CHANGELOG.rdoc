@@ -8,6 +8,7 @@
 * The shoe generator accepts a --data option to generate a data directory.
 * The shoe generator accepts an --extension option to generate a C extension.
 * Shoe::Tasks may no longer be built with a Gem::Specification object; pass the path to a gemspec file instead.
+* Generate a .gitignore file.
 
 == 0.5.1 -- 2010 April 7
 

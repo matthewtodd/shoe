@@ -43,10 +43,11 @@ module Shoe
       end
 
       def generate
-        install('readme.erb',   'README.rdoc')
-        install('rakefile.erb', 'Rakefile')
-        install('gemspec.erb',  "#{name}.gemspec")
-        install('module.erb',   "lib/#{name}.rb")
+        install('gitignore.erb', '.gitignore')
+        install('readme.erb',    'README.rdoc')
+        install('rakefile.erb',  'Rakefile')
+        install('gemspec.erb',   "#{name}.gemspec")
+        install('module.erb',    "lib/#{name}.rb")
 
         if application?
           install('executable.erb',  "bin/#{name}", 0755)
