@@ -68,11 +68,7 @@ module Shoe
     end
 
     def template(name)
-      ERB.new(template_contents(name), nil, '<>').result(binding)
-    end
-
-    def template_contents(name)
-      Shoe.datadir.join('templates', name).read
+      Template.new(name).evaluate(binding)
     end
 
     def path(name)
@@ -109,6 +105,22 @@ module Shoe
           open('w') { |file| file.write(contents) }
           chmod(mode)
         end
+      end
+    end
+
+    class Template
+      def initialize(name)
+        @name = name
+      end
+
+      def evaluate(binding)
+        ERB.new(contents, nil, '<>').result(binding)
+      end
+
+      private
+
+      def contents
+        Shoe.datadir.join('templates', @name).read
       end
     end
   end
