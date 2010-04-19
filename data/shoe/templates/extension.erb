@@ -1,0 +1,9 @@
+#include "ruby.h"
+
+static VALUE m<%= module_name %>;
+static VALUE m<%= extension_module_name %>;
+
+void Init_ext() {
+  m<%= module_name %> = rb_define_module("<%= module_name %>");
+  m<%= extension_module_name %> = rb_define_module_under("<%= module_name %>", "<%= extension_module_name %>");
+}

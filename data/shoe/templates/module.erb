@@ -6,9 +6,14 @@ require 'rbconfig/datadir'
 <% end %>
 module <%= module_name %>
   VERSION = '<%= version %>'
-<% if application? %>
+<% if application? || extension? %>
 
+<% end %>
+<% if application? %>
   autoload :Application, '<%= name %>/application'
+<% end %>
+<% if extension? %>
+  autoload :<%= extension_module_name %>, '<%= name %>/<%= extension_name %>'
 <% end %>
 <% if data? %>
 
