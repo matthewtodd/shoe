@@ -82,7 +82,7 @@ other skeleton files for your new project:
 
  $ shoe my_project
 
-If you're using {Bundler}[http://gembundler.com], see <tt>doc/bundler.rdoc</tt>
+If you're using {Bundler}[http://gembundler.com], see <tt>BUNDLER.rdoc</tt>
 for some helpful tips.
 
 
