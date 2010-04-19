@@ -11,7 +11,7 @@ module Shoe
                   Gem::Specification.load(spec)
                 end
 
-        @spec.extend(LocalGemspecExtensions)
+        @spec.extend(Extensions::Specification)
 
         if active?
           define
@@ -19,12 +19,6 @@ module Shoe
       end
 
       private
-
-      module LocalGemspecExtensions #:nodoc:
-        def full_gem_path
-          Dir.pwd
-        end
-      end
 
       def warn(subject, *paragraphs)
         $stderr.extend(Colored).
