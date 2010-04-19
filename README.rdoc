@@ -16,6 +16,10 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
   {the}[http://rake.rubyforge.org/classes/Rake/RDocTask.html]
   {wheel}[http://rake.rubyforge.org/classes/Rake/TestTask.html].
 
+* It <b>follows the
+  {Ruby Packaging Standard}[http://chneukirchen.github.com/rps/]</b>
+  when generating project files.
+
 
 == Install
 
