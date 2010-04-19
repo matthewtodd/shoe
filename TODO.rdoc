@@ -1,5 +1,6 @@
 = Next Up
 
+* Generator shoould do the right thing when the base directory has a dash in it.
 * Help generate man pages?
 * How would I incorporate Gem::Specification#add_bundler_dependencies?
 * Find a better way to clean; I don't want to whack .bundler and .rvmrc.
