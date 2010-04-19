@@ -1,12 +1,12 @@
 $:.unshift File.expand_path('../lib', __FILE__)
-require '<%= project_name %>'
+require '<%= name %>'
 
 # Feel free to change whatever you like! This file is yours now.
 Gem::Specification.new do |spec|
-  spec.name    = '<%= project_name %>'
-  spec.version = <%= project_module %>::VERSION
+  spec.name    = '<%= name %>'
+  spec.version = <%= module_name %>::VERSION
 
-  spec.summary = '<%= project_module %> is one of my favorite things!'
+  spec.summary = '<%= module_name %> is one of my favorite things!'
   spec.description = <<-END.gsub(/^ */, '')
     #{spec.summary}
 
@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.author = '<%= `git config --get user.name`.chomp %>'
   spec.email  = '<%= `git config --get user.email`.chomp %>'
-  spec.homepage = 'http://github.com/<%= `git config --get github.user`.chomp %>/<%= project_name %>'
+  spec.homepage = 'http://github.com/<%= `git config --get github.user`.chomp %>/<%= name %>'
 
   # You may find these helpful:
   # spec.requirements = ['git'] # If your library shells out to git
@@ -45,6 +45,6 @@ Gem::Specification.new do |spec|
     --main README.rdoc
     --title #{spec.full_name}
     --inline-source
-    --webcvs http://github.com/<%= `git config --get github.user`.chomp %>/<%= project_name %>/blob/v#{spec.version}/
+    --webcvs http://github.com/<%= `git config --get github.user`.chomp %>/<%= name %>/blob/v#{spec.version}/
   )
 end

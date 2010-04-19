@@ -5,77 +5,27 @@ require 'pathname'
 module Shoe
   class Generator
     def initialize
-      @options  = OptionParser.new do |opts|
+      @options = {}
+      @parser  = OptionParser.new do |opts|
         opts.extend(OptionParserExtensions)
 
         opts.banner   = "Usage: #{File.basename($0)} [options] [path]"
         opts.defaults = %w(--no-application .)
         opts.version  = Shoe::VERSION
 
-        opts.separator ''
         opts.on('-a', '--[no-]application', 'Generate a command-line application.') do |application|
-          @application = application
+          @options[:application] = application
         end
       end
     end
 
-    def run(argv)
-      @options.order(argv) { |path| @path = Pathname.new(path) }
+    def run(arguments)
+      @parser.order(arguments) { |path| @project = Project.new(path, @options) }
 
-      path('README.rdoc').install template('readme.erb')
-      path('Rakefile').install    template('rakefile.erb')
-      path(gemspec_path).install  template('gemspec.erb')
-      path(module_path).install   template('module.erb')
-
-      if application?
-        path(executable_path).install  template('executable.erb'), 0755
-        path(application_path).install template('application.erb')
-      end
+      @project.generate
     end
 
     private
-
-    def project_name
-      @path.expand_path.basename.to_s
-    end
-
-    def project_module
-      project_name.capitalize.gsub(/_(\w)/) { $1.upcase }
-    end
-
-    def project_version
-      '0.0.0'
-    end
-
-    def application?
-      @application
-    end
-
-    def application_path
-      "lib/#{project_name}/application.rb"
-    end
-
-    def executable_path
-      "bin/#{project_name}"
-    end
-
-    def gemspec_path
-      "#{project_name}.gemspec"
-    end
-
-    def module_path
-      "lib/#{project_name}.rb"
-    end
-
-    def template(name)
-      Template.new(name).evaluate(binding)
-    end
-
-    def path(name)
-      path = @path.join(name)
-      path.dirname.mkpath
-      path.extend(PathExtensions)
-    end
 
     module OptionParserExtensions #:nodoc:
       attr_accessor :defaults
@@ -97,8 +47,8 @@ module Shoe
       end
     end
 
-    module PathExtensions #:nodoc:
-      def install(contents, mode=0644)
+    module PathnameExtensions #:nodoc:
+      def install(contents, mode)
         if exist?
           $stderr.puts "#{to_s} exists. Not clobbering."
         else
@@ -108,7 +58,58 @@ module Shoe
       end
     end
 
-    class Template
+    class Project #:nodoc:
+      def initialize(path, options)
+        @path    = Pathname.new(path)
+        @options = options
+      end
+
+      def generate
+        install('readme.erb',   'README.rdoc')
+        install('rakefile.erb', 'Rakefile')
+        install('gemspec.erb',  "#{name}.gemspec")
+        install('module.erb',   "lib/#{name}.rb")
+
+        if application?
+          install('executable.erb',  "bin/#{name}", 0755)
+          install('application.erb', "lib/#{name}/application.rb")
+        end
+      end
+
+      def install(template, path, mode=0644)
+        installable_path(path).install(contents(template), mode)
+      end
+
+      private
+
+      def name
+        @path.expand_path.basename.to_s
+      end
+
+      def module_name
+        name.capitalize.gsub(/_(\w)/) { $1.upcase }
+      end
+
+      def version
+        '0.0.0'
+      end
+
+      def application?
+        @options[:application]
+      end
+
+      def installable_path(name)
+        path = @path.join(name)
+        path.dirname.mkpath
+        path.extend(PathnameExtensions)
+      end
+
+      def contents(template)
+        Template.new(template).evaluate(binding)
+      end
+    end
+
+    class Template #:nodoc:
       def initialize(name)
         @name = name
       end
