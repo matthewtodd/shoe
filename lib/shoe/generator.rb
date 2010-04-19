@@ -5,29 +5,22 @@ require 'pathname'
 module Shoe
   class Generator
     def initialize
-      @defaults = %w(--no-application .)
-
       @options  = OptionParser.new do |opts|
-        opts.banner  = "Usage: #{File.basename($0)} [options] [path]"
-        opts.version = Shoe::VERSION
+        opts.extend(OptionParserExtensions)
+
+        opts.banner   = "Usage: #{File.basename($0)} [options] [path]"
+        opts.defaults = %w(--no-application .)
+        opts.version  = Shoe::VERSION
 
         opts.separator ''
         opts.on('-a', '--[no-]application', 'Generate a command-line application.') do |application|
           @application = application
         end
-
-        opts.separator ''
-        opts.separator 'Defaults:'
-        opts.separator opts.summary_indent + @defaults.join(' ')
       end
     end
 
     def run(argv)
-      begin
-        @options.order(@defaults.concat(argv)) { |path| @path = Pathname.new(path) }
-      rescue OptionParser::ParseError
-        @options.abort($!)
-      end
+      @options.order(argv) { |path| @path = Pathname.new(path) }
 
       path('README.rdoc').install template('readme.erb')
       path('Rakefile').install    template('rakefile.erb')
@@ -86,6 +79,26 @@ module Shoe
       path = @path.join(name)
       path.dirname.mkpath
       path.extend(PathExtensions)
+    end
+
+    module OptionParserExtensions #:nodoc:
+      attr_accessor :defaults
+
+      def order(*args, &block)
+        begin
+          super(defaults.dup.concat(*args), &block)
+        rescue OptionParser::ParseError
+          abort($!)
+        end
+      end
+
+      def summarize(*args, &block)
+        return <<-END.gsub(/^ {10}/, '')
+          #{super}
+          Defaults:
+          #{summary_indent}#{defaults.join(' ')}
+        END
+      end
     end
 
     module PathExtensions #:nodoc:
