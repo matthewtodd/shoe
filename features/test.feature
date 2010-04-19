@@ -3,12 +3,6 @@ Feature: Test
   As a developer
   I want shoe to give me a rake task
 
-  Scenario: Running rake --tasks in a shoe project without tests
-    Given I have created a project called "my_project"
-    And I have run git init inside "my_project"
-    When I run bundle exec rake --tasks inside "my_project"
-    Then I should not see "rake test" on standard out
-
   Scenario: Running rake --tasks in a shoe project with tests
     Given I have created a project called "my_project"
     And I have run git init inside "my_project"

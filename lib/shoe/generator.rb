@@ -10,7 +10,7 @@ module Shoe
         opts.extend(Extensions::OptionParser)
 
         opts.banner   = "Usage: #{File.basename($0)} [options] [path]"
-        opts.defaults = %w(--no-application --no-data --no-extension .)
+        opts.defaults = %w(--no-application --no-data --no-extension --test-unit .)
         opts.version  = Shoe::VERSION
 
         opts.on('-a', '--[no-]application', 'Generate a command-line application.') do |application|
@@ -23,6 +23,10 @@ module Shoe
 
         opts.on('-e', '--[no-]extension', 'Generate a C extension.') do |extension|
           @options[:extension] = extension
+        end
+
+        opts.on('-t', '--[no-]test-unit', 'Generate Test::Unit tests.') do |test_unit|
+          @options[:test_unit] = test_unit
         end
       end
     end
@@ -62,6 +66,11 @@ module Shoe
           install('extconf.erb',   "ext/#{name}/extconf.rb")
           install('extension.erb', "ext/#{name}/#{extension_name}.c")
         end
+
+        if test_unit?
+          install('test_helper.erb', "test/helper.rb")
+          install('module_test.rb',  "test/#{name}_test.rb")
+        end
       end
 
       def install(template, path, mode=0644)
@@ -80,6 +89,10 @@ module Shoe
 
       def extension?
         @options[:extension]
+      end
+
+      def test_unit?
+        @options[:test_unit]
       end
 
       def name

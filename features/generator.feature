@@ -17,6 +17,8 @@ Feature: Getting started
     And I should see a file "my_project/Rakefile"
     And I should see a file "my_project/README.rdoc"
     And I should see a file "my_project/lib/my_project.rb"
+    And I should see a file "my_project/test/helper.rb"
+    And I should see a file "my_project/test/my_project_test.rb"
     And I should see a file "my_project/my_project.gemspec"
 
   Scenario: Running shoe --application in an empty directory
