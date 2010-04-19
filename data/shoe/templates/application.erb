@@ -1,0 +1,23 @@
+require 'optparse'
+
+module <%= project_module %>
+  class Application
+    def initialize
+      @options = OptionParser.new do |opts|
+        # -h, --help, -v, --version are built into OptionParser
+        # Try `<%= project_name %> --version=all` as you require more libraries!
+        opts.version = <%= project_module %>::VERSION
+      end
+    end
+
+    def run(argv)
+      begin
+        @options.parse(argv)
+      rescue OptionParser::ParseError
+        @options.abort($!)
+      end
+
+      # Have at it!
+    end
+  end
+end

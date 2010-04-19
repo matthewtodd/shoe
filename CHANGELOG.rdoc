@@ -4,6 +4,7 @@
 * Move erb templates from lib to datadir.
 * Generate a top-level project module.
 * Move generated VERSION constant out of foo/version.rb, into foo.rb
+* The shoe generator accepts an --application option to generate an executable stub.
 
 == 0.5.1 -- 2010 April 7
 

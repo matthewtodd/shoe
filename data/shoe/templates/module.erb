@@ -1,3 +1,7 @@
 module <%= project_module %>
   VERSION = '<%= project_version %>'
+<% if application? %>
+
+  autoload :Application, '<%= project_name %>/application'
+<% end %>
 end
