@@ -1,10 +1,9 @@
-Given /^I have created a project called "([^\"]*)"$/ do |name|
+Given /^I have started a project called "([^\"]*)"$/ do |name|
   create_directory(name)
   create_file("#{name}/Gemfile", <<-END.gsub(/^\s*/, ''))
     source :rubygems
     gem 'shoe', :group => :development
   END
-  run('bundle exec shoe .', name)
 end
 
 Given /^I have created a directory called "([^\"]*)"$/ do |name|

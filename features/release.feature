@@ -6,7 +6,8 @@ Feature: Release
   Background:
     Given I have created a directory called "origin"
     And I have run git init --bare inside "origin"
-    Given I have created a project called "my_project"
+    Given I have started a project called "my_project"
+    And I have run bundle exec shoe inside "my_project"
     And I have run git init inside "my_project"
     And I have run git add . inside "my_project"
     And I have run git commit -m "Initial commit" inside "my_project"
