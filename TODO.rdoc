@@ -1,5 +1,5 @@
 = Next Up
 
-* Generator shoould do the right thing when the base directory has a dash in it.
-* How would I incorporate Gem::Specification#add_bundler_dependencies?
+* Generator should do the right thing when the base directory has a dash in it.
 * Find a better way to clean; I don't want to whack .bundler and .rvmrc.
+* Add :only/:except options to Shoe::Tasks.define.
