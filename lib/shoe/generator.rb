@@ -56,6 +56,7 @@ module Shoe
         if application?
           install('executable.erb',  "bin/#{name}", 0755)
           install('application.erb', "lib/#{name}/application.rb")
+          install('manpage.erb',     "man/#{name}.1.ronn")
         end
 
         if data?
