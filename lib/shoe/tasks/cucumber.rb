@@ -23,7 +23,7 @@ module Shoe
         rescue LoadError
           Shoe.logger.warn ['cucumber',
             "Although you have a cucumber.yml, it seems you don't have cucumber installed.",
-            "You probably want to add a \"gem 'cucumber'\" to your Gemfile."]
+            "You probably want to add a \"gem 'cucumber'\" to your Gemfile and a spec.add_development_dependency('cucumber') to your gemspec."]
         else
           define_tasks
         end
