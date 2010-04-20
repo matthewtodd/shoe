@@ -1,6 +1,24 @@
 module Shoe
   module Tasks
 
+    # Defines <tt>`rake man`</tt> to generate man pages from
+    # {ronn}[http://rtomayko.github.com/ronn/] sources.
+    #
+    # To enable, create a <tt>man/.*.ronn</tt> file.
+    #
+    # To configure the <tt>organization</tt> field for your man pages, set the
+    # first of the
+    # <tt>authors[http://docs.rubygems.org/read/chapter/20#authors]</tt>
+    # in your gemspec.
+    #
+    # == Notes
+    #
+    # * It's best to check the generated man pages into version control so
+    #   they'll be included in your gem for
+    #   {gem-man}[http://github.com/defunkt/gem-man].
+    #
+    # * Man is a prerequisite for Release, so your man pages are sure to be
+    #   up-to-date.
     class Man < Abstract
       def active?
         !ronn_files.empty?
