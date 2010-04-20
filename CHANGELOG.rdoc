@@ -11,6 +11,7 @@
 * Shoe::Tasks may no longer be built with a Gem::Specification object; pass the path to a gemspec file instead.
 * Generate a .gitignore file.
 * New `rake ronn` task to build man pages from ronn sources.
+* Support running generated apps from a local checkout.
 
 == 0.5.1 -- 2010 April 7
 
