@@ -25,14 +25,18 @@ module Shoe
         task :man => man_files.concat(html_files)
 
         rule /\.\d$/ => '%p.ronn' do |task|
-          sh "ronn --build --roff --manual='RubyGems Manual' --organization='#{spec.author}' #{task.source}"
+          ronn('--roff', task.source)
         end
 
         rule '.html' => '%X.ronn' do |task|
-          sh "ronn --build --html --manual='RubyGems Manual' --organization='#{spec.author}' #{task.source}"
+          ronn('--html', task.source)
         end
 
         task :prepare => :man
+      end
+
+      def ronn(format, file)
+        sh "ronn --build #{format} --manual='RubyGems Manual' --organization='#{spec.author}' #{file}"
       end
 
       def ronn_files
