@@ -17,8 +17,12 @@ module Shoe
     #   they'll be included in your gem for
     #   {gem-man}[http://github.com/defunkt/gem-man].
     #
-    # * Ronn is a prerequisite for Release, so your man pages are sure to be
-    #   up-to-date.
+    # * Ronn becomes a prerequisite for Release, so your man pages are sure to
+    #   be up-to-date.
+    #
+    # * You may like to add a <tt>task :man => :ronn</tt> to your
+    #   <tt>Rakefile</tt>. I felt a little uncomfortable clogging that
+    #   namespace without your consent.
     class Ronn < Abstract
       def active?
         !ronn_files.empty?

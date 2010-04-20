@@ -60,6 +60,12 @@ Shoe::Tasks::Release::
   calls <tt>`git tag`</tt>, <tt>`git push`</tt>, <tt>`gem build`</tt> and
   <tt>`gem push`</tt>, of course.
 
+Shoe::Tasks::Ronn::
+  builds man pages from your <tt>{ronn}[http://rtomayko.github.com/ronn/]</tt> sources,
+  honoring the first
+  <tt>author[http://docs.rubygems.org/read/chapter/20#authors]</tt>
+  in your gemspec.
+
 Shoe::Tasks::Test::
   runs the
   <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt> in
