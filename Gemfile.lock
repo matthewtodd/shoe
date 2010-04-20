@@ -1,0 +1,49 @@
+--- 
+dependencies: 
+  ronn: 
+    group: 
+    - :development
+    version: ">= 0"
+  rake: 
+    group: 
+    - :default
+    version: ">= 0"
+  cucumber: 
+    group: 
+    - :development
+    version: ">= 0"
+  launchy: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- rake: 
+    version: 0.8.7
+- builder: 
+    version: 2.1.2
+- configuration: 
+    version: 1.1.0
+- diff-lcs: 
+    version: 1.1.2
+- json_pure: 
+    version: 1.2.4
+- polyglot: 
+    version: 0.3.1
+- term-ansicolor: 
+    version: 1.0.5
+- treetop: 
+    version: 1.4.5
+- cucumber: 
+    version: 0.6.4
+- hpricot: 
+    version: 0.8.2
+- launchy: 
+    version: 0.3.5
+- rdiscount: 
+    version: 1.6.3
+- ronn: 
+    version: "0.5"
+hash: d47953731e3f472755d844fb72d2644ea08f56d9
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

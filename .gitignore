@@ -1,5 +1,4 @@
 .bundle
 .rvmrc
-Gemfile.lock
 *.gem
 rdoc
