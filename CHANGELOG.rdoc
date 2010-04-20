@@ -1,4 +1,4 @@
-== Git
+== 0.6.0 -- 2010 April 20
 
 * Add --webcvs to rdoc_options in generated gemspec.
 * Move erb templates from lib to datadir.

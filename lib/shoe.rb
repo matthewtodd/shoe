@@ -3,7 +3,7 @@ require 'rbconfig'
 require 'rbconfig/datadir'
 
 module Shoe
-  VERSION = '0.5.1'
+  VERSION = '0.6.0'
 
   autoload :Extensions, 'shoe/extensions'
   autoload :Generator,  'shoe/generator'
