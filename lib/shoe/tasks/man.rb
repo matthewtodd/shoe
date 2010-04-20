@@ -24,8 +24,12 @@ module Shoe
 
       def define_tasks
         desc 'Generate man pages'
-        task :man => man_files.concat(html_files) do
+        task :man => 'man:build' do
           Launchy::Browser.run(*html_files)
+        end
+
+        namespace :man do
+          task :build => man_files.concat(html_files)
         end
 
         rule /\.\d$/ => '%p.ronn' do |task|
@@ -35,6 +39,8 @@ module Shoe
         rule '.html' => '%X.ronn' do |task|
           ronn('--html', task.source)
         end
+
+        task :prepare => 'man:build'
       end
 
       def ronn(format, file)
