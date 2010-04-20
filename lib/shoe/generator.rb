@@ -9,7 +9,7 @@ module Shoe
       @parser  = OptionParser.new do |opts|
         opts.extend(Extensions::OptionParser)
 
-        opts.banner   = "Usage: #{File.basename($0)} [options] [path]"
+        opts.banner   = "Usage: #{File.basename($0)} [-adehtv] [path]"
         opts.defaults = %w(--no-application --no-data --no-extension --test-unit .)
         opts.version  = Shoe::VERSION
 
