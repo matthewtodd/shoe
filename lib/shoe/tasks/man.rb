@@ -25,11 +25,11 @@ module Shoe
         task :man => man_files.concat(html_files)
 
         rule /\.\d$/ => '%p.ronn' do |task|
-          sh "ronn --build --roff --organization='#{spec.author.upcase}' #{task.source}"
+          sh "ronn --build --roff --manual='RubyGems Manual' --organization='#{spec.author.upcase}' #{task.source}"
         end
 
         rule '.html' => '%X.ronn' do |task|
-          sh "ronn --build --html --organization='#{spec.author.upcase}' #{task.source}"
+          sh "ronn --build --html --manual='RubyGems Manual' --organization='#{spec.author.upcase}' #{task.source}"
         end
 
         task :prepare => :man
