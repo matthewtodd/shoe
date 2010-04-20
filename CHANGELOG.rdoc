@@ -10,7 +10,7 @@
 * The shoe generator accepts a --test-unit option to generate Test::Unit tests.
 * Shoe::Tasks may no longer be built with a Gem::Specification object; pass the path to a gemspec file instead.
 * Generate a .gitignore file.
-* New `rake man` task to build man pages from ronn sources.
+* New `rake ronn` task to build man pages from ronn sources.
 
 == 0.5.1 -- 2010 April 7
 
