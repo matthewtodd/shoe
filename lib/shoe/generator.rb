@@ -74,11 +74,11 @@ module Shoe
         end
       end
 
+      private
+
       def install(template, path, mode=0644)
         installable_path(path).install(contents(template), mode)
       end
-
-      private
 
       def application?
         @options[:application]
