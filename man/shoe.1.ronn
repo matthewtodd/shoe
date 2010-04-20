@@ -1,4 +1,4 @@
-shoe(1) -- generate a rubygems project
+shoe(1) -- generate a RubyGems project
 ======================================
 
 ## SYNOPSIS
@@ -7,7 +7,7 @@ shoe(1) -- generate a rubygems project
 
 ## DESCRIPTION
 
-The `shoe` command generates a new rubygems project _The Right Way_, giving you
+The `shoe` command generates a new RubyGems project _The Right Way_, giving you
 stubs that respect the `LOAD_PATH` and top-level modules that don't do too
 much. `Shoe`'s built-in `rake(1)` tasks then derive their configuration from your
 `gemspec` and its surrounding environment, keeping your configuration DRY.
@@ -56,5 +56,10 @@ it with you. He can be reached on email at <matthew.todd@gmail.com> or as
 
 ## SEE ALSO
 
-`shoe` is heavily inspired by `hoe`, `jeweler`, and `newgem` and heavily influenced by
-the conversations around `rip`, `bundler`, and the `Ruby Packaging Standard`.
+<http://seattlerb.rubyforge.org/hoe/>,
+<http://github.com/technicalpickles/jeweler>,
+<http://github.com/sr/mg>,
+<http://defunkt.github.com/rip/>,
+<http://gembundler.com/>,
+<http://github.com/rtomayko/rpg>,
+<http://chneukirchen.github.com/rps/>
