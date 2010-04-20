@@ -1,15 +1,16 @@
 module Shoe
   module Tasks
 
-    # Defines <tt>`rake ronn`</tt> to generate man pages from
-    # {ronn}[http://rtomayko.github.com/ronn/] sources.
+    # Defines <tt>`rake ronn`</tt> to generate man pages from your
+    # <tt>{ronn}[http://rtomayko.github.com/ronn/]</tt> sources.
     #
-    # To enable, create a <tt>man/.*.ronn</tt> file.
+    # To enable, create some <tt>man/*.ronn</tt> files.
     #
-    # To configure the <tt>organization</tt> field for your man pages, set the
-    # first of the
+    # To configure the <tt>date</tt> and <tt>organization</tt> fields for your man pages, set the
+    # <tt>date[http://docs.rubygems.org/read/chapter/20#date]</tt>
+    # and the first of the
     # <tt>authors[http://docs.rubygems.org/read/chapter/20#authors]</tt>
-    # in your gemspec.
+    # in your gemspec, respectively.
     #
     # == Notes
     #
@@ -62,7 +63,7 @@ module Shoe
       end
 
       def ronn(format, file)
-        sh "ronn --build #{format} --manual='RubyGems Manual' --organization='#{spec.author}' #{file}"
+        sh "ronn --build #{format} --date #{spec.date.strftime('%Y-%m-%d')} --manual='RubyGems Manual' --organization='#{spec.author}' #{file}"
       end
 
       def ronn_files

@@ -62,7 +62,9 @@ Shoe::Tasks::Release::
 
 Shoe::Tasks::Ronn::
   builds man pages from your <tt>{ronn}[http://rtomayko.github.com/ronn/]</tt> sources,
-  honoring the first
+  honoring the
+  <tt>date[http://docs.rubygems.org/read/chapter/20#date]</tt>
+  and the first
   <tt>author[http://docs.rubygems.org/read/chapter/20#authors]</tt>
   in your gemspec.
 
