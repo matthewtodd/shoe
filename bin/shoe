@@ -1,4 +1,18 @@
 #!/usr/bin/env ruby
 
-require 'shoe'
+begin
+  require 'shoe'
+rescue LoadError
+  raise unless $!.message =~ /\bshoe$/
+
+  lib = File.expand_path('../../lib', __FILE__).sub(/^#{Dir.pwd}/, '.')
+  if !$:.include?(lib)
+    warn "#{$!}. Trying again with #{lib} on the $LOAD_PATH."
+    $:.unshift(lib)
+    retry
+  end
+
+  raise
+end
+
 Shoe::Generator.new.run(ARGV)

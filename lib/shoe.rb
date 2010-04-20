@@ -11,7 +11,14 @@ module Shoe
   autoload :Tasks,      'shoe/tasks'
 
   def self.datadir
-    @@datadir ||= Pathname.new(RbConfig.datadir('shoe'))
+    @@datadir ||= begin
+      datadir = RbConfig.datadir('shoe')
+      if !File.exist?(datadir)
+        warn "#{datadir} does not exist. Trying again with data directory relative to __FILE__."
+        datadir = File.expand_path('../../data/shoe', __FILE__)
+      end
+      Pathname.new(datadir)
+    end
   end
 
   def self.logger
