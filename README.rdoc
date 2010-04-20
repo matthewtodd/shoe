@@ -98,6 +98,10 @@ For more, run:
 
  $ shoe --help
 
+Or, if you have <tt>{gem-man}[http://github.com/defunkt/gem-man]</tt> installed:
+
+ $ gem man shoe
+
 Also, if you're using {Bundler}[http://gembundler.com], see
 <tt>BUNDLER.rdoc</tt> for some helpful tips.
 
