@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = '>= 1.3.6'
   spec.add_runtime_dependency 'rake'
   spec.add_development_dependency 'cucumber'
+  spec.add_development_dependency 'ronn'
 
   def spec.git_files(glob=nil)
     `git ls-files -z --cached --other --exclude-standard #{glob}`.split("\0")
