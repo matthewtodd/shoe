@@ -21,21 +21,20 @@ a different _path_ on the command line, if you like.)
 To generate additional files, use the following options:
 
 * `-a`, `--[no-]application`:
-  Generate a command-line application. This adds a simple executable script in
-  the `bin` directory and an `Application` class that uses the `optparse`
-  library to handle command-line options.
+  Generate a command-line application. Create a simple executable script in
+  the `bin` directory and an `Application` class that uses `optparse`.
 
 * `-d`, `--[no-]data`:
-  Generate a data directory. This adds a `data` directory (perfect for HTML
-  templates and other static assets) and provides a `datadir` method in your
-  top-level module to access it.
+  Generate a data directory. Create a `data` directory (perfect for HTML
+  templates and other static assets) and a `datadir` method in your top-level
+  module to access it.
 
 * `-e`, `--[no-]extension`:
-  Generate a C extension. This adds an `ext` directory with an `extconf.rb` and
+  Generate a C extension. Create an `ext` directory with an `extconf.rb` and
   a bare-bones `extension.c` defining a module named `Extension`.
 
 * `-t`, `--[no-]test-unit`:
-  Generate Test::Unit tests. This adds a `test` directory with a `helper.rb`
+  Generate Test::Unit tests. Create a `test` directory with a `helper.rb`
   and a single passing test.
 
 `shoe` also responds to the following standard options:
