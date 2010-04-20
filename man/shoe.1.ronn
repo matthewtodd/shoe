@@ -7,10 +7,10 @@ shoe(1) -- generate a RubyGems project
 
 ## DESCRIPTION
 
-The `shoe` command generates a new RubyGems project _The Right Way_, giving you
-stubs that respect the `LOAD_PATH` and top-level modules that don't do too
-much. `Shoe`'s built-in `rake(1)` tasks then derive their configuration from your
-`gemspec` and its surrounding environment, keeping your configuration DRY.
+The `shoe` command generates a new RubyGems project. Big deal, right? As
+compared with other tools, `shoe` gently guides you toward hygenic packaging
+standards and provides you with a sweet library of on-demand `rake(1)` tasks
+built around your (authoritative) gemspec.
 
 ## OPTIONS
 

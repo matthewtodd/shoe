@@ -10,9 +10,10 @@
 \fBshoe\fR [\-\fBadehtv\fR] [\fIpath\fR]
 .
 .SH "DESCRIPTION"
-The \fBshoe\fR command generates a new RubyGems project \fIThe Right Way\fR, giving you
-stubs that respect the \fBLOAD_PATH\fR and top\-level modules that don't do too
-much. \fBShoe\fR's built\-in \fBrake(1)\fR tasks then derive their configuration from your \fBgemspec\fR and its surrounding environment, keeping your configuration DRY.
+The \fBshoe\fR command generates a new RubyGems project. Big deal, right? As
+compared with other tools, \fBshoe\fR gently guides you toward hygenic packaging
+standards and provides you with a sweet library of on\-demand \fBrake(1)\fR tasks
+built around your (authoritative) gemspec.
 .
 .SH "OPTIONS"
 \fBshoe\fR's default mode of operation is to generate a basic library, its \fBRakefile\fR, and some \fBTest::Unit\fR tests in the current directory. (You may pass
