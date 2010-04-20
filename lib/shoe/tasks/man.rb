@@ -1,5 +1,3 @@
-require 'launchy'
-
 module Shoe
   module Tasks
 
@@ -25,19 +23,15 @@ module Shoe
       def define_tasks
         desc 'Generate man pages'
         task :man => 'man:build' do
-          Launchy::Browser.run(*html_files)
+          sh 'man', *man_files
         end
 
         namespace :man do
-          task :build => man_files.concat(html_files)
+          task :build => man_files
         end
 
         rule /\.\d$/ => '%p.ronn' do |task|
           ronn('--roff', task.source)
-        end
-
-        rule '.html' => '%X.ronn' do |task|
-          ronn('--html', task.source)
         end
 
         namespace :prepare do
@@ -55,10 +49,6 @@ module Shoe
 
       def man_files
         ronn_files.map { |path| path.sub(/\.ronn$/, '') }
-      end
-
-      def html_files
-        ronn_files.map { |path| path.sub(/\.ronn$/, '.html') }
       end
     end
 
