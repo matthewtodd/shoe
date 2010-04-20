@@ -40,7 +40,9 @@ module Shoe
           ronn('--html', task.source)
         end
 
-        task :prepare => 'man:build'
+        namespace :prepare do
+          task :release => 'man:build'
+        end
       end
 
       def ronn(format, file)

@@ -53,6 +53,12 @@ module Shoe
           sh "gem build #{spec.name}.gemspec"
           sh "gem push #{spec.file_name}"
         end
+
+        namespace :prepare do
+          task :release
+        end
+
+        task :release => 'prepare:release'
       end
 
       private

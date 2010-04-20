@@ -36,7 +36,9 @@ module Shoe
           end
         end
 
-        task :prepare => :compile
+        namespace :prepare do
+          task :execute => :compile
+        end
       end
     end
 
