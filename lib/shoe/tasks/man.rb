@@ -44,7 +44,7 @@ module Shoe
       end
 
       def ronn_files
-        spec.files.grep /\.ronn$/
+        spec.files.grep /^man\/.*\.ronn$/
       end
 
       def man_files
