@@ -33,9 +33,7 @@ module Shoe
         begin
           require 'ronn'
         rescue LoadError
-          Shoe.logger.warn ['ronn',
-            "Although you have .ronn files in your project, it seems you don't have ronn installed.",
-            "You probably want to add a \"gem 'ronn'\" to your Gemfile and a spec.add_development_dependency('ronn') to your gemspec."]
+          warn "It seems you don't have 'ronn' installed."
         else
           define_tasks
         end

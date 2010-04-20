@@ -39,10 +39,7 @@ module Shoe
           sh "git tag #{version_tag(spec.version)}"
 
           if there_is_no_tag_for('semver')
-            Shoe.logger.warn ['semantic versioning',
-              "It seems you don't yet have a 'semver' tag.",
-              'Please read more about the emerging consensus around semantic versioning:',
-              'http://semver.org']
+            warn "It seems you don't have a 'semver' tag. See http://semver.org/."
           end
 
           if there_is_a_remote_called('origin')
