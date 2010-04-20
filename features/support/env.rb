@@ -19,7 +19,7 @@ class WorkingDirectory
   end
 
   def create_file(path, contents)
-    file(path).open('w') { |file| file.write(be_sneaky_with_the_gemfile(contents)) }
+    file(path).open('w') { |file| file.write(contents) }
   end
 
   def append_file(path, contents)
@@ -47,19 +47,15 @@ class WorkingDirectory
 
   private
 
-  def be_sneaky_with_the_gemfile(contents)
-    contents.sub("gem 'shoe'", "gem 'shoe', :path => '#{PROJECT_ROOT.expand_path}'")
-  end
-
   def isolate_environment(command)
-    # set the PATH so bundle exec can find shoe
+    # set the PATH so tests can just run shoe
     ENV['PATH'] = ENV['PATH'].split(File::PATH_SEPARATOR).
                             unshift(PROJECT_ROOT.join('bin')).uniq.
                                join(File::PATH_SEPARATOR)
+    ENV['RUBYLIB'] = PROJECT_ROOT.join('lib')
 
-    # whack most environment variables so nested bundle exec won't get confused
-    # about where the Gemfile is
-    "/usr/bin/env -i #{preserve_environment 'HOME', 'PATH', 'GEM_HOME', 'GEM_PATH'} #{command}"
+    # whack most environment variables for good hygiene
+    "/usr/bin/env -i #{preserve_environment 'HOME', 'PATH', 'GEM_HOME', 'GEM_PATH', 'RUBYLIB'} #{command}"
   end
 
   def preserve_environment(*variables)
