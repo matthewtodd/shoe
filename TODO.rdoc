@@ -3,3 +3,4 @@
 * Generator should do the right thing when the base directory has a dash in it.
 * Find a better way to clean; I don't want to whack .bundler and .rvmrc.
 * Add :only/:except options to Shoe::Tasks.define.
+* Port cucumber features to Test::Unit so they'll be run under `gem check --test shoe`.
