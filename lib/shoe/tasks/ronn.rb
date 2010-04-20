@@ -1,7 +1,7 @@
 module Shoe
   module Tasks
 
-    # Defines <tt>`rake man`</tt> to generate man pages from
+    # Defines <tt>`rake ronn`</tt> to generate man pages from
     # {ronn}[http://rtomayko.github.com/ronn/] sources.
     #
     # To enable, create a <tt>man/.*.ronn</tt> file.
@@ -17,9 +17,9 @@ module Shoe
     #   they'll be included in your gem for
     #   {gem-man}[http://github.com/defunkt/gem-man].
     #
-    # * Man is a prerequisite for Release, so your man pages are sure to be
+    # * Ronn is a prerequisite for Release, so your man pages are sure to be
     #   up-to-date.
-    class Man < Abstract
+    class Ronn < Abstract
       def active?
         !ronn_files.empty?
       end
@@ -40,11 +40,11 @@ module Shoe
 
       def define_tasks
         desc 'Generate man pages'
-        task :man => 'man:build' do
+        task :ronn => 'ronn:build' do
           sh 'man', *man_files
         end
 
-        namespace :man do
+        namespace :ronn do
           task :build => man_files
         end
 
@@ -53,7 +53,7 @@ module Shoe
         end
 
         namespace :prepare do
-          task :release => 'man:build'
+          task :release => 'ronn:build'
         end
       end
 

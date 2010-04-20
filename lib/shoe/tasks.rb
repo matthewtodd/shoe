@@ -5,8 +5,8 @@ module Shoe
     autoload :Clean,     'shoe/tasks/clean'
     autoload :Compile,   'shoe/tasks/compile'
     autoload :Cucumber,  'shoe/tasks/cucumber'
-    autoload :Man,       'shoe/tasks/man'
     autoload :Rdoc,      'shoe/tasks/rdoc'
+    autoload :Ronn,      'shoe/tasks/ronn'
     autoload :Release,   'shoe/tasks/release'
     autoload :Test,      'shoe/tasks/test'
 
@@ -14,8 +14,8 @@ module Shoe
       Clean
       Compile
       Cucumber
-      Man
       Rdoc
+      Ronn
       Release
       Test
     )
