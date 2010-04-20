@@ -1,4 +1,5 @@
 require 'rubygems/doc_manager'
+require 'launchy'
 
 module Shoe
   module Tasks
@@ -31,15 +32,7 @@ module Shoe
         desc 'Generate documentation'
         task :rdoc do
           Gem::DocManager.new(spec).extend(Extensions::DocManager).generate_rdoc
-
-          case RUBY_PLATFORM
-          when /darwin/
-            sh 'open rdoc/index.html'
-          when /mswin|mingw/
-            sh 'start rdoc\index.html'
-          else
-            sh 'firefox rdoc/index.html'
-          end
+          Launchy::Browser.run('rdoc/index.html')
         end
       end
     end
