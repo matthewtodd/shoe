@@ -50,9 +50,8 @@ To generate additional files, use the following options:
 
 ## AUTHOR
 
-`shoe` is the fanatical side project of Matthew Todd, who would love to discuss
-it with you. He can be reached on email at <matthew.todd@gmail.com> or as
-<@matthewtodd> on Twitter.
+Matthew Todd, <@matthewtodd> on GitHub and Twitter. Do drop me a line if you
+use `shoe` -- I'd love to hear from you!
 
 ## SEE ALSO
 
