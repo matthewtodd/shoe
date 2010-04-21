@@ -4,7 +4,7 @@ module Shoe
     module Pathname
       def install(contents, mode)
         if exist?
-          warn "#{to_s} exists. Not clobbering."
+          warn "WARN: not clobbering existing #{to_s}"
         else
           open('w') { |file| file.write(contents) }
           chmod(mode)

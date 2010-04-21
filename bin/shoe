@@ -7,7 +7,7 @@ rescue LoadError
 
   lib = File.expand_path('../../lib', __FILE__)
   if !$:.include?(lib)
-    warn "#{$!}. Trying again with #{lib} on the $LOAD_PATH."
+    warn "WARN: #{$!}.\n  Trying again with #{lib} on the $LOAD_PATH..."
     $:.unshift(lib)
     retry
   end

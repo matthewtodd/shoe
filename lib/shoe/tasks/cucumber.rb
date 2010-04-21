@@ -21,7 +21,7 @@ module Shoe
         begin
           require 'cucumber/rake/task'
         rescue LoadError
-          warn "It seems you don't have cucumber installed."
+          warn "WARN: Please `gem install cucumber`."
         else
           define_tasks
         end

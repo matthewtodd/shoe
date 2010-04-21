@@ -39,7 +39,7 @@ module Shoe
           sh "git tag #{version_tag(spec.version)}"
 
           if there_is_no_tag_for('semver')
-            warn "It seems you don't have a 'semver' tag. See http://semver.org/."
+            warn "WARN: Please `git tag semver`. <http://semver.org/>"
           end
 
           if there_is_a_remote_called('origin')

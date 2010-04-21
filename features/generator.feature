@@ -27,6 +27,6 @@ Feature: Getting started
     Given I have created a directory called "my_project"
     And I have created a file called "my_project/Rakefile" containing "# RAKEFILE CONTENTS"
     When I run shoe inside "my_project"
-    Then I should see "Rakefile exists. Not clobbering." on standard error
+    Then I should see "WARN: not clobbering existing Rakefile" on standard error
     And the contents of "my_project/Rakefile" should still be "# RAKEFILE CONTENTS"
 

@@ -33,7 +33,7 @@ module Shoe
         begin
           require 'ronn'
         rescue LoadError
-          warn "It seems you don't have 'ronn' installed."
+          warn "WARN: Please `gem install ronn`."
         else
           define_tasks
         end
