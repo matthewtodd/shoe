@@ -3,16 +3,6 @@ Feature: Getting started
   As a developer
   I want a little help generating my Rakefile
 
-  Scenario: Running shoe to create a new project
-    When I run shoe my_project inside "."
-    Then I should see a file "my_project/.gitignore"
-    And I should see a file "my_project/Rakefile"
-    And I should see a file "my_project/README.rdoc"
-    And I should see a file "my_project/lib/my_project.rb"
-    And I should see a file "my_project/test/helper.rb"
-    And I should see a file "my_project/test/my_project_test.rb"
-    And I should see a file "my_project/my_project.gemspec"
-
   Scenario: Running shoe --application to create a new project
     When I run shoe --application my_project inside "."
     Then I should see a file "my_project/bin/my_project"

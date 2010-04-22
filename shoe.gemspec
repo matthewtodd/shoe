@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake'
   spec.add_runtime_dependency 'launchy'
   spec.add_development_dependency 'cucumber'
+  spec.add_development_dependency 'redgreen'
   spec.add_development_dependency 'ronn'
 
   def spec.git_files(glob=nil)

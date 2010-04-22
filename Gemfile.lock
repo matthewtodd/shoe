@@ -8,6 +8,10 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  redgreen: 
+    group: 
+    - :development
+    version: ">= 0"
   cucumber: 
     group: 
     - :development
@@ -40,10 +44,12 @@ specs:
 - launchy: 
     version: 0.3.5
 - rdiscount: 
-    version: 1.6.3
+    version: 1.6.3.1
+- redgreen: 
+    version: 1.2.2
 - ronn: 
     version: "0.5"
-hash: d47953731e3f472755d844fb72d2644ea08f56d9
+hash: c2f6c1ba8e4cd1e59e6686f0b779faa0c71629aa
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
