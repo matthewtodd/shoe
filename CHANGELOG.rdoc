@@ -1,3 +1,11 @@
+== 0.6.1 -- 2010 April 22
+
+* Reformat warning messages.
+* Sample-require redgreen in the generated test/helper.
+* Include common dvelopment dependencies in the generated gemspec.
+* Fix a couple of typos.
+* Document extensions to OptionParser.
+
 == 0.6.0 -- 2010 April 20
 
 * Add --webcvs to rdoc_options in generated gemspec.
