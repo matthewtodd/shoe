@@ -26,11 +26,9 @@ module Shoe
       end
 
       def order(*args, &block)
-        begin
-          super(*defaults.followed_by(*args), &block)
-        rescue ::OptionParser::ParseError
-          abort($!)
-        end
+        super(*defaults.followed_by(*args), &block)
+      rescue ::OptionParser::ParseError
+        abort($!)
       end
 
       def help
