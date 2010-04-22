@@ -13,7 +13,7 @@ module Shoe
     # To use:
     #   parser = OptionsParser.new do |opts|
     #              opts.extend(Shoe::Extensions::OptionParser)
-    #              opts.defaults = %w(--foo --no-bar --baz=5)
+    #              opts.defaults = %w(--foo --no-bar --baz=42)
     #              # ... and so on ...
     #            end
     #
@@ -41,7 +41,7 @@ module Shoe
 
       module Defaults #:nodoc:
         def followed_by(*args)
-          dup.concat(*args)
+          dup.concat(args.flatten)
         end
 
         def help(before, indent)
