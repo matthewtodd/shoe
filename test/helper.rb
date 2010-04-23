@@ -75,17 +75,25 @@ module Shoe
         def system(*args)
           stdin, stdout, stderr = Open3.popen3(*args)
           stdin.close
-          @stdout = stdout.readlines
-          @stderr = stderr.readlines
+          @stdout = stdout.read
+          @stderr = stderr.read
         end
 
         def find(string)
           root = ::Pathname.new(string)
           root.enum_for(:find).
                  select { |path| path.file? }.
-                collect { |path| path.relative_path_from(root).to_s }.
-                   sort
+                collect { |path| path.relative_path_from(root).to_s }
         end
+
+        def assert_file(path)
+          assert ::Pathname.new(path).exist?, "#{path} does not exist."
+        end
+
+        def assert_find(path, expected)
+          assert_equal expected.sort, find(path).sort
+        end
+
       end
     end
 

@@ -1,3 +1,7 @@
+== Git
+
+* Generated C extension actually works now.
+
 == 0.6.1 -- 2010 April 22
 
 * Reformat warning messages.
