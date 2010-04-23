@@ -1,12 +1,16 @@
 require 'test/helper'
+require 'yaml'
 
 class RakeTest < Test::Unit::TestCase
   isolate_environment
 
-  test 'rake clean removes ignored files' do
+  def setup
+    super
     in_git_project 'foo'
     system 'shoe'
+  end
 
+  test 'rake clean removes ignored files' do
     write_file '.gitignore', "bar\n"
     write_file 'bar', 'NOT LONG FOR THIS WORLD'
     files_before_clean = find('.')
@@ -18,26 +22,52 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake compile is active only if there are extensions' do
-    in_git_project 'foo'
-    system 'shoe'
-
     system 'rake --tasks'
-    assert_no_match /rake compile/, stdout
+    assert_no_match /compile/, stdout
 
     add_files_for_c_extension('foo')
 
     system 'rake --tasks'
-    assert_match /rake compile/, stdout
+    assert_match /compile/, stdout
   end
 
   test 'rake compile builds extensions' do
-    in_git_project 'foo'
-    system 'shoe'
     add_files_for_c_extension('foo')
 
     system 'rake compile'
+
     system 'ruby -Ilib -rfoo/extension -e "puts Foo::Extension.name"'
     assert_equal 'Foo::Extension', stdout.chomp
+  end
+
+  test 'rake cucumber is active only if there are profiles in cucumber.yml' do
+    system 'rake --tasks'
+    assert_no_match /cucumber/, stdout
+
+    write_file 'cucumber.yml', { 'default' => 'features', 'wip' => 'features' }.to_yaml
+
+    system 'rake --tasks'
+    assert_match /cucumber\s/, stdout
+    assert_match /cucumber:wip/, stdout
+  end
+
+  test 'rake cucumber runs cucumber features', :require => 'cucumber' do
+    write_file 'cucumber.yml', { 'default' => 'features' }.to_yaml
+
+    write_file 'features/api.feature', <<-END.gsub(/^      /, '')
+      Feature: The API
+        Scenario: Exercising nothing
+          Then I should pass
+    END
+
+    write_file 'features/step_definitions/steps.rb', <<-END
+      Then /^I should pass$/ do
+      end
+    END
+
+    system 'rake cucumber'
+
+    assert_match '1 scenario (1 passed)', stdout
   end
 
   private

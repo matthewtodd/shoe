@@ -19,7 +19,18 @@ module Shoe
         include IsolatedSystem
       end
 
-      def test(name, &block)
+      def test(name, options={}, &block)
+        requires = Array(options[:require])
+
+        requires.each do |lib|
+          begin
+            require lib
+          rescue LoadError
+            warn "WARN: #{lib} is not available.\n  Skipping test \"#{name}\""
+            return
+          end
+        end
+
         define_method("test #{name}", &block)
       end
 
