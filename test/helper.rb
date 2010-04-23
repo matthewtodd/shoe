@@ -89,7 +89,9 @@ module Shoe
         end
 
         def write_file(path, contents)
-          File.open(path, 'w') { |stream| stream.write(contents) }
+          path = ::Pathname.new(path)
+          path.parent.mkpath
+          path.open('w') { |stream| stream.write(contents) }
         end
 
         def in_git_project(name)
@@ -105,7 +107,6 @@ module Shoe
         def assert_find(path, expected)
           assert_equal expected.sort, find(path).sort
         end
-
       end
     end
 
