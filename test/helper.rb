@@ -44,17 +44,19 @@ module Shoe
         private
 
         def isolate_environment_variables
-          munge_path { |path| path.unshift ::Pathname.new('bin').expand_path }
+          munge_path('PATH')    { |path| path.unshift ::Pathname.new('bin').expand_path }
+          munge_path('RUBYLIB') { |path| path.unshift ::Pathname.new('lib').expand_path }
         end
 
         def restore_environment_variables
-          munge_path { |path| path.shift }
+          munge_path('PATH')    { |path| path.shift }
+          munge_path('RUBYLIB') { |path| path.shift }
         end
 
-        def munge_path
-          path = ENV['PATH'].split(File::PATH_SEPARATOR)
+        def munge_path(name)
+          path = ENV[name].to_s.split(File::PATH_SEPARATOR)
           yield path
-          ENV['PATH'] = path.join(File::PATH_SEPARATOR)
+          ENV[name] = path.join(File::PATH_SEPARATOR)
         end
 
         def isolate_working_directory
@@ -84,6 +86,16 @@ module Shoe
           root.enum_for(:find).
                  select { |path| path.file? }.
                 collect { |path| path.relative_path_from(root).to_s }
+        end
+
+        def write_file(path, contents)
+          File.open(path, 'w') { |stream| stream.write(contents) }
+        end
+
+        def in_git_project(name)
+          Dir.mkdir(name)
+          Dir.chdir(name)
+          system 'git init'
         end
 
         def assert_file(path)

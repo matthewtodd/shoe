@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class CommandLineTest < Test::Unit::TestCase
+class ShoeTest < Test::Unit::TestCase
   isolate_environment
 
   test 'running without arguments generates files named after the current directory' do
@@ -25,7 +25,7 @@ class CommandLineTest < Test::Unit::TestCase
 
   test 'running in an existing project does not clobber existing files' do
     in_git_project 'existing_project'
-    File.open('Rakefile', 'w') { |stream| stream.write '# original' }
+    write_file 'Rakefile', '# original'
     system 'shoe'
     assert_match 'WARN: not clobbering existing Rakefile', stderr
     assert_equal '# original', File.read('Rakefile')
@@ -55,7 +55,7 @@ class CommandLineTest < Test::Unit::TestCase
   test 'running --data generates a datadir helper method' do
     in_git_project 'foo'
     system 'shoe --data'
-    File.open('data/foo/file', 'w') { |stream| stream.write('DATA!') }
+    write_file 'data/foo/file', 'DATA!'
     system 'ruby -Ilib -rfoo -e "puts Foo.datadir.join(\"file\").read"'
     assert_equal 'DATA!', stdout.chomp
   end
@@ -73,13 +73,5 @@ class CommandLineTest < Test::Unit::TestCase
     system 'shoe --test'
     system 'testrb -I. -Ilib test/*_test.rb'
     assert_match '1 tests, 1 assertions, 0 failures, 0 errors', stdout
-  end
-
-  private
-
-  def in_git_project(name)
-    Dir.mkdir(name)
-    Dir.chdir(name)
-    system 'git init'
   end
 end
