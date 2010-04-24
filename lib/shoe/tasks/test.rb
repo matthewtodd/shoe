@@ -64,9 +64,8 @@ module Shoe
           Gem.source_index.extend(Extensions::SourceIndex)
           Gem.source_index.local_gemspec = spec
 
-          Gem::Validator.send(:remove_const, :TestRunner)
-          Gem::Validator.const_set(:TestRunner, test_runner_class)
-          Gem::Validator.new.extend(Extensions::Validator).unit_test(spec)
+          Gem::Validator.extend(Extensions::Validator)
+          Gem::Validator.new.unit_test(spec)
         end
 
         namespace :prepare do
@@ -77,12 +76,6 @@ module Shoe
 
         task :default
         Rake.application[:default].prerequisites.unshift(Rake.application[:test])
-      end
-
-      private
-
-      def test_runner_class
-        ::Test::Unit::UI::Console::TestRunner.extend(Extensions::TestRunner)
       end
     end
 
