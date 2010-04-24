@@ -7,7 +7,7 @@ class RakeTest < Test::Unit::TestCase
   def setup
     super
     in_git_project 'foo'
-    system 'shoe'
+    system 'shoe --no-test-unit'
   end
 
   test 'rake clean removes ignored files' do
@@ -25,14 +25,14 @@ class RakeTest < Test::Unit::TestCase
     system 'rake --tasks'
     assert_no_match /compile/, stdout
 
-    add_files_for_c_extension('foo')
+    add_files_for_c_extension 'foo'
 
     system 'rake --tasks'
     assert_match /compile/, stdout
   end
 
   test 'rake compile builds extensions' do
-    add_files_for_c_extension('foo')
+    add_files_for_c_extension 'foo'
 
     system 'rake compile'
 
@@ -62,6 +62,23 @@ class RakeTest < Test::Unit::TestCase
     add_files_for_cucumber 'require "foo/extension"'
     system 'rake cucumber'
     assert_match '1 scenario (1 passed)', stdout
+  end
+
+  test 'rake test is active only if there are test files present' do
+    system 'rake --tasks'
+    assert_no_match /test/, stdout
+
+    write_file 'test/foo_test.rb', <<-END
+      require 'test/unit'
+      class FooTest < Test::Unit::TestCase
+        def test_dummy
+          assert true
+        end
+      end
+    END
+
+    system 'rake --tasks'
+    assert_match /test/, stdout
   end
 
   private
