@@ -52,21 +52,15 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake cucumber runs cucumber features', :require => 'cucumber' do
-    write_file 'cucumber.yml', { 'default' => 'features' }.to_yaml
-
-    write_file 'features/api.feature', <<-END.gsub(/^      /, '')
-      Feature: The API
-        Scenario: Exercising nothing
-          Then I should pass
-    END
-
-    write_file 'features/step_definitions/steps.rb', <<-END
-      Then /^I should pass$/ do
-      end
-    END
-
+    add_files_for_cucumber
     system 'rake cucumber'
+    assert_match '1 scenario (1 passed)', stdout
+  end
 
+  test 'rake cucumber depends (perhaps indirectly) on rake compile', :require => 'cucumber' do
+    add_files_for_c_extension 'foo'
+    add_files_for_cucumber 'require "foo/extension"'
+    system 'rake cucumber'
     assert_match '1 scenario (1 passed)', stdout
   end
 
@@ -89,4 +83,19 @@ class RakeTest < Test::Unit::TestCase
     END
   end
 
+  def add_files_for_cucumber(assertion='')
+    write_file 'cucumber.yml', { 'default' => 'features' }.to_yaml
+
+    write_file 'features/api.feature', <<-END.gsub(/^      /, '')
+      Feature: The API
+        Scenario: Exercising something
+          Then I should pass
+    END
+
+    write_file 'features/step_definitions/steps.rb', <<-END
+      Then /^I should pass$/ do
+        #{assertion}
+      end
+    END
+  end
 end
