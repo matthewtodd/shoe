@@ -83,17 +83,16 @@ class RakeTest < Test::Unit::TestCase
     system 'rake --tasks'
     assert_no_match /test/, stdout
 
-    write_file 'test/foo_test.rb', <<-END
-      require 'test/unit'
-      class FooTest < Test::Unit::TestCase
-        def test_dummy
-          assert true
-        end
-      end
-    END
+    add_files_for_test
 
     system 'rake --tasks'
     assert_match /test/, stdout
+  end
+
+  test 'rake test runs tests' do
+    add_files_for_test
+    system 'rake test'
+    assert_match '1 tests, 1 assertions, 0 failures, 0 errors', stdout
   end
 
   private
@@ -127,6 +126,17 @@ class RakeTest < Test::Unit::TestCase
     write_file 'features/step_definitions/steps.rb', <<-END
       Then /^I should pass$/ do
         #{assertion}
+      end
+    END
+  end
+
+  def add_files_for_test(assertion='assert true')
+    write_file 'test/foo_test.rb', <<-END
+      require 'test/unit'
+      class FooTest < Test::Unit::TestCase
+        def test_something
+          #{assertion}
+        end
       end
     END
   end
