@@ -36,7 +36,7 @@ class RakeTest < Test::Unit::TestCase
     assert_equal 'Foo::Extension', stdout.chomp
   end
 
-  test 'rake cucumber is active only if there are profiles in cucumber.yml' do
+  test 'rake cucumber is active only if there are profiles in cucumber.yml', :require => 'cucumber' do
     assert_no_task 'cucumber'
     write_file 'cucumber.yml', { 'default' => 'features', 'wip' => 'features' }.to_yaml
     assert_task 'cucumber'
