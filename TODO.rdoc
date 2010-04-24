@@ -4,3 +4,4 @@
 * Find a better way to clean; I don't want to whack .bundler and .rvmrc.
 * Add :only/:except options to Shoe::Tasks.define.
 * Port cucumber features to Test::Unit so they'll be run under `gem check --test shoe`.
+* Figure out why redgreen doesn't color the dots under `rake test`.

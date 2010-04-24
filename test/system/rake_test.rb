@@ -79,6 +79,22 @@ class RakeTest < Test::Unit::TestCase
     # am I going to do about `gem push`?
   end
 
+  pending 'rake release depends (perhaps indirectly) on rake ronn', :require => 'ronn'
+
+  test 'rake ronn is enabled if there are ronn files' do
+    system 'rake --tasks'
+    assert_no_match /ronn/, stdout
+
+    write_file 'man/foo.1.ronn', ''
+
+    system 'rake --tasks'
+    assert_match /ronn/, stdout
+  end
+
+  pending 'rake ronn generates man pages', :require => 'ronn' do
+    # This task will then launch man; so I need to set the MANPAGER?
+  end
+
   test 'rake test is active only if there are test files present' do
     system 'rake --tasks'
     assert_no_match /test/, stdout
