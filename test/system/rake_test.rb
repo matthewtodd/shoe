@@ -23,12 +23,12 @@ class RakeTest < Test::Unit::TestCase
 
   test 'rake compile is active only if there are extensions' do
     assert_no_task 'compile'
-    add_files_for_c_extension 'foo'
+    add_files_for_c_extension
     assert_task 'compile'
   end
 
   test 'rake compile builds extensions' do
-    add_files_for_c_extension 'foo'
+    add_files_for_c_extension
 
     system 'rake compile'
 
@@ -50,7 +50,7 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake cucumber depends (perhaps indirectly) on rake compile', :require => 'cucumber' do
-    add_files_for_c_extension 'foo'
+    add_files_for_c_extension
     add_files_for_cucumber 'require "foo/extension"'
     system 'rake cucumber'
     assert_match '1 scenario (1 passed)', stdout
@@ -63,6 +63,28 @@ class RakeTest < Test::Unit::TestCase
   pending 'rake rdoc generates rdoc' do
     # need to move out Launchy or stub BROWSER or something
     # I might prefer using hub's approach, just so I don't depend on Launchy.
+  end
+
+  test 'rake release is enabled once the version is greater than 0' do
+    assert_no_task 'release'
+    bump_version_to '0.1.0'
+    assert_task 'release'
+  end
+
+  test 'rake release is disabled if the version has already been tagged' do
+    bump_version_to '0.1.0'
+    system 'git add .'
+    system 'git commit -m "dummy message"'
+    system 'git tag v0.1.0'
+    assert_no_task 'release'
+  end
+
+  test 'rake release is disabled if current branch is not master' do
+    bump_version_to '0.1.0'
+    system 'git add .'
+    system 'git commit -m "dummy message"'
+    system 'git checkout -b other'
+    assert_no_task 'release'
   end
 
   pending 'rake release does a lot of things' do
@@ -95,7 +117,7 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake test depends (perhaps indirectly) on rake compile' do
-    add_files_for_c_extension 'foo'
+    add_files_for_c_extension
     add_files_for_test 'require "foo/extension"'
     system 'rake test'
     assert_match '1 tests, 0 assertions, 0 failures, 0 errors', stdout
@@ -113,19 +135,19 @@ class RakeTest < Test::Unit::TestCase
     assert_match /\srake #{name}\s/, stdout
   end
 
-  def add_files_for_c_extension(project_name, module_name = project_name.capitalize)
-    write_file "ext/#{project_name}/extconf.rb", <<-END.gsub(/^ */, '')
+  def add_files_for_c_extension
+    write_file "ext/foo/extconf.rb", <<-END.gsub(/^ */, '')
       require 'mkmf'
-      create_makefile '#{project_name}/extension'
+      create_makefile 'foo/extension'
     END
 
-    write_file "ext/#{project_name}/extension.c", <<-END.gsub(/^ */, '')
+    write_file "ext/foo/extension.c", <<-END.gsub(/^ */, '')
       #include "ruby.h"
-      static VALUE m#{module_name};
+      static VALUE mFoo;
       static VALUE mExtension;
       void Init_extension() {
-        m#{module_name} = rb_define_module("#{module_name}");
-        mExtension = rb_define_module_under(m#{module_name}, "Extension");
+        mFoo = rb_define_module("Foo");
+        mExtension = rb_define_module_under(mFoo, "Extension");
       }
     END
   end
@@ -153,6 +175,14 @@ class RakeTest < Test::Unit::TestCase
         def test_something
           #{assertion}
         end
+      end
+    END
+  end
+
+  def bump_version_to(version)
+    write_file 'lib/foo.rb', <<-END
+      module Foo
+        VERSION = '#{version}'
       end
     END
   end
