@@ -95,6 +95,13 @@ class RakeTest < Test::Unit::TestCase
     assert_match '1 tests, 1 assertions, 0 failures, 0 errors', stdout
   end
 
+  test 'rake test depends (perhaps indirectly) on rake compile' do
+    add_files_for_c_extension 'foo'
+    add_files_for_test 'require "foo/extension"'
+    system 'rake test'
+    assert_match '1 tests, 0 assertions, 0 failures, 0 errors', stdout
+  end
+
   private
 
   def add_files_for_c_extension(project_name, module_name = project_name.capitalize)

@@ -69,8 +69,11 @@ module Shoe
           Gem::Validator.new.extend(Extensions::Validator).unit_test(spec)
         end
 
-        task :prepare
-        task :test => :prepare
+        namespace :prepare do
+          task :execute
+        end
+
+        task :test => 'prepare:execute'
 
         task :default
         Rake.application[:default].prerequisites.unshift(Rake.application[:test])

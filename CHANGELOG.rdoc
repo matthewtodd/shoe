@@ -1,6 +1,7 @@
 == Git
 
 * Generated C extension actually works now.
+* `rake test` now properly depends on `rake compile`.
 
 == 0.6.1 -- 2010 April 22
 
