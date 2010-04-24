@@ -65,7 +65,7 @@ module Shoe
           Gem.source_index.local_gemspec = spec
 
           Gem::Validator.send(:remove_const, :TestRunner)
-          Gem::Validator.const_set(:TestRunner, LocalTestRunner)
+          Gem::Validator.const_set(:TestRunner, test_runner_class)
           Gem::Validator.new.extend(Extensions::Validator).unit_test(spec)
         end
 
@@ -81,10 +81,8 @@ module Shoe
 
       private
 
-      class LocalTestRunner < ::Test::Unit::UI::Console::TestRunner #:nodoc:
-        def self.run(*args)
-          new(args.first, ::Test::Unit::UI::NORMAL).start
-        end
+      def test_runner_class
+        ::Test::Unit::UI::Console::TestRunner.extend(Extensions::TestRunner)
       end
     end
 
