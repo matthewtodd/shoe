@@ -19,7 +19,13 @@ module Shoe
         include IsolatedSystem
       end
 
+      def pending(name, options={}, &block)
+        warn "WARN: Pending test \"#{name}\""
+      end
+
       def test(name, options={}, &block)
+        return pending(name, options, &block) unless block_given?
+
         requires = Array(options[:require])
 
         requires.each do |lib|

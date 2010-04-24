@@ -64,6 +64,21 @@ class RakeTest < Test::Unit::TestCase
     assert_match '1 scenario (1 passed)', stdout
   end
 
+  test 'rake rdoc is unconditionally enabled' do
+    system 'rake --tasks'
+    assert_match /rdoc/, stdout
+  end
+
+  pending 'rake rdoc generates rdoc' do
+    # need to move out Launchy or stub BROWSER or something
+    # I might prefer using hub's approach, just so I don't depend on Launchy.
+  end
+
+  pending 'rake release does a lot of things' do
+    # I can fake everything else if origin is also on the filesystem; but what
+    # am I going to do about `gem push`?
+  end
+
   test 'rake test is active only if there are test files present' do
     system 'rake --tasks'
     assert_no_match /test/, stdout
