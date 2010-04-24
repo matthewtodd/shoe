@@ -22,13 +22,9 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake compile is active only if there are extensions' do
-    system 'rake --tasks'
-    assert_no_match /compile/, stdout
-
+    assert_no_task 'compile'
     add_files_for_c_extension 'foo'
-
-    system 'rake --tasks'
-    assert_match /compile/, stdout
+    assert_task 'compile'
   end
 
   test 'rake compile builds extensions' do
@@ -41,14 +37,10 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake cucumber is active only if there are profiles in cucumber.yml' do
-    system 'rake --tasks'
-    assert_no_match /cucumber/, stdout
-
+    assert_no_task 'cucumber'
     write_file 'cucumber.yml', { 'default' => 'features', 'wip' => 'features' }.to_yaml
-
-    system 'rake --tasks'
-    assert_match /cucumber\s/, stdout
-    assert_match /cucumber:wip/, stdout
+    assert_task 'cucumber'
+    assert_task 'cucumber:wip'
   end
 
   test 'rake cucumber runs cucumber features', :require => 'cucumber' do
@@ -64,9 +56,8 @@ class RakeTest < Test::Unit::TestCase
     assert_match '1 scenario (1 passed)', stdout
   end
 
-  test 'rake rdoc is unconditionally enabled' do
-    system 'rake --tasks'
-    assert_match /rdoc/, stdout
+  test 'rake rdoc is unconditionally active' do
+    assert_task 'rdoc'
   end
 
   pending 'rake rdoc generates rdoc' do
@@ -82,13 +73,9 @@ class RakeTest < Test::Unit::TestCase
   pending 'rake release depends (perhaps indirectly) on rake ronn', :require => 'ronn'
 
   test 'rake ronn is enabled if there are ronn files' do
-    system 'rake --tasks'
-    assert_no_match /ronn/, stdout
-
+    assert_no_task 'ronn'
     write_file 'man/foo.1.ronn', ''
-
-    system 'rake --tasks'
-    assert_match /ronn/, stdout
+    assert_task 'ronn'
   end
 
   pending 'rake ronn generates man pages', :require => 'ronn' do
@@ -96,13 +83,9 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake test is active only if there are test files present' do
-    system 'rake --tasks'
-    assert_no_match /test/, stdout
-
+    assert_no_task 'test'
     add_files_for_test
-
-    system 'rake --tasks'
-    assert_match /test/, stdout
+    assert_task 'test'
   end
 
   test 'rake test runs tests' do
@@ -119,6 +102,16 @@ class RakeTest < Test::Unit::TestCase
   end
 
   private
+
+  def assert_no_task(name)
+    system 'rake --tasks'
+    assert_no_match /\srake #{name}\s/, stdout
+  end
+
+  def assert_task(name)
+    system 'rake --tasks'
+    assert_match /\srake #{name}\s/, stdout
+  end
 
   def add_files_for_c_extension(project_name, module_name = project_name.capitalize)
     write_file "ext/#{project_name}/extconf.rb", <<-END.gsub(/^ */, '')
