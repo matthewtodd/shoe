@@ -1,8 +1,10 @@
+require 'test/unit'
+require 'shoe'
+
 require 'find'
 require 'open3'
-require 'shoe'
 require 'tempfile'
-require 'test/unit'
+require 'yaml'
 
 begin
   require 'redgreen' if $stdout.tty?

@@ -1,5 +1,4 @@
 require 'test/helper'
-require 'yaml'
 
 class RakeTest < Test::Unit::TestCase
   isolate_environment
