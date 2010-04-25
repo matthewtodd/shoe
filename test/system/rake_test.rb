@@ -13,11 +13,9 @@ class RakeTest < Test::Unit::TestCase
   test 'rake clean removes ignored files' do
     write_file '.gitignore', "bar\n"
     write_file 'bar', 'NOT LONG FOR THIS WORLD'
+
     files_before_clean = find('.')
-
     system 'rake clean'
-
-    assert_match 'Removing bar', stdout
     assert_find  '.', files_before_clean - ['bar']
   end
 
@@ -29,9 +27,7 @@ class RakeTest < Test::Unit::TestCase
 
   test 'rake compile builds extensions' do
     add_files_for_c_extension
-
     system 'rake compile'
-
     system 'ruby -Ilib -rfoo/extension -e "puts Foo::Extension.name"'
     assert_equal 'Foo::Extension', stdout.chomp
   end
@@ -49,7 +45,7 @@ class RakeTest < Test::Unit::TestCase
     assert_match '1 scenario (1 passed)', stdout
   end
 
-  test 'rake cucumber depends (perhaps indirectly) on rake compile', :require => 'cucumber' do
+  test 'rake cucumber depends on rake compile', :require => 'cucumber' do
     add_files_for_c_extension
     add_files_for_cucumber 'require "foo/extension"'
     system 'rake cucumber'
@@ -92,7 +88,7 @@ class RakeTest < Test::Unit::TestCase
     # am I going to do about `gem push`?
   end
 
-  pending 'rake release depends (perhaps indirectly) on rake ronn', :require => 'ronn'
+  pending 'rake release depends on rake ronn', :require => 'ronn'
 
   test 'rake ronn is enabled if there are ronn files' do
     assert_no_task 'ronn'
