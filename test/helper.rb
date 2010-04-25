@@ -26,7 +26,10 @@ module Shoe
       end
 
       def test(name, options={}, &block)
-        return pending(name, options, &block) unless block_given?
+        if !block_given?
+          pending(name, options, &block)
+          return
+        end
 
         requires = Array(options[:require])
 
