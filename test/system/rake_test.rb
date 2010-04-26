@@ -1,7 +1,9 @@
 require 'test/helper'
+require 'yaml'
 
 class RakeTest < Test::Unit::TestCase
   isolate_environment
+  include_helper_methods
 
   def setup
     super

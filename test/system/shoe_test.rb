@@ -2,6 +2,7 @@ require 'test/helper'
 
 class ShoeTest < Test::Unit::TestCase
   isolate_environment
+  include_helper_methods
 
   test 'running without arguments generates files named after the current directory' do
     Dir.mkdir 'existing_project'
