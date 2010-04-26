@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = '>= 1.3.6'
   spec.add_runtime_dependency 'rake'
   spec.add_runtime_dependency 'launchy'
+  spec.add_development_dependency 'cucumber'
   spec.add_development_dependency 'redgreen'
   spec.add_development_dependency 'ronn'
 
