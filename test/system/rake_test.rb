@@ -96,7 +96,7 @@ class RakeTest < Test::Unit::TestCase
 
   pending 'rake release depends on rake ronn', :require => 'ronn'
 
-  test 'rake ronn is enabled if there are ronn files' do
+  test 'rake ronn is enabled if there are ronn files', :require => 'ronn' do
     assert_no_task 'ronn'
     write_file 'man/foo.1.ronn', ''
     assert_task 'ronn'
