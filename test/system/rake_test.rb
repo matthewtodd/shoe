@@ -1,4 +1,6 @@
 require 'test/helper'
+require 'logger'
+require 'webrick'
 require 'yaml'
 
 class RakeTest < Test::Unit::TestCase
@@ -9,6 +11,8 @@ class RakeTest < Test::Unit::TestCase
     super
     in_git_project 'foo'
     system 'shoe --no-test-unit'
+    system 'git add .'
+    system 'git commit -a -m "Initial commit."'
   end
 
   test 'rake clean removes ignored files' do
@@ -75,23 +79,54 @@ class RakeTest < Test::Unit::TestCase
 
   test 'rake release is disabled if the version has already been tagged' do
     bump_version_to '0.1.0'
-    system 'git add .'
-    system 'git commit -m "dummy message"'
     system 'git tag v0.1.0'
     assert_no_task 'release'
   end
 
   test 'rake release is disabled if current branch is not master' do
     bump_version_to '0.1.0'
-    system 'git add .'
-    system 'git commit -m "dummy message"'
     system 'git checkout -b other'
     assert_no_task 'release'
   end
 
-  pending 'rake release does a lot of things' do
-    # I can fake everything else if origin is also on the filesystem; but what
-    # am I going to do about `gem push`?
+  test 'rake release tags, builds, and pushes' do
+    rubygems_port = 48484
+    ENV['RUBYGEMS_HOST'] = "http://localhost:#{rubygems_port}"
+
+    webrick = fork do
+      server = WEBrick::HTTPServer.new(
+                 :Port      => rubygems_port,
+                 :Logger    => Logger.new(nil),
+                 :AccessLog => []
+               )
+      server.mount_proc('/api/v1/gems') do |req, res|
+        File.open('uploaded.gem', 'w') { |stream| stream.write(req.body) }
+      end
+
+      trap(:INT) { server.shutdown }
+      server.start
+    end
+
+    origin = File.expand_path('../origin.git')
+    system "git init --bare #{origin}"
+    system "git remote add origin #{origin}"
+    bump_version_to '0.1.0'
+
+    system 'rake release'
+
+    # local should have tag
+    system 'git tag'
+    assert_match 'v0.1.0', stdout
+
+    # origin should have refs and tags
+    system "git ls-remote --heads --tags . master"
+    local = stdout
+    system "git ls-remote --heads --tags origin master"
+    assert_match local, stdout
+
+    # gem should be pushed
+    assert_equal File.read('foo-0.1.0.gem'), File.read('uploaded.gem')
+    Process.kill('INT', webrick)
   end
 
   pending 'rake release depends on rake ronn', :require => 'ronn'
