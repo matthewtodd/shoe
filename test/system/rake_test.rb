@@ -102,8 +102,12 @@ class RakeTest < Test::Unit::TestCase
     assert_task 'ronn'
   end
 
-  pending 'rake ronn generates man pages', :require => 'ronn' do
-    # This task will then launch man; so I need to set the MANPAGER?
+  test 'rake ronn generates man pages', :require => 'ronn' do
+    ENV['MANPAGER'] = '/bin/cat'
+    write_file 'man/foo.1.ronn', ''
+    system 'rake ronn'
+    assert_file 'man/foo.1'
+    assert_match 'FOO(1)', stdout.chomp
   end
 
   test 'rake test is active only if there are test files present' do
