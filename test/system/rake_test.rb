@@ -90,56 +90,54 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake release tags, builds, and pushes' do
-    rubygems_port = 48484
-    ENV['RUBYGEMS_HOST'] = "http://localhost:#{rubygems_port}"
+    begin
+      start_fake_rubygems_server
+      add_git_remote 'origin'
+      bump_version_to '0.1.0'
 
-    webrick = fork do
-      server = WEBrick::HTTPServer.new(
-                 :Port      => rubygems_port,
-                 :Logger    => Logger.new(nil),
-                 :AccessLog => []
-               )
-      server.mount_proc('/api/v1/gems') do |req, res|
-        File.open('uploaded.gem', 'w') { |stream| stream.write(req.body) }
-      end
+      system 'rake release'
 
-      trap(:INT) { server.shutdown }
-      server.start
+      # local should have tag
+      system 'git tag'
+      assert_match 'v0.1.0', stdout
+
+      # origin should have refs and tags
+      system "git ls-remote --heads --tags . master"
+      local = stdout
+      system "git ls-remote --heads --tags origin master"
+      assert_match local, stdout
+
+      # gem should be pushed
+      assert_equal File.read('foo-0.1.0.gem'), File.read('uploaded.gem')
+    ensure
+      stop_fake_rubygems_server
     end
-
-    origin = File.expand_path('../origin.git')
-    system "git init --bare #{origin}"
-    system "git remote add origin #{origin}"
-    bump_version_to '0.1.0'
-
-    system 'rake release'
-
-    # local should have tag
-    system 'git tag'
-    assert_match 'v0.1.0', stdout
-
-    # origin should have refs and tags
-    system "git ls-remote --heads --tags . master"
-    local = stdout
-    system "git ls-remote --heads --tags origin master"
-    assert_match local, stdout
-
-    # gem should be pushed
-    assert_equal File.read('foo-0.1.0.gem'), File.read('uploaded.gem')
-    Process.kill('INT', webrick)
   end
 
-  pending 'rake release depends on rake ronn', :require => 'ronn'
+  test 'rake release depends on rake ronn', :require => 'ronn' do
+    begin
+      start_fake_rubygems_server
+      add_files_for_ronn
+      bump_version_to '0.1.0'
+
+      system 'rake release'
+
+      files = Gem::Format.from_file_by_path('uploaded.gem').file_entries.collect { |entry| entry.first['path'] }
+      assert files.include?('man/foo.1'), files.inspect
+    ensure
+      stop_fake_rubygems_server
+    end
+  end
 
   test 'rake ronn is enabled if there are ronn files', :require => 'ronn' do
     assert_no_task 'ronn'
-    write_file 'man/foo.1.ronn', ''
+    add_files_for_ronn
     assert_task 'ronn'
   end
 
   test 'rake ronn generates man pages', :require => 'ronn' do
     ENV['MANPAGER'] = '/bin/cat'
-    write_file 'man/foo.1.ronn', ''
+    add_files_for_ronn
     system 'rake ronn'
     assert_file 'man/foo.1'
     assert_match 'FOO(1)', stdout.chomp
@@ -209,6 +207,10 @@ class RakeTest < Test::Unit::TestCase
     END
   end
 
+  def add_files_for_ronn
+    write_file 'man/foo.1.ronn', ''
+  end
+
   def add_files_for_test(assertion='assert true')
     write_file 'test/foo_test.rb', <<-END
       require 'test/unit'
@@ -220,11 +222,39 @@ class RakeTest < Test::Unit::TestCase
     END
   end
 
+  def add_git_remote(name)
+    path = File.expand_path("../#{name}.git")
+    system "git init --bare #{path}"
+    system "git remote add #{name} #{path}"
+  end
+
   def bump_version_to(version)
     write_file 'lib/foo.rb', <<-END
       module Foo
         VERSION = '#{version}'
       end
     END
+  end
+
+  def start_fake_rubygems_server(port=48484)
+    ENV['RUBYGEMS_HOST'] = "http://localhost:#{port}"
+
+    @fake_rubygems_server_pid = fork do
+      server = WEBrick::HTTPServer.new(
+                 :Port      => port,
+                 :Logger    => Logger.new(nil),
+                 :AccessLog => []
+               )
+      server.mount_proc('/api/v1/gems') do |req, res|
+        File.open('uploaded.gem', 'w') { |stream| stream.write(req.body) }
+      end
+
+      trap(:INT) { server.shutdown }
+      server.start
+    end
+  end
+
+  def stop_fake_rubygems_server
+    Process.kill('INT', @fake_rubygems_server_pid)
   end
 end
