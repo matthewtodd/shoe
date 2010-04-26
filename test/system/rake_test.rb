@@ -16,7 +16,7 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake clean removes ignored files' do
-    write_file '.gitignore', "bar\n"
+    write_file '.gitignore', 'bar'
     write_file 'bar', 'NOT LONG FOR THIS WORLD'
 
     files_before_clean = find('.')
