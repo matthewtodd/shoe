@@ -57,9 +57,14 @@ class RakeTest < Test::Unit::TestCase
     assert_task 'rdoc'
   end
 
-  pending 'rake rdoc generates rdoc' do
-    # need to move out Launchy or stub BROWSER or something
-    # I might prefer using hub's approach, just so I don't depend on Launchy.
+  test 'rake rdoc generates rdoc' do
+    # Launchy runs BROWSER in a subshell, sending output to /dev/null, so if I
+    # want to test it, I'm going to have to be more clever than this. For the
+    # meantime, though, using /bin/echo at least keeps from opening a real
+    # browser at test time.
+    ENV['BROWSER'] = '/bin/echo'
+    system 'rake rdoc'
+    assert_file  'rdoc/index.html'
   end
 
   test 'rake release is enabled once the version is greater than 0' do
