@@ -27,10 +27,9 @@ module Shoe
         path.open('w') { |stream| stream.write(contents) }
       end
 
-      def in_git_project(name)
+      def in_project(name)
         Dir.mkdir(name)
         Dir.chdir(name)
-        system 'git init'
       end
 
       def with_fake_rubygems_server(&block)

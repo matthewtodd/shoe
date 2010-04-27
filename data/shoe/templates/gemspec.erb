@@ -26,22 +26,14 @@ Gem::Specification.new do |spec|
   # spec.add_development_dependency 'ronn'
   spec.add_development_dependency 'shoe'
 
-  # This may not be the best way to select files for inclusion in your gem, but
-  # it does at least honor your .gitignore, keeping that bit of your
-  # configuration DRY. Alternatively, you could use more explicit Dir.glob
-  # patterns or even try reading a Manifest file, hoe-style.
-  def spec.git_files(glob=nil)
-    `git ls-files -z --cached --other --exclude-standard #{glob}`.split("\0")
-  end
-
   # The kooky &File.method(:basename) trick keeps us from accidentally
   # shadowing a variable named "file" in the context that evaluates this
   # gemspec. I actually ran into this problem with Bundler!
-  spec.files            = spec.git_files
-  spec.executables      = spec.git_files('bin/*').map &File.method(:basename)
-  spec.extensions       = spec.git_files('ext/**/extconf.rb')
-  spec.extra_rdoc_files = spec.git_files('{,**/}*.rdoc')
-  spec.test_files       = spec.git_files('test/{,**/}*_test.rb')
+  spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
+  spec.executables      = Dir['bin/*'].map &File.method(:basename)
+  spec.extensions       = Dir['ext/**/extconf.rb']
+  spec.extra_rdoc_files = Dir['**/*.rdoc']
+  spec.test_files       = Dir['test/**/*_test.rb']
 
   spec.rdoc_options = %W(
     --main README.rdoc

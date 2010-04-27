@@ -26,16 +26,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'redgreen'
   spec.add_development_dependency 'ronn'
 
-  def spec.git_files(glob=nil)
-    `git ls-files -z --cached --other --exclude-standard #{glob}`.split("\0")
-  end
+  spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
+  spec.executables      = Dir['bin/*'].map &File.method(:basename)
+  spec.extensions       = Dir['ext/**/extconf.rb']
+  spec.extra_rdoc_files = Dir['**/*.rdoc']
+  spec.test_files       = Dir['test/**/*_test.rb']
 
-  spec.files       = spec.git_files
-  spec.executables = spec.git_files('bin/*').map &File.method(:basename)
-  spec.extensions  = spec.git_files('ext/**/extconf.rb')
-  spec.test_files  = spec.git_files('test/{,**/}*_test.rb')
-
-  spec.extra_rdoc_files = spec.git_files('{,**/}*.rdoc')
   spec.rdoc_options     = %W(
     --main README.rdoc
     --title #{spec.full_name}

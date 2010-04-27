@@ -3,6 +3,7 @@
 * Generated C extension actually works now.
 * `rake test` now properly depends on `rake compile`.
 * Run Gem::Validator tests via Test::Unit::AutoRunner, so that redgreen has a chance to color the dots as well as the result line.
+* Generated gemspec now selects files with Dir.glob instead of `git ls-files`.
 
 == 0.6.1 -- 2010 April 22
 
