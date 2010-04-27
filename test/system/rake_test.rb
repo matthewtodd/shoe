@@ -1,6 +1,4 @@
 require 'test/helper'
-require 'logger'
-require 'webrick'
 require 'yaml'
 
 class RakeTest < Test::Unit::TestCase
@@ -90,43 +88,37 @@ class RakeTest < Test::Unit::TestCase
   end
 
   test 'rake release tags, builds, and pushes' do
-    begin
-      start_fake_rubygems_server
-      add_git_remote 'origin'
-      bump_version_to '0.1.0'
+    add_git_remote 'origin'
+    bump_version_to '0.1.0'
 
+    uploaded_gem = with_fake_rubygems_server do
       system 'rake release'
-
-      # local should have tag
-      system 'git tag'
-      assert_match 'v0.1.0', stdout
-
-      # origin should have refs and tags
-      system "git ls-remote --heads --tags . master"
-      local = stdout
-      system "git ls-remote --heads --tags origin master"
-      assert_match local, stdout
-
-      # gem should be pushed
-      assert_equal File.read('foo-0.1.0.gem'), File.read('uploaded.gem')
-    ensure
-      stop_fake_rubygems_server
     end
+
+    # local should have tag
+    system 'git tag'
+    assert_match 'v0.1.0', stdout
+
+    # origin should have refs and tags
+    system "git ls-remote --heads --tags . master"
+    local = stdout
+    system "git ls-remote --heads --tags origin master"
+    assert_match local, stdout
+
+    # gem should be pushed
+    assert_equal File.read('foo-0.1.0.gem'), uploaded_gem
   end
 
   test 'rake release depends on rake ronn', :require => 'ronn' do
-    begin
-      start_fake_rubygems_server
-      add_files_for_ronn
-      bump_version_to '0.1.0'
+    add_files_for_ronn
+    bump_version_to '0.1.0'
 
+    uploaded_gem = with_fake_rubygems_server do
       system 'rake release'
-
-      files = Gem::Format.from_file_by_path('uploaded.gem').file_entries.collect { |entry| entry.first['path'] }
-      assert files.include?('man/foo.1'), files.inspect
-    ensure
-      stop_fake_rubygems_server
     end
+
+    assert uploaded_gem.contents.include?('man/foo.1'),
+           uploaded_gem.contents.inspect
   end
 
   test 'rake ronn is enabled if there are ronn files', :require => 'ronn' do
@@ -236,25 +228,4 @@ class RakeTest < Test::Unit::TestCase
     END
   end
 
-  def start_fake_rubygems_server(port=48484)
-    ENV['RUBYGEMS_HOST'] = "http://localhost:#{port}"
-
-    @fake_rubygems_server_pid = fork do
-      server = WEBrick::HTTPServer.new(
-                 :Port      => port,
-                 :Logger    => Logger.new(nil),
-                 :AccessLog => []
-               )
-      server.mount_proc('/api/v1/gems') do |req, res|
-        File.open('uploaded.gem', 'w') { |stream| stream.write(req.body) }
-      end
-
-      trap(:INT) { server.shutdown }
-      server.start
-    end
-  end
-
-  def stop_fake_rubygems_server
-    Process.kill('INT', @fake_rubygems_server_pid)
-  end
 end

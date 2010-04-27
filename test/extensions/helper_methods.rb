@@ -33,6 +33,10 @@ module Shoe
         system 'git init'
       end
 
+      def with_fake_rubygems_server(&block)
+        FakeRubygemsServer.start(&block)
+      end
+
       def assert_file(path)
         assert Pathname.new(path).exist?, "#{path} does not exist."
       end
