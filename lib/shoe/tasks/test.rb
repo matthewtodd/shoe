@@ -44,14 +44,33 @@ module Shoe
     # <tt>{dependencies}[http://docs.rubygems.org/read/chapter/20#dependencies]</tt>
     # are on the <tt>$LOAD_PATH</tt>.
     #
-    # <b>Bad:</b>
+    # <b>Wrong:</b>
     #
     #  # Don't do this; test_helper's not in the $LOAD_PATH
     #  require 'test_helper'
     #
-    # <b>Good:</b>
+    # <b>Right:</b>
     #
     #  require 'test/test_helper'
+    #
+    # = Pretty Colors
+    #
+    # If you like pretty colors (I do!), just <tt>require
+    # '{redgreen}[http://rubygems.org/gems/redgreen]'</tt> in your tests. The
+    # <tt>Gem::Validator</tt> has been configured to play nicely with it.
+    #
+    # <b>Wrong:</b>
+    #
+    #  # Don't do this; it breaks `gem check --test` if redgreen's not installed.
+    #  require 'redgreen' if $stdout.tty?
+    #
+    # <b>Right:</b>
+    #
+    #  begin
+    #    require 'redgreen' if $stdout.tty?
+    #  rescue LoadError
+    #    # No colors, but `gem check --test` is golden!
+    #  end
     #
     class Test < Abstract
       def active?
