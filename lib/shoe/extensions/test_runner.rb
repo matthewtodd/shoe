@@ -17,7 +17,7 @@ module Shoe
 
       private
 
-      module BooleanPassed
+      module BooleanPassed #:nodoc:
         def passed?
           self
         end

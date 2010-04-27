@@ -3,12 +3,16 @@ module Shoe
 
     module Validator
       def self.extended(base)
-        base.send(:include, InstanceMethods)
-        base.send(:remove_const, :TestRunner)
-        base.send(:const_set, :TestRunner, Shoe::Extensions::TestRunner)
+        base.send :include, InstanceMethods
+        base.test_runner = TestRunner
       end
 
-      module InstanceMethods
+      def test_runner=(klass)
+        remove_const :TestRunner
+        const_set    :TestRunner, klass
+      end
+
+      module InstanceMethods #:nodoc:
         def alert_error(*args)
           # no-op
         end

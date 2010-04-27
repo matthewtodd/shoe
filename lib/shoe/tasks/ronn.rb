@@ -14,9 +14,8 @@ module Shoe
     #
     # == Notes
     #
-    # * It's best to check the generated man pages into version control so
-    #   they'll be included in your gem for
-    #   {gem-man}[http://github.com/defunkt/gem-man].
+    # * It's best to include the generated man pages in your gem, so that
+    #   {gem-man}[http://github.com/defunkt/gem-man] can get to them.
     #
     # * Ronn becomes a prerequisite for Release, so your man pages are sure to
     #   be up-to-date.
