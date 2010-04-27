@@ -41,7 +41,12 @@ module Shoe
       private
 
       def define_tasks
-        desc 'Generate man pages'
+        desc <<-END.gsub(/^ */, '')
+          Generate man pages.
+          Configure via the `date` and `authors` fields in #{spec.name}.gemspec.
+          Uses ronn sources in man/*.ronn.
+        END
+
         task :ronn => 'ronn:build' do
           sh 'man', *man_files
         end

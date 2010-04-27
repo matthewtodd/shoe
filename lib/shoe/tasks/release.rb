@@ -33,7 +33,7 @@ module Shoe
       end
 
       def define
-        desc "Release #{spec.full_name}"
+        desc "Release #{spec.full_name}."
         task :release do
           sh "git commit -a -m 'Release #{spec.version}'"
           sh "git tag #{version_tag(spec.version)}"

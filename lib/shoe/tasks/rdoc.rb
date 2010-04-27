@@ -29,7 +29,12 @@ module Shoe
       end
 
       def define
-        desc 'Generate documentation'
+        desc <<-END.gsub(/^ */, '')
+          Generate documentation.
+          Configure via the `rdoc_options` and `extra_rdoc_files` fields in
+          #{spec.name}.gemspec. Open in a different browser by setting the
+          BROWSER environment variable.
+        END
         task :rdoc do
           Gem::DocManager.new(spec).extend(Extensions::DocManager).generate_rdoc
           Launchy::Browser.run('rdoc/index.html')

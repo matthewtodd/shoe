@@ -78,7 +78,11 @@ module Shoe
       end
 
       def define
-        desc 'Run tests'
+        desc <<-END.gsub(/^ */, '')
+          Run tests.
+          Configure via the `test_files` field in #{spec.name}.gemspec.
+        END
+
         task :test do
           Gem.source_index.extend(Extensions::SourceIndex)
           Gem.source_index.local_gemspec = spec

@@ -16,7 +16,11 @@ module Shoe
       end
 
       def define
-        desc 'Remove ignored files'
+        desc <<-END.gsub(/^ */, '')
+          Remove ignored files.
+          Configure via your .gitignore file. Uses `git clean -fdX`.
+        END
+
         task :clean do
           sh 'git clean -fdX'
         end

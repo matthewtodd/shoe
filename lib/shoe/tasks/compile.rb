@@ -19,7 +19,11 @@ module Shoe
       end
 
       def define
-        desc 'Compile C extensions'
+        desc <<-END.gsub(/^ */, '')
+          Compile C extensions.
+          Configure via the `extensions` field in #{spec.name}.gemspec.
+        END
+
         task :compile do
           top_level_path   = File.expand_path('.')
           destination_path = File.join(top_level_path, spec.require_paths.first)
