@@ -11,6 +11,12 @@ class RakeTest < Test::Unit::TestCase
     system 'shoe --no-test-unit'
   end
 
+  test 'rake clean is active only if there is a .git directory' do
+    assert_no_task 'clean'
+    system 'git init'
+    assert_task 'clean'
+  end
+
   test 'rake clean removes ignored files' do
     system 'git init'
 
