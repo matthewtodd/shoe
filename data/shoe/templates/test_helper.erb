@@ -1,9 +1,7 @@
 require 'test/unit'
 require '<%= name %>'
 
-begin
-  require 'redgreen' if $stdout.tty?
-rescue LoadError
-  # It's nice not to have hard dependencies on any gems for testing, so that
-  # it's super-easy for your users to run `gem check --test <%= name %>.`
-end
+# NOTE: If you can help it, stick to using the Ruby standard library in your
+# tests. If your tests depend on any RubyGems, you'll need to tell your users
+# to `gem install <%= name %> --development` before they try to
+# `gem check --test <%= name %>`.
