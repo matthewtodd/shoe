@@ -5,8 +5,7 @@ module Shoe
       def self.extended(base)
         base.send(:include, InstanceMethods)
         base.send(:remove_const, :TestRunner)
-        base.send(:const_set, :TestRunner,
-          Test::Unit::UI::Console::TestRunner.extend(TestRunner))
+        base.send(:const_set, :TestRunner, Shoe::Extensions::TestRunner)
       end
 
       module InstanceMethods

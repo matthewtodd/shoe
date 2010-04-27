@@ -5,7 +5,6 @@ require 'rbconfig/datadir'
 module Shoe
   VERSION = '0.6.1'
 
-  autoload :Color,      'shoe/color'
   autoload :Extensions, 'shoe/extensions'
   autoload :Generator,  'shoe/generator'
   autoload :Tasks,      'shoe/tasks'
