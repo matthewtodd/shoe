@@ -10,16 +10,16 @@ module Shoe
         new.start(&block)
       end
 
-      def initialize(port=48484)
+      def initialize(host='127.0.0.1', port=48484)
         @initial_rubygems_host = ENV['RUBYGEMS_HOST']
-        @fake_rubygems_host    = "http://localhost:#{port}"
+        @fake_rubygems_host    = "http://#{host}:#{port}"
 
         @message_bus = Queue.new
         @webrick = WEBrick::HTTPServer.new(
                      # Ruby is super slow to create the underlying Socket if
                      # (my ISP's upstream connection is flakey? and) we don't
                      # specify a BindAddress.
-                     :BindAddress   => '127.0.0.1',
+                     :BindAddress   => host,
                      :Port          => port,
                      :Logger        => Logger.new(nil),
                      :AccessLog     => [],
@@ -34,14 +34,14 @@ module Shoe
 
       def start(&block)
         ENV['RUBYGEMS_HOST'] = @fake_rubygems_host
-        @thread = Thread.new { @webrick.start }
+        thread = Thread.new { @webrick.start }
         @message_bus.pop
         block.call
         return @uploaded_gem
       ensure
         ENV['RUBYGEMS_HOST'] = @initial_rubygems_host
         @webrick.shutdown
-        @thread.join
+        thread.join
       end
 
       private
