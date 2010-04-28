@@ -9,20 +9,20 @@ shoe(1) -- generate a RubyGems project
 
 The `shoe` command generates a new RubyGems project. Big deal, right? As
 compared with other tools, `shoe` gently guides you toward hygenic packaging
-standards and provides you with a sweet library of on-demand `rake(1)` tasks
-built around your (authoritative) gemspec.
+standards and provides you with a sweet [shoe(3)](shoe.3.html) library of
+on-demand `rake(1)` tasks built around your (authoritative) gemspec.
 
 ## OPTIONS
 
-`shoe`'s default mode of operation is to generate a basic library, its
-`Rakefile`, and some `Test::Unit` tests in the current directory. (You may pass
-a different _path_ on the command line, if you like.)
+By default, `shoe` generates a basic library, its `Rakefile`, and some
+`Test::Unit` tests in the current directory. (You may pass a different _path_
+on the command line, if you like.)
 
 To generate additional files, use the following options:
 
 * `-a`, `--[no-]application`:
   Generate a command-line application. Create a simple executable script in
-  the `bin` directory and an `Application` class that uses `optparse`.
+  the `bin` directory and an `optparse`-based `Application` class.
 
 * `-d`, `--[no-]data`:
   Generate a data directory. Create a `data` directory (perfect for HTML
@@ -44,21 +44,17 @@ To generate additional files, use the following options:
 
 * `-v`, `--version`[=all]:
   Print `shoe`'s version number and exit. If `=all` is given, also print
-  version numbers of `shoe`'s dependencies. (This is standard `optparse` behavior
-  that deserves more attention!)
+  version numbers of `shoe`'s dependencies.
 
 ## AUTHOR
 
-Matthew Todd, <@matthewtodd> on GitHub and Twitter. Do drop me a line if you
-use `shoe` -- I'd love to hear from you!
+Matthew Todd, [matthewtodd](http://github.com/matthewtodd) on GitHub. Do drop
+me a line if you use `shoe` -- I'd love to hear from you!
 
 ## SEE ALSO
 
-shoe(3),
-<http://seattlerb.rubyforge.org/hoe/>,
-<http://github.com/technicalpickles/jeweler>,
-<http://github.com/sr/mg>,
-<http://defunkt.github.com/rip/>,
+[shoe(3)](shoe.3.html),
+<http://chneukirchen.github.com/rps/>,
 <http://gembundler.com/>,
-<http://github.com/rtomayko/rpg>,
-<http://chneukirchen.github.com/rps/>
+<http://defunkt.github.com/rip/>,
+<http://github.com/rtomayko/rpg>

@@ -4,13 +4,13 @@
 .TH "SHOE" "3" "April 2010" "Matthew Todd" "RubyGems Manual"
 .
 .SH "NAME"
-\fBshoe\fR \-\- \fBrake(1)\fR tasks for your RubyGems project
+\fBshoe\fR \-\- standard Rake tasks for your RubyGems project
 .
 .SH "SYNOPSIS"
-\fBrequire 'shoe'\fR
+require 'shoe'
 .
 .br
-\fBShoe::Tasks.define\fR('\fIproject.gemspec\fR')
+Shoe::Tasks.define('\fIproject.gemspec\fR')
 .
 .SH "DESCRIPTION"
 \fBShoe::Tasks.define()\fR defines a number of standard \fBrake(1)\fR tasks for your
@@ -22,7 +22,7 @@ Gem::Specification, and they assume you are using \fBgit(1)\fR.
 .TP
 \fBrake clean\fR
 Remove ignored files. Calls something like \fBgit\-clean(1)\fR with the \fB\-fdX\fR
-options, honoring your \fBgitignore(5)\fR rules, but preserves \fB.bundle/\fR and \fB.rvmrc\fR.
+options, honoring your \fBgitignore(5)\fR rules, but preserving \fB.bundle/\fR and \fB.rvmrc\fR.
 .
 .TP
 \fBrake compile\fR
@@ -32,8 +32,8 @@ reading the \fBextensions\fR field in your Gem::Specification.
 .TP
 \fBrake cucumber\fR
 Run Cucumber features, using the \fBdefault\fR profile in \fBcucumber.yml\fR.
-The remaining profiles may be run via namespaced tasks: \fBrake
-cucumber:wip\fR, etc.
+Tasks for the other profiles are placed under the cucumber namespace, so you
+could run a hypothetical \fBwip\fR profile with \fBrake cucumber:wip\fR, etc.
 .
 .TP
 \fBrake rdoc\fR
@@ -61,19 +61,8 @@ Note these tasks check conditions before defining themselves, so that your \fBra
 the time.
 .
 .SH "AUTHOR"
-Matthew Todd, \fI@matthewtodd\fR on GitHub and Twitter. Do drop me a line if you
-use \fBshoe\fR \-\- I'd love to hear from you!
+Matthew Todd, \fImatthewtodd\fR on GitHub. Do drop
+me a line if you use \fBshoe\fR \-\- I'd love to hear from you!
 .
 .SH "SEE ALSO"
-shoe(1),
-rake(1),
-git(1),
-git\-clean(1),
-git\-commit(1),
-git\-push(1),
-git\-remote(1),
-git\-tag(1),
-gitignore(5),
-gem(1),
-gem\-man(1),
-ronn(1), \fIhttp://docs.rubygems.org/read/chapter/20\fR, \fIhttp://semver.org/\fR
+\fIshoe(1)\fR, \fIhttp://docs.rubygems.org/read/chapter/20\fR, \fIhttp://semver.org/\fR

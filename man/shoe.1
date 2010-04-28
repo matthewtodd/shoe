@@ -12,12 +12,12 @@
 .SH "DESCRIPTION"
 The \fBshoe\fR command generates a new RubyGems project. Big deal, right? As
 compared with other tools, \fBshoe\fR gently guides you toward hygenic packaging
-standards and provides you with a sweet library of on\-demand \fBrake(1)\fR tasks
-built around your (authoritative) gemspec.
+standards and provides you with a sweet \fIshoe(3)\fR library of
+on\-demand \fBrake(1)\fR tasks built around your (authoritative) gemspec.
 .
 .SH "OPTIONS"
-\fBshoe\fR's default mode of operation is to generate a basic library, its \fBRakefile\fR, and some \fBTest::Unit\fR tests in the current directory. (You may pass
-a different \fIpath\fR on the command line, if you like.)
+By default, \fBshoe\fR generates a basic library, its \fBRakefile\fR, and some \fBTest::Unit\fR tests in the current directory. (You may pass a different \fIpath\fR
+on the command line, if you like.)
 .
 .P
 To generate additional files, use the following options:
@@ -25,7 +25,7 @@ To generate additional files, use the following options:
 .TP
 \fB\-a\fR, \fB\-\-[no\-]application\fR
 Generate a command\-line application. Create a simple executable script in
-the \fBbin\fR directory and an \fBApplication\fR class that uses \fBoptparse\fR.
+the \fBbin\fR directory and an \fBoptparse\fR\-based \fBApplication\fR class.
 .
 .TP
 \fB\-d\fR, \fB\-\-[no\-]data\fR
@@ -53,12 +53,11 @@ Print a help message and exit.
 .TP
 \fB\-v\fR, \fB\-\-version\fR[=all]
 Print \fBshoe\fR's version number and exit. If \fB=all\fR is given, also print
-version numbers of \fBshoe\fR's dependencies. (This is standard \fBoptparse\fR behavior
-that deserves more attention!)
+version numbers of \fBshoe\fR's dependencies.
 .
 .SH "AUTHOR"
-Matthew Todd, \fI@matthewtodd\fR on GitHub and Twitter. Do drop me a line if you
-use \fBshoe\fR \-\- I'd love to hear from you!
+Matthew Todd, \fImatthewtodd\fR on GitHub. Do drop
+me a line if you use \fBshoe\fR \-\- I'd love to hear from you!
 .
 .SH "SEE ALSO"
-shoe(3), \fIhttp://seattlerb.rubyforge.org/hoe/\fR, \fIhttp://github.com/technicalpickles/jeweler\fR, \fIhttp://github.com/sr/mg\fR, \fIhttp://defunkt.github.com/rip/\fR, \fIhttp://gembundler.com/\fR, \fIhttp://github.com/rtomayko/rpg\fR, \fIhttp://chneukirchen.github.com/rps/\fR
+\fIshoe(3)\fR, \fIhttp://chneukirchen.github.com/rps/\fR, \fIhttp://gembundler.com/\fR, \fIhttp://defunkt.github.com/rip/\fR, \fIhttp://github.com/rtomayko/rpg\fR

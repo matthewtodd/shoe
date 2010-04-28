@@ -18,12 +18,11 @@ Write your description here.
 
 * `-v`, `--version`[=all]:
   Print `<%= name %>`'s version number and exit. If `=all` is given, also print
-  version numbers of `<%= name %>`'s dependencies. (This is standard `optparse` behavior
-  that deserves more attention!)
+  version numbers of `<%= name %>`'s dependencies.
 
 ## AUTHOR
 
-<%= `git config --get user.name`.chomp %> <<%= `git config --get user.email`.chomp %>>
+<%= `git config --get user.name`.chomp %>, [<%= `git config --get github.user`.chomp %>](http://github.com/<%= `git config --get github.user`.chomp %>) on GitHub.
 
 ## SEE ALSO
 

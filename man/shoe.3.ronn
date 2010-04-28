@@ -1,10 +1,10 @@
-shoe(3) -- `rake(1)` tasks for your RubyGems project
-====================================================
+shoe(3) -- standard Rake tasks for your RubyGems project
+========================================================
 
 ## SYNOPSIS
 
-`require 'shoe'`  
-`Shoe::Tasks.define`('_project.gemspec_')
+require 'shoe'  
+Shoe::Tasks.define('_project.gemspec_')
 
 ## DESCRIPTION
 
@@ -16,7 +16,7 @@ Gem::Specification, and they assume you are using `git(1)`.
 
 * `rake clean`:
   Remove ignored files. Calls something like `git-clean(1)` with the `-fdX`
-  options, honoring your `gitignore(5)` rules, but preserves `.bundle/` and
+  options, honoring your `gitignore(5)` rules, but preserving `.bundle/` and
   `.rvmrc`.
 
 * `rake compile`:
@@ -25,8 +25,8 @@ Gem::Specification, and they assume you are using `git(1)`.
 
 * `rake cucumber`:
   Run Cucumber features, using the `default` profile in `cucumber.yml`.
-  The remaining profiles may be run via namespaced tasks: `rake
-  cucumber:wip`, etc.
+  Tasks for the other profiles are placed under the cucumber namespace, so you
+  could run a hypothetical `wip` profile with `rake cucumber:wip`, etc.
 
 * `rake rdoc`:
   Generate RDoc documentation with RubyGems' built-in Gem::DocManager, which
@@ -54,22 +54,11 @@ the time.
 
 ## AUTHOR
 
-Matthew Todd, <@matthewtodd> on GitHub and Twitter. Do drop me a line if you
-use `shoe` -- I'd love to hear from you!
+Matthew Todd, [matthewtodd](http://github.com/matthewtodd) on GitHub. Do drop
+me a line if you use `shoe` -- I'd love to hear from you!
 
 ## SEE ALSO
 
-shoe(1),
-rake(1),
-git(1),
-git-clean(1),
-git-commit(1),
-git-push(1),
-git-remote(1),
-git-tag(1),
-gitignore(5),
-gem(1),
-gem-man(1),
-ronn(1),
+[shoe(1)](shoe.1.html),
 <http://docs.rubygems.org/read/chapter/20>,
 <http://semver.org/>
