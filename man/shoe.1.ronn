@@ -54,6 +54,7 @@ use `shoe` -- I'd love to hear from you!
 
 ## SEE ALSO
 
+shoe(3),
 <http://seattlerb.rubyforge.org/hoe/>,
 <http://github.com/technicalpickles/jeweler>,
 <http://github.com/sr/mg>,

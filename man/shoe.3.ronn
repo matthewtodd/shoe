@@ -1,0 +1,74 @@
+shoe(3) -- `rake(1)` tasks for your RubyGems project
+====================================================
+
+## SYNOPSIS
+
+`require 'shoe'`  
+`Shoe::Tasks.define`('_project.gemspec_')
+
+## DESCRIPTION
+
+`Shoe::Tasks.define()` defines a number of standard `rake(1)` tasks for your
+RubyGems project. These tasks derive their configuration from your
+Gem::Specification, and they assume you are using `git(1)`.
+
+## TASKS
+
+* `rake clean`:
+  Remove ignored files. Calls `git-clean(1)` with the `-fdX` options,
+  honoring your `gitignore(5)` rules.
+
+* `rake compile`:
+  Compile C extensions with RubyGems' built-in Gem::Ext::ExtConfBuilder,
+  reading the `extensions` field in your Gem::Specification.
+
+* `rake cucumber`:
+  Run Cucumber features, using the `default` profile in `cucumber.yml`.
+  The remaining profiles may be run via namespaced tasks: `rake
+  cucumber:wip`, etc.
+
+* `rake rdoc`:
+  Generate RDoc documentation with RubyGems' built-in Gem::DocManager, which
+  reads the `rdoc_options` and `extra_rdoc_files` fields in your
+  Gem::Specification.
+
+* `rake release`:
+  Push a release to <http://rubygems.org/>, additionally running `git-push(1)` if
+  you have a `git-remote(1)` named `origin`. Before pushing, runs
+  `git-commit(1)` and `git-tag(1)` with the current `version` in your
+  Gem::Specification.
+
+* `rake ronn`:
+  Generate man pages with `ronn(1)` from the `man/*.ronn` sources listed in the
+  `files` field of your Gem::Specification. (The generated manpages will then
+  be available via `gem-man(1)` once your gem is installed.)
+
+* `rake test`:
+  Run tests with RubyGems' built-in Gem::Validator, which reads the
+  `test_files` field in your Gem::Specification to know which tests to run.
+
+Note these tasks check conditions before defining themselves, so that your
+`rake --tasks` list stays relevant and compact. You won't see all the tasks all
+the time.
+
+## AUTHOR
+
+Matthew Todd, <@matthewtodd> on GitHub and Twitter. Do drop me a line if you
+use `shoe` -- I'd love to hear from you!
+
+## SEE ALSO
+
+shoe(1),
+rake(1),
+git(1),
+git-clean(1),
+git-commit(1),
+git-push(1),
+git-remote(1),
+git-tag(1),
+gitignore(5),
+gem(1),
+gem-man(1),
+ronn(1),
+<http://docs.rubygems.org/read/chapter/20>,
+<http://semver.org/>

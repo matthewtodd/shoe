@@ -1,0 +1,79 @@
+.\" generated with Ronn/v0.5
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "SHOE" "3" "April 2010" "Matthew Todd" "RubyGems Manual"
+.
+.SH "NAME"
+\fBshoe\fR \-\- \fBrake(1)\fR tasks for your RubyGems project
+.
+.SH "SYNOPSIS"
+\fBrequire 'shoe'\fR
+.
+.br
+\fBShoe::Tasks.define\fR('\fIproject.gemspec\fR')
+.
+.SH "DESCRIPTION"
+\fBShoe::Tasks.define()\fR defines a number of standard \fBrake(1)\fR tasks for your
+RubyGems project. These tasks derive their configuration from your
+Gem::Specification, and they assume you are using \fBgit(1)\fR.
+.
+.SH "TASKS"
+.
+.TP
+\fBrake clean\fR
+Remove ignored files. Calls \fBgit\-clean(1)\fR with the \fB\-fdX\fR options,
+honoring your \fBgitignore(5)\fR rules.
+.
+.TP
+\fBrake compile\fR
+Compile C extensions with RubyGems' built\-in Gem::Ext::ExtConfBuilder,
+reading the \fBextensions\fR field in your Gem::Specification.
+.
+.TP
+\fBrake cucumber\fR
+Run Cucumber features, using the \fBdefault\fR profile in \fBcucumber.yml\fR.
+The remaining profiles may be run via namespaced tasks: \fBrake
+cucumber:wip\fR, etc.
+.
+.TP
+\fBrake rdoc\fR
+Generate RDoc documentation with RubyGems' built\-in Gem::DocManager, which
+reads the \fBrdoc_options\fR and \fBextra_rdoc_files\fR fields in your
+Gem::Specification.
+.
+.TP
+\fBrake release\fR
+Push a release to \fIhttp://rubygems.org/\fR, additionally running \fBgit\-push(1)\fR if
+you have a \fBgit\-remote(1)\fR named \fBorigin\fR. Before pushing, runs \fBgit\-commit(1)\fR and \fBgit\-tag(1)\fR with the current \fBversion\fR in your
+Gem::Specification.
+.
+.TP
+\fBrake ronn\fR
+Generate man pages with \fBronn(1)\fR from the \fBman/*.ronn\fR sources listed in the \fBfiles\fR field of your Gem::Specification. (The generated manpages will then
+be available via \fBgem\-man(1)\fR once your gem is installed.)
+.
+.TP
+\fBrake test\fR
+Run tests with RubyGems' built\-in Gem::Validator, which reads the \fBtest_files\fR field in your Gem::Specification to know which tests to run.
+.
+.P
+Note these tasks check conditions before defining themselves, so that your \fBrake \-\-tasks\fR list stays relevant and compact. You won't see all the tasks all
+the time.
+.
+.SH "AUTHOR"
+Matthew Todd, \fI@matthewtodd\fR on GitHub and Twitter. Do drop me a line if you
+use \fBshoe\fR \-\- I'd love to hear from you!
+.
+.SH "SEE ALSO"
+shoe(1),
+rake(1),
+git(1),
+git\-clean(1),
+git\-commit(1),
+git\-push(1),
+git\-remote(1),
+git\-tag(1),
+gitignore(5),
+gem(1),
+gem\-man(1),
+ronn(1), \fIhttp://docs.rubygems.org/read/chapter/20\fR, \fIhttp://semver.org/\fR
