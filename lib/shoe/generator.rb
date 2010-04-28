@@ -52,11 +52,12 @@ module Shoe
         install('rakefile.erb',  'Rakefile')
         install('gemspec.erb',   "#{name}.gemspec")
         install('module.erb',    "lib/#{name}.rb")
+        install('manpage_3.erb', "man/#{name}.3.ronn")
 
         if application?
           install('executable.erb',  "bin/#{name}", 0755)
           install('application.erb', "lib/#{name}/application.rb")
-          install('manpage.erb',     "man/#{name}.1.ronn")
+          install('manpage_1.erb',   "man/#{name}.1.ronn")
         end
 
         if data?

@@ -121,29 +121,27 @@ class RakeTest < Test::Unit::TestCase
 
   test 'rake release depends on rake ronn', :require => 'ronn' do
     perform_initial_commit
-    add_files_for_ronn
     bump_version_to '0.1.0'
 
     uploaded_gem = with_fake_rubygems_server do
       system 'rake release'
     end
 
-    assert uploaded_gem.contents.include?('man/foo.1'),
+    assert uploaded_gem.contents.include?('man/foo.3'),
            uploaded_gem.contents.inspect
   end
 
   test 'rake ronn is enabled if there are ronn files', :require => 'ronn' do
-    assert_no_task 'ronn'
-    add_files_for_ronn
     assert_task 'ronn'
+    system 'rm **/*.ronn'
+    assert_no_task 'ronn'
   end
 
   test 'rake ronn generates man pages', :require => 'ronn' do
     ENV['MANPAGER'] = '/bin/cat'
-    add_files_for_ronn
     system 'rake ronn'
-    assert_file 'man/foo.1'
-    assert_match 'FOO(1)', stdout.chomp
+    assert_file 'man/foo.3'
+    assert_match 'FOO(3)', stdout.chomp
   end
 
   test 'rake test is active only if there are test files present' do
@@ -208,10 +206,6 @@ class RakeTest < Test::Unit::TestCase
         #{assertion}
       end
     END
-  end
-
-  def add_files_for_ronn
-    write_file 'man/foo.1.ronn', ''
   end
 
   def add_files_for_test(assertion='assert true')
