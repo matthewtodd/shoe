@@ -5,6 +5,7 @@
 * Run Gem::Validator tests via Test::Unit::AutoRunner, so that redgreen has a chance to color the dots as well as the result line.
 * Generated gemspec now selects files with Dir.glob instead of `git ls-files`.
 * Always generate a section 3 manpage.
+* `rake clean` now preserves <tt>.bundle/</tt> and <tt>.rvmrc</tt>.
 
 == 0.6.1 -- 2010 April 22
 

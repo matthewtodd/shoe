@@ -17,11 +17,18 @@ class RakeTest < Test::Unit::TestCase
     assert_task 'clean'
   end
 
-  test 'rake clean removes ignored files' do
+  test 'rake clean removes ignored files, excluding .rvmrc and .bundler' do
     system 'git init'
 
-    write_file '.gitignore', 'bar'
-    write_file 'bar', 'NOT LONG FOR THIS WORLD'
+    write_file '.gitignore', <<-END.gsub(/^ */, '')
+      .bundle
+      .rvmrc
+      bar
+    END
+
+    write_file '.bundle/config.rb', '# STAYING ALIVE'
+    write_file '.rvmrc',            '# STAYING ALIVE'
+    write_file 'bar',               'NOT LONG FOR THIS WORLD'
 
     files_before_clean = find('.')
     system 'rake clean'

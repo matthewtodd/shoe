@@ -21,8 +21,8 @@ Gem::Specification, and they assume you are using \fBgit(1)\fR.
 .
 .TP
 \fBrake clean\fR
-Remove ignored files. Calls \fBgit\-clean(1)\fR with the \fB\-fdX\fR options,
-honoring your \fBgitignore(5)\fR rules.
+Remove ignored files. Calls something like \fBgit\-clean(1)\fR with the \fB\-fdX\fR
+options, honoring your \fBgitignore(5)\fR rules, but preserves \fB.bundle/\fR and \fB.rvmrc\fR.
 .
 .TP
 \fBrake compile\fR

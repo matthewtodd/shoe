@@ -38,7 +38,8 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 Shoe::Tasks accept no direct configuration. Instead, they rely on your project environment:
 
 Shoe::Tasks::Clean::
-  calls <tt>`git clean -fdX`</tt>.
+  calls something like <tt>`git clean -fdX`</tt>, but preserves
+  <tt>.bundle/</tt> and <tt>.rvmrc</tt>.
 
 Shoe::Tasks::Compile::
   builds the
