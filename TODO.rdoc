@@ -1,9 +1,12 @@
 = Next Up
 
-* Generator should do the right thing when the base directory has a dash in it.
-* Add :only/:except options to Shoe::Tasks.define.
 * Remove Launchy? (Follow hub's lead.)
+* Start running on 1.9: Gem::Validator uses MiniTest::Unit.
+
+= Someday Maybe
+
 * Re-think focus: probably want to ditch cucumber, since I'm not using it for shoe?
 * Document rake task hooks prepare:execute and prepare:release.
 * Use a generator framework?
-* Start running on 1.9: Gem::Validator uses MiniTest::Unit.
+* Generator should do the right thing when the base directory has a dash in it.
+* Add :only/:except options to Shoe::Tasks.define.
