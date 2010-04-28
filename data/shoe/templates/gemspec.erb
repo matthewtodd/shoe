@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
   spec.executables      = Dir['bin/*'].map &File.method(:basename)
   spec.extensions       = Dir['ext/**/extconf.rb']
-  spec.extra_rdoc_files = Dir['**/*.rdoc']
+  spec.extra_rdoc_files = Dir['**/*.rdoc', 'ext/**/*.c']
   spec.test_files       = Dir['test/**/*_test.rb']
 
   spec.rdoc_options = %W(

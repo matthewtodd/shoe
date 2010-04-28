@@ -6,6 +6,7 @@
 * Generated gemspec now selects files with Dir.glob instead of `git ls-files`.
 * Always generate a section 3 manpage.
 * `rake clean` now preserves <tt>.bundle/</tt> and <tt>.rvmrc</tt>.
+* Include C extensions in RDoc.
 
 == 0.6.1 -- 2010 April 22
 
