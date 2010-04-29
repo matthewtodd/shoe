@@ -1,4 +1,5 @@
 require 'logger'
+require 'rubygems/format'
 require 'stringio'
 require 'webrick'
 
