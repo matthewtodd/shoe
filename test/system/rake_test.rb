@@ -11,19 +11,6 @@ class RakeTest < Test::Unit::TestCase
     system 'shoe --no-test-unit'
   end
 
-  test 'rake compile is active only if there are extensions' do
-    assert_no_task 'compile'
-    add_files_for_c_extension
-    assert_task 'compile'
-  end
-
-  test 'rake compile builds extensions' do
-    add_files_for_c_extension
-    system 'rake compile'
-    system 'ruby -Ilib -rfoo/extension -e "puts Foo::Extension.name"'
-    assert_equal 'Foo::Extension', stdout.chomp
-  end
-
   test 'rake cucumber is active only if there are profiles in cucumber.yml', :require => 'cucumber' do
     assert_no_task 'cucumber'
     write_file 'cucumber.yml', { 'default' => 'features', 'wip' => 'features' }.to_yaml
@@ -147,23 +134,6 @@ class RakeTest < Test::Unit::TestCase
   end
 
   private
-
-  def add_files_for_c_extension
-    write_file "ext/foo/extconf.rb", <<-END.gsub(/^ */, '')
-      require 'mkmf'
-      create_makefile 'foo/extension'
-    END
-
-    write_file "ext/foo/extension.c", <<-END.gsub(/^ */, '')
-      #include "ruby.h"
-      static VALUE mFoo;
-      static VALUE mExtension;
-      void Init_extension() {
-        mFoo = rb_define_module("Foo");
-        mExtension = rb_define_module_under(mFoo, "Extension");
-      }
-    END
-  end
 
   def add_files_for_cucumber(assertion='')
     write_file 'cucumber.yml', { 'default' => 'features' }.to_yaml
