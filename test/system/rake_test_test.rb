@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class RakeTest < Test::Unit::TestCase
+class RakeTestTest < Test::Unit::TestCase
   isolate_environment
   include_helper_methods
 
