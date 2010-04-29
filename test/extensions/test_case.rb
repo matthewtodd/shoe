@@ -27,6 +27,7 @@ module Shoe
             require lib
           rescue LoadError
             warn "WARN: #{lib} is not available.\n  Skipping test \"#{name}\""
+            define_method('default_test', lambda {})
             return
           end
         end
