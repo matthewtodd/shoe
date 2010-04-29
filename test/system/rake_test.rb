@@ -11,30 +11,6 @@ class RakeTest < Test::Unit::TestCase
     system 'shoe --no-test-unit'
   end
 
-  test 'rake clean is active only if there is a .git directory' do
-    assert_no_task 'clean'
-    system 'git init'
-    assert_task 'clean'
-  end
-
-  test 'rake clean removes ignored files, excluding .rvmrc and .bundler' do
-    system 'git init'
-
-    write_file '.gitignore', <<-END.gsub(/^ */, '')
-      .bundle
-      .rvmrc
-      bar
-    END
-
-    write_file '.bundle/config.rb', '# STAYING ALIVE'
-    write_file '.rvmrc',            '# STAYING ALIVE'
-    write_file 'bar',               'NOT LONG FOR THIS WORLD'
-
-    files_before_clean = find('.')
-    system 'rake clean'
-    assert_find  '.', files_before_clean - ['bar']
-  end
-
   test 'rake compile is active only if there are extensions' do
     assert_no_task 'compile'
     add_files_for_c_extension
@@ -171,16 +147,6 @@ class RakeTest < Test::Unit::TestCase
   end
 
   private
-
-  def assert_no_task(name)
-    system 'rake --tasks'
-    assert_no_match /\srake #{name}\s/, stdout
-  end
-
-  def assert_task(name)
-    system 'rake --tasks'
-    assert_match /\srake #{name}\s/, stdout
-  end
 
   def add_files_for_c_extension
     write_file "ext/foo/extconf.rb", <<-END.gsub(/^ */, '')

@@ -43,6 +43,16 @@ module Shoe
       def assert_find(path, expected)
         assert_equal expected.sort, find(path).sort
       end
+
+      def assert_no_task(name)
+        system 'rake --tasks'
+        assert_no_match /\srake #{name}\s/, stdout
+      end
+
+      def assert_task(name)
+        system 'rake --tasks'
+        assert_match /\srake #{name}\s/, stdout
+      end
     end
 
   end
