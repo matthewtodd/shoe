@@ -1,3 +1,4 @@
+require 'bundler'
 $:.unshift File.expand_path('../lib', __FILE__)
 require 'shoe'
 
@@ -20,11 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.requirements = ['git']
   spec.required_rubygems_version = '>= 1.3.6'
-  spec.add_runtime_dependency 'rake'
-  spec.add_runtime_dependency 'launchy'
-  spec.add_development_dependency 'cucumber'
-  spec.add_development_dependency 'redgreen'
-  spec.add_development_dependency 'ronn'
+  spec.add_bundler_dependencies
 
   spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
   spec.executables      = Dir['bin/*'].map &File.method(:basename)
