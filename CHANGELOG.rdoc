@@ -1,5 +1,8 @@
 == Git
 
+* Use optparse-defaults gem for command line options.
+* Be more specific about dependency versions.
+
 == 0.6.2 -- 2010 April 29
 
 * Generated C extension actually works now.
