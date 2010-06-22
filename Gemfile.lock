@@ -4,6 +4,10 @@ dependencies:
     group: 
     - :development
     version: ~> 0.5
+  optparse-defaults: 
+    group: 
+    - :default
+    version: ~> 0.1.0
   rake: 
     group: 
     - :default
@@ -43,13 +47,15 @@ specs:
     version: 0.8.2
 - launchy: 
     version: 0.3.5
+- optparse-defaults: 
+    version: 0.1.0
 - rdiscount: 
     version: 1.6.3.1
 - redgreen: 
     version: 1.2.2
 - ronn: 
     version: "0.5"
-hash: 1eb0fd5f2fd937ffc6895cc7bade8dbea71a33f9
+hash: 9fcc1ef35cc17bd2f851713aa2e5a9bfe16866c3
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

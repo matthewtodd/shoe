@@ -1,14 +1,12 @@
 require 'erb'
-require 'optparse'
+require 'optparse/defaults'
 require 'pathname'
 
 module Shoe
   class Generator
     def initialize
       @options = {}
-      @parser  = OptionParser.new do |opts|
-        opts.extend(Extensions::OptionParser)
-
+      @parser  = OptionParser.with_defaults do |opts|
         opts.banner   = "Usage: #{File.basename($0)} [-adehtv] [path]"
         opts.defaults = %w(--no-application --no-data --no-extension --test-unit .)
         opts.version  = Shoe::VERSION

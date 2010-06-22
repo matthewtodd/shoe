@@ -9,6 +9,9 @@ module Shoe
         @environment.setup do |env|
           env.path('PATH')    { |path| path.unshift Pathname.new('bin').expand_path }
           env.path('RUBYLIB') { |path| path.unshift Pathname.new('lib').expand_path }
+
+          # We need rubygems now that the shoe executable uses optparse-defaults.
+          env['RUBYOPT'] = 'rubygems'
         end
         super
       end
@@ -28,6 +31,10 @@ module Shoe
           @initial_directory   = Dir.pwd
           @working_directory   = Dir.mktmpdir
           Dir.chdir(@working_directory)
+        end
+
+        def []=(name, value)
+          ENV[name] = value
         end
 
         def path(name)
