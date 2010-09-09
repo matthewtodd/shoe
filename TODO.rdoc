@@ -2,6 +2,7 @@
 
 * Remove Launchy? (Follow hub's lead.)
 * Start running on 1.9: Gem::Validator uses MiniTest::Unit.
+* Automatically bump to next prerelease version on release?
 
 = Someday Maybe
 
