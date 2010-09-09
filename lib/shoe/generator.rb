@@ -50,6 +50,7 @@ module Shoe
         install('rakefile.erb',  'Rakefile')
         install('gemspec.erb',   "#{name}.gemspec")
         install('module.erb',    "lib/#{name}.rb")
+        install('version.erb',   "lib/#{name}/version.rb")
         install('manpage_3.erb', "man/#{name}.3.ronn")
 
         if application?

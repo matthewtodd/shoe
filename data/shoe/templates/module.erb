@@ -1,3 +1,5 @@
+require '<%= module_name %>/version'
+
 <% if data? %>
 require 'pathname'
 require 'rbconfig'
@@ -5,7 +7,6 @@ require 'rbconfig/datadir'
 
 <% end %>
 module <%= module_name %>
-  VERSION = '<%= version %>'
 <% if application? || extension? %>
 
 <% end %>

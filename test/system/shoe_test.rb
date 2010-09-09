@@ -14,6 +14,7 @@ class ShoeTest < Test::Unit::TestCase
       Rakefile
       existing_project.gemspec
       lib/existing_project.rb
+      lib/existing_project/version.rb
       man/existing_project.3.ronn
       test/helper.rb
       test/existing_project_test.rb

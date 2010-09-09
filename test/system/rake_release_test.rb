@@ -75,7 +75,7 @@ class RakeReleaseTest < Test::Unit::TestCase
   end
 
   def bump_version_to(version)
-    write_file 'lib/foo.rb', <<-END
+    write_file 'lib/foo/version.rb', <<-END
       module Foo
         VERSION = '#{version}'
       end
