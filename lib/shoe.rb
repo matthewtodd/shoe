@@ -1,10 +1,10 @@
+require 'shoe/version'
+
 require 'pathname'
 require 'rbconfig'
 require 'rbconfig/datadir'
 
 module Shoe
-  VERSION = '0.6.2'
-
   autoload :Extensions, 'shoe/extensions'
   autoload :Generator,  'shoe/generator'
   autoload :Tasks,      'shoe/tasks'
