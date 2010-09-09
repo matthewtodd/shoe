@@ -10,6 +10,7 @@ class ShoeTest < Test::Unit::TestCase
     system 'shoe'
     assert_find '.', %w(
       .gitignore
+      Gemfile
       README.rdoc
       Rakefile
       existing_project.gemspec

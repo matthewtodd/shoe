@@ -46,6 +46,7 @@ module Shoe
 
       def generate
         install('gitignore.erb', '.gitignore')
+        install('gemfile.erb',   'Gemfile')
         install('readme.erb',    'README.rdoc')
         install('rakefile.erb',  'Rakefile')
         install('gemspec.erb',   "#{name}.gemspec")
