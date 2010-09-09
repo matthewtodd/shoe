@@ -6,7 +6,7 @@ module Shoe
     #
     # Uses something like <tt>`{git
     # clean}[http://www.kernel.org/pub/software/scm/git/docs/git-clean.html]
-    # -fdX`</tt>, except preserves <tt>.bundle/</tt> and <tt>.rvmrc</tt>.
+    # -fdX`</tt>, except preserves <tt>.bundle/</tt>.
     #
     # To enable, version your project with git[http://git-scm.com].
     #
@@ -21,7 +21,7 @@ module Shoe
         desc <<-END.gsub(/^ */, '')
           Remove ignored files.
           Configure via your .gitignore file. Uses something like `git clean -fdX`,
-          except preserves .bundle/ and .rvmrc.
+          except preserves .bundle/.
         END
 
         task :clean do
@@ -36,7 +36,7 @@ module Shoe
       end
 
       def preserved_files
-        %w( .bundle/ .rvmrc )
+        %w( .bundle/ )
       end
     end
 

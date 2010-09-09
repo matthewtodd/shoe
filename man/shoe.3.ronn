@@ -16,8 +16,7 @@ Gem::Specification, and they assume you are using `git(1)`.
 
 * `rake clean`:
   Remove ignored files. Calls something like `git-clean(1)` with the `-fdX`
-  options, honoring your `gitignore(5)` rules, but preserving `.bundle/` and
-  `.rvmrc`.
+  options, honoring your `gitignore(5)` rules, but preserving `.bundle/`.
 
 * `rake compile`:
   Compile C extensions with RubyGems' built-in Gem::Ext::ExtConfBuilder,

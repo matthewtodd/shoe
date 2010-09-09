@@ -39,7 +39,7 @@ Shoe::Tasks accept no direct configuration. Instead, they rely on your project e
 
 Shoe::Tasks::Clean::
   calls something like <tt>`git clean -fdX`</tt>, but preserves
-  <tt>.bundle/</tt> and <tt>.rvmrc</tt>.
+  <tt>.bundle/</tt>.
 
 Shoe::Tasks::Compile::
   builds the

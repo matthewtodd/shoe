@@ -1,5 +1,6 @@
 == Git
 
+* Don't .gitignore .rvmrc.
 * Use optparse-defaults gem for command line options.
 * Be more specific about dependency versions.
 * Use bundler's gemspec option.
