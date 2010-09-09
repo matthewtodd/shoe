@@ -40,7 +40,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (>= 1.0.0.rc.5)
+  bundler (~> 1.0.0)
   cucumber (~> 0.6.4)
   launchy (~> 0.3.5)
   optparse-defaults (~> 0.1.0)

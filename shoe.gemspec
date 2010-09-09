@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake', '~> 0.8.7'
   spec.add_runtime_dependency 'launchy', '~> 0.3.5'
   spec.add_runtime_dependency 'optparse-defaults', '~> 0.1.0'
-  spec.add_development_dependency 'bundler',  '>= 1.0.0.rc.5'
+  spec.add_development_dependency 'bundler',  '~> 1.0.0'
   spec.add_development_dependency 'cucumber', '~> 0.6.4'
   spec.add_development_dependency 'redgreen', '~> 1.2.2'
   spec.add_development_dependency 'ronn',     '~> 0.5'
