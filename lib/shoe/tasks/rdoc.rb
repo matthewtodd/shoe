@@ -37,7 +37,7 @@ module Shoe
         END
         task :rdoc do
           Gem::DocManager.new(spec).extend(Extensions::DocManager).generate_rdoc
-          Launchy::Browser.run('rdoc/index.html')
+          Browser.run('rdoc/index.html')
         end
       end
     end

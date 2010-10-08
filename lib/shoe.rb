@@ -5,6 +5,7 @@ require 'rbconfig'
 require 'rbconfig/datadir'
 
 module Shoe
+  autoload :Browser,    'shoe/browser'
   autoload :Extensions, 'shoe/extensions'
   autoload :Generator,  'shoe/generator'
   autoload :Tasks,      'shoe/tasks'
