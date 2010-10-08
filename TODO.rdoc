@@ -1,6 +1,5 @@
 = Next Up
 
-* Remove Launchy. (Follow hub's lead.)
 * Bundler automatically sets the LOAD_PATH and takes care of datadir; use it!
 * Say Shoe.install_tasks, like Bundler::GemHelper. (Auto-detect gemspec.)
 * Remove generator, suggesting `bundle gem` instead.

@@ -1,5 +1,6 @@
 == Git
 
+* Remove dependency on launchy.
 * Generate a basic Gemfile, delegating to the gemspec.
 * Don't .gitignore .rvmrc.
 * Use optparse-defaults gem for command line options.

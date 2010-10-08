@@ -21,6 +21,6 @@ class RakeRdocTest < Test::Unit::TestCase
     # browser at test time.
     ENV['BROWSER'] = '/bin/echo'
     system 'rake rdoc'
-    assert_file  'rdoc/index.html'
+    assert_file 'rdoc/index.html'
   end
 end

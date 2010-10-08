@@ -1,5 +1,4 @@
 require 'rubygems/doc_manager'
-require 'launchy'
 
 module Shoe
   module Tasks
@@ -37,7 +36,7 @@ module Shoe
         END
         task :rdoc do
           Gem::DocManager.new(spec).extend(Extensions::DocManager).generate_rdoc
-          Browser.run('rdoc/index.html')
+          Browser.open('rdoc/index.html')
         end
       end
     end
