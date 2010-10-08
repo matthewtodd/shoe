@@ -1,5 +1,6 @@
 == Git
 
+* Shoe.install_tasks auto-detects gemspec.
 * Remove dependency on launchy.
 * Generate a basic Gemfile, delegating to the gemspec.
 * Don't .gitignore .rvmrc.
