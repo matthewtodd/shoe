@@ -10,7 +10,6 @@ end
 
 module Shoe
   module TestExtensions
-    autoload :FakeRubygemsServer,  'test/extensions/fake_rubygems_server'
     autoload :HelperMethods,       'test/extensions/helper_methods'
     autoload :IsolatedEnvironment, 'test/extensions/isolated_environment'
     autoload :TestCase,            'test/extensions/test_case'

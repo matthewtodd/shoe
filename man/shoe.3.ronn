@@ -32,12 +32,6 @@ Gem::Specification, and they assume you are using `git(1)`.
   reads the `rdoc_options` and `extra_rdoc_files` fields in your
   Gem::Specification.
 
-* `rake release`:
-  Push a release to <http://rubygems.org/>, additionally running `git-push(1)` if
-  you have a `git-remote(1)` named `origin`. Before pushing, runs
-  `git-commit(1)` and `git-tag(1)` with the current `version` in your
-  Gem::Specification.
-
 * `rake ronn`:
   Generate man pages with `ronn(1)` from the `man/*.ronn` sources listed in the
   `files` field of your Gem::Specification. (The generated manpages will then

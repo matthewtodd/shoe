@@ -44,11 +44,9 @@ module Shoe
       end
 
       def define_default_task
-        namespace :prepare do
-          task :execute
-        end
+        task :prepare
 
-        ::Cucumber::Rake::Task.new({ :cucumber => 'prepare:execute' }, "Run features.\nConfigure via the default profile in cucumber.yml.") do |task|
+        ::Cucumber::Rake::Task.new({ :cucumber => :prepare }, "Run features.\nConfigure via the default profile in cucumber.yml.") do |task|
           task.profile = 'default'
         end
 
@@ -56,12 +54,10 @@ module Shoe
       end
 
       def define_profile_task(profile)
-        namespace :prepare do
-          task :execute
-        end
+        task :prepare
 
         namespace :cucumber do
-          ::Cucumber::Rake::Task.new({ profile => 'prepare:execute' }, "Run #{profile} features.\nConfigure via the #{profile} profile in cucumber.yml.") do |task|
+          ::Cucumber::Rake::Task.new({ profile => :prepare }, "Run #{profile} features.\nConfigure via the #{profile} profile in cucumber.yml.") do |task|
             task.profile = profile
           end
         end

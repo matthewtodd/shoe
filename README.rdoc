@@ -57,10 +57,6 @@ Shoe::Tasks::Rdoc::
   <tt>extra_rdoc_files[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]</tt>
   in your gemspec.
 
-Shoe::Tasks::Release::
-  calls <tt>`git tag`</tt>, <tt>`git push`</tt>, <tt>`gem build`</tt> and
-  <tt>`gem push`</tt>, of course.
-
 Shoe::Tasks::Ronn::
   builds man pages from your <tt>{ronn}[http://rtomayko.github.com/ronn/]</tt> sources,
   honoring the

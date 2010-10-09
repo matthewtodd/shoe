@@ -22,4 +22,9 @@ class RakeRonnTest < Test::Unit::TestCase
     assert_file 'man/foo.3'
     assert_match 'FOO(3)', stdout.chomp
   end
+
+  pending 'rake ronn registers itself as a prerequisite of rake build', :require => 'ronn' do
+    system 'rake build'
+    assert_file 'man/foo.3'
+  end
 end

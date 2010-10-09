@@ -7,7 +7,6 @@ module Shoe
     autoload :Cucumber,  'shoe/tasks/cucumber'
     autoload :Rdoc,      'shoe/tasks/rdoc'
     autoload :Ronn,      'shoe/tasks/ronn'
-    autoload :Release,   'shoe/tasks/release'
     autoload :Test,      'shoe/tasks/test'
 
     NAMES = %w(
@@ -16,7 +15,6 @@ module Shoe
       Cucumber
       Rdoc
       Ronn
-      Release
       Test
     )
 

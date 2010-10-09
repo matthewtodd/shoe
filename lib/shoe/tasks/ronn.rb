@@ -17,8 +17,8 @@ module Shoe
     # * It's best to include the generated man pages in your gem, so that
     #   {gem-man}[http://github.com/defunkt/gem-man] can get to them.
     #
-    # * Ronn becomes a prerequisite for Release, so your man pages are sure to
-    #   be up-to-date.
+    # * Ronn becomes a prerequisite for <tt>rake build</tt>, so your man pages
+    #   are sure to be up-to-date.
     #
     # * You may like to add a <tt>task :man => :ronn</tt> to your
     #   <tt>Rakefile</tt>. I felt a little uncomfortable clogging that
@@ -59,8 +59,8 @@ module Shoe
           ronn('--roff', task.source)
         end
 
-        namespace :prepare do
-          task :release => 'ronn:build'
+        if Rake::Task.task_defined?(:build)
+          task :build => 'ronn:build'
         end
       end
 
