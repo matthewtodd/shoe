@@ -31,7 +31,6 @@ class ShoeTest < Test::Unit::TestCase
     in_project 'existing_project'
     write_file 'Rakefile', '# original'
     system 'shoe'
-    assert_match 'WARN: not clobbering existing Rakefile', stderr
     assert_equal '# original', File.read('Rakefile')
   end
 
@@ -53,7 +52,7 @@ class ShoeTest < Test::Unit::TestCase
     in_project 'foo'
     system 'shoe --application'
     system './bin/foo --version'
-    assert_equal 'foo 0.0.0', stdout.chomp
+    assert_match 'foo 0.0.0', stdout.chomp
   end
 
   test 'running --data generates a datadir helper method' do
@@ -61,7 +60,7 @@ class ShoeTest < Test::Unit::TestCase
     system 'shoe --data'
     write_file 'data/foo/file', 'DATA!'
     system 'ruby -Ilib -rfoo -e "puts Foo.datadir.join(\"file\").read"'
-    assert_equal 'DATA!', stdout.chomp
+    assert_match 'DATA!', stdout.chomp
   end
 
   test 'running --extension generates an Extension' do

@@ -5,13 +5,11 @@ module Shoe
   module TestExtensions
 
     module HelperMethods
-      attr_reader :stdout, :stderr
+      attr_reader :stdout
 
-      def system(*args)
-        stdin, stdout, stderr = Open3.popen3(*args)
-        stdin.close
-        @stdout = stdout.read
-        @stderr = stderr.read
+      def system(command)
+        IO.popen("#{command} 2>&1") { |io| @stdout = io.read }
+        assert $?.success?, @stdout
       end
 
       def find(string)
