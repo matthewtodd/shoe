@@ -8,6 +8,7 @@ class RakeCompileTest < Test::Unit::TestCase
     super
     in_project 'foo'
     system 'shoe'
+    prepend_shoe_path_to_gemfile
   end
 
   test 'rake compile is active only if there are extensions' do

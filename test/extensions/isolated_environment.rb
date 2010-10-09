@@ -11,7 +11,8 @@ module Shoe
           env.path('RUBYLIB') { |path| path.unshift Pathname.new('lib').expand_path }
 
           # We need rubygems now that the shoe executable uses optparse-defaults.
-          env['RUBYOPT'] = 'rubygems'
+          env['BUNDLE_GEMFILE'] = nil
+          env['RUBYOPT']        = 'rubygems'
         end
         super
       end

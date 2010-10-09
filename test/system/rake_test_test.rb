@@ -8,6 +8,7 @@ class RakeTestTest < Test::Unit::TestCase
     super
     in_project 'foo'
     system 'shoe --no-test-unit'
+    prepend_shoe_path_to_gemfile
   end
 
   test 'rake test is active only if there are test files present' do

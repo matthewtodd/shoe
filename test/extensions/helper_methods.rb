@@ -5,6 +5,8 @@ module Shoe
   module TestExtensions
 
     module HelperMethods
+      SHOE_PATH = File.expand_path('../../..', __FILE__)
+
       attr_reader :stdout
 
       def system(command)
@@ -19,10 +21,22 @@ module Shoe
               collect { |path| path.relative_path_from(root).to_s }
       end
 
-      def write_file(path, contents)
+      def write_file(path, contents, mode='w')
         path = Pathname.new(path)
         path.parent.mkpath
-        path.open('w') { |stream| stream.write(contents) }
+        path.open(mode) { |stream| stream.write(contents) }
+      end
+
+      def append_file(path, contents)
+        write_file(path, contents, 'a')
+      end
+
+      def prepend_file(path, contents)
+        write_file(path, "#{contents}\n#{File.read(path)}")
+      end
+
+      def prepend_shoe_path_to_gemfile
+        prepend_file('Gemfile', "path '#{SHOE_PATH}'")
       end
 
       def in_project(name)

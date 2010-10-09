@@ -8,6 +8,7 @@ class RakeCleanTest < Test::Unit::TestCase
     super
     in_project 'foo'
     system 'shoe'
+    prepend_shoe_path_to_gemfile
   end
 
   test 'rake clean is active only if there is a .git directory' do
@@ -29,6 +30,6 @@ class RakeCleanTest < Test::Unit::TestCase
 
     files_before_clean = find('.')
     system 'rake clean'
-    assert_find  '.', files_before_clean - ['bar']
+    assert_find  '.', files_before_clean - ['bar'] + ['Gemfile.lock']
   end
 end

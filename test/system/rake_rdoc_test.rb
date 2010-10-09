@@ -8,6 +8,7 @@ class RakeRdocTest < Test::Unit::TestCase
     super
     in_project 'foo'
     system 'shoe'
+    prepend_shoe_path_to_gemfile
   end
 
   test 'rake rdoc is unconditionally active' do
