@@ -1,5 +1,6 @@
 == Git
 
+* Remove release tasks; suggest Bundler's instead.
 * Shoe.install_tasks auto-detects gemspec.
 * Remove dependency on launchy.
 * Generate a basic Gemfile, delegating to the gemspec.
