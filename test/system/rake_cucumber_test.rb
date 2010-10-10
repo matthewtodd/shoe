@@ -1,7 +1,7 @@
 require 'test/helper'
 require 'yaml'
 
-class RakeCucumberTest < Test::Unit::TestCase
+class RakeCucumberTest < Shoe::TestCase
   def setup
     super
     system 'bundle gem foo'

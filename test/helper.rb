@@ -10,11 +10,38 @@ end
 
 require 'test/extensions/helper_methods'
 require 'test/extensions/isolated_environment'
-require 'test/extensions/test_case'
 
-class Test::Unit::TestCase
-  extend Shoe::TestExtensions::TestCase
-
+class Shoe::TestCase < Test::Unit::TestCase
   include Shoe::TestExtensions::IsolatedEnvironment
   include Shoe::TestExtensions::HelperMethods
+
+  class << self
+    def pending(name, options={}, &block)
+      warn "WARN: Pending test \"#{name}\""
+    end
+
+    def test(name, options={}, &block)
+      if !block_given?
+        pending(name, options, &block)
+        return
+      end
+
+      requires = Array(options[:require])
+
+      requires.each do |lib|
+        begin
+          require lib
+        rescue LoadError
+          warn "WARN: #{lib} is not available.\n  Skipping test \"#{name}\""
+          return
+        end
+      end
+
+      define_method("test #{name}", &block)
+    end
+  end
+
+  def default_test
+    # keep Test::Unit from complaining
+  end
 end

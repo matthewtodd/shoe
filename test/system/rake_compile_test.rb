@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class RakeCompileTest < Test::Unit::TestCase
+class RakeCompileTest < Shoe::TestCase
   def setup
     super
     system 'bundle gem foo'

@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class RakeRonnTest < Test::Unit::TestCase
+class RakeRonnTest < Shoe::TestCase
   def setup
     super
     system 'bundle gem foo'
