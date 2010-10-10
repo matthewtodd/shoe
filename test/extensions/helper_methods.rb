@@ -27,15 +27,32 @@ module Shoe
         path.open(mode) { |stream| stream.write(contents) }
       end
 
+      # TODO can this method be removed once I've cleaned up the tests?
       def append_file(path, contents)
-        write_file(path, "#{contents}\n", 'a')
+        inject_into_file(path, contents, :after => /\z/)
       end
 
+      # TODO can this method be removed once I've cleaned up the tests?
       def prepend_file(path, contents)
-        write_file(path, "#{contents}\n#{File.read(path)}")
+        inject_into_file(path, contents, :before => /\A/)
       end
 
-      # TODO this method should go away
+      # Stolen from thor, then simplified a bit.
+      def inject_into_file(path, contents, options={})
+        flag = nil
+
+        if options.key?(:after)
+          contents = '\0' + contents + "\n"
+          flag     = options.delete(:after)
+        else
+          contents = contents + "\n" + '\0'
+          flag     = options.delete(:before)
+        end
+
+        write_file(path, File.read(path).gsub(flag, contents))
+      end
+
+      # TODO can this method be removed once I've cleaned up the tests?
       def prepend_shoe_path_to_gemfile
         prepend_file('Gemfile', "path '#{SHOE_PATH}'")
       end
@@ -47,10 +64,18 @@ module Shoe
 
       def configure_project_for_shoe
         prepend_file 'Gemfile',  "path '#{SHOE_PATH}'"
-        # TODO instead of appending to Gemfile, alter gemspec directly
-        append_file  'Gemfile',  "gem 'shoe'"
+        add_development_dependency 'shoe'
         append_file  'Rakefile', "require 'shoe'"
         append_file  'Rakefile', "Shoe.install_tasks"
+      end
+
+      def add_to_gemspec(contents)
+        gemspec = Dir['*.gemspec'].first
+        inject_into_file(gemspec, contents, :before => /en.\s*\z/)
+      end
+
+      def add_development_dependency(name)
+        add_to_gemspec("s.add_development_dependency('#{name}')")
       end
 
       def assert_file(path)
