@@ -6,9 +6,9 @@ class RakeRdocTest < Test::Unit::TestCase
 
   def setup
     super
+    system 'bundle gem foo'
     in_project 'foo'
-    system 'shoe'
-    prepend_shoe_path_to_gemfile
+    configure_project_for_shoe
   end
 
   test 'rake rdoc is unconditionally active' do
