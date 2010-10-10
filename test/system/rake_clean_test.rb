@@ -30,6 +30,6 @@ class RakeCleanTest < Test::Unit::TestCase
 
     files_before_clean = find('.')
     system 'rake clean'
-    assert_find  '.', files_before_clean - ['bar']
+    assert_find  '.', files_before_clean - ['bar'] + ['Gemfile.lock']
   end
 end

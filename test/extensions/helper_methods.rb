@@ -56,21 +56,19 @@ module Shoe
         gsub_file(path, flag, contents)
       end
 
-      # TODO can this method be removed once I've cleaned up the tests?
-      def prepend_shoe_path_to_gemfile
-        prepend_file('Gemfile', "path '#{SHOE_PATH}'")
-      end
-
       def in_project(name)
-        Dir.mkdir(name) unless File.directory?(name)
         Dir.chdir(name)
       end
 
       def configure_project_for_shoe
         prepend_file 'Gemfile',  "path '#{SHOE_PATH}'"
         add_development_dependency 'shoe'
-        append_file  'Rakefile', "require 'shoe'"
-        append_file  'Rakefile', "Shoe.install_tasks"
+        append_file  'Rakefile', <<-END.gsub(/^ */, '')
+          # need bundler setup only because shoe's not installed
+          Bundler.setup(:default, :development)
+          require 'shoe'
+          Shoe.install_tasks
+        END
       end
 
       def gemspec
