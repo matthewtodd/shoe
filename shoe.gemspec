@@ -21,7 +21,6 @@ Gem::Specification.new do |spec|
   spec.requirements = ['git']
   spec.required_rubygems_version = '>= 1.3.6'
   spec.add_runtime_dependency 'rake', '~> 0.8.7'
-  spec.add_runtime_dependency 'optparse-defaults', '~> 0.1.0'
   spec.add_development_dependency 'bundler',  '~> 1.0.0'
   spec.add_development_dependency 'cucumber', '~> 0.6.4'
   spec.add_development_dependency 'redgreen', '~> 1.2.2'

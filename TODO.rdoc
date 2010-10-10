@@ -1,10 +1,18 @@
 = Next Up
 
 * Bundler automatically sets the LOAD_PATH and takes care of datadir; use it!
-* Remove generator, suggesting `bundle gem` instead.
 * Start running on 1.9: Gem::Validator uses MiniTest::Unit.
 
 = Someday Maybe
 
 * Re-think focus: probably want to ditch cucumber, since I'm not using it for shoe?
 * Document rake task hook prepare.
+* Reintroduce a command-line tool to fill in the gaps left by bundler:
+  * Modify the gemspec:
+    * Help setting rdoc_options and extra_rdoc_files.
+    * Help setting author and email?
+    * Help setting extensions?
+  * Generate a C extension.
+  * Generate a data directory and provide access to it.
+  * Generate man pages.
+  * Generate an .rvmrc.

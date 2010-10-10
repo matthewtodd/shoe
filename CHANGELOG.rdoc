@@ -1,13 +1,9 @@
 == Git
 
+* Remove shoe generator; use `bundle gem foo` instead.
 * Remove release tasks; suggest Bundler's instead.
-* Shoe.install_tasks auto-detects gemspec.
+* Use Shoe.install_tasks to auto-detect gemspec.
 * Remove dependency on launchy.
-* Generate a basic Gemfile, delegating to the gemspec.
-* Don't .gitignore .rvmrc.
-* Use optparse-defaults gem for command line options.
-* Be more specific about dependency versions.
-* Use bundler's gemspec option.
 
 == 0.6.2 -- 2010 April 29
 

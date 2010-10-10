@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     shoe (0.6.2)
-      optparse-defaults (~> 0.1.0)
       rake (~> 0.8.7)
 
 GEM
@@ -19,7 +18,6 @@ GEM
     diff-lcs (1.1.2)
     hpricot (0.8.2)
     json_pure (1.4.3)
-    optparse-defaults (0.1.0)
     polyglot (0.3.1)
     rake (0.8.7)
     rdiscount (1.6.3.1)
@@ -37,7 +35,6 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.0)
   cucumber (~> 0.6.4)
-  optparse-defaults (~> 0.1.0)
   rake (~> 0.8.7)
   redgreen (~> 1.2.2)
   ronn (~> 0.5)

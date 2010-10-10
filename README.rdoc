@@ -16,11 +16,6 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
   {the}[http://rake.rubyforge.org/classes/Rake/RDocTask.html]
   {wheel}[http://rake.rubyforge.org/classes/Rake/TestTask.html].
 
-* It <b>follows the
-  {Ruby Packaging Standard}[http://chneukirchen.github.com/rps/]</b>
-  when generating project files.
-
-
 == Install
 
  $ gem install shoe
@@ -29,8 +24,7 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 == Use
 
  require 'shoe'
-
- Shoe::Tasks.define('my_project.gemspec')
+ Shoe.install_tasks
 
 
 == Configure
@@ -82,22 +76,6 @@ want:
 
  Shoe::Tasks::Cucumber.new('my_project.gemspec')
  Shoe::Tasks::Rdoc.new('my_project.gemspec')
-
-
-== Bootstrap
-
-The provided <tt>shoe</tt> executable will generate a helpful gemspec and some
-other skeleton files for your new project:
-
- $ shoe my_project
-
-For more, run:
-
- $ shoe --help
-
-Or, if you have <tt>{gem-man}[http://github.com/defunkt/gem-man]</tt> installed:
-
- $ gem man shoe
 
 
 == Contribute
