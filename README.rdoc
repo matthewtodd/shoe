@@ -2,19 +2,12 @@
 
 Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
-* It <b>reads your gemspec</b> instead of writing it like
-  Hoe[http://seattlerb.rubyforge.org/hoe] and
-  Jeweler[http://github.com/technicalpickles/jeweler] do.
-  (Background[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].)
+* It {reads your gemspec}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].
 
-* It <b>uses Rubygems</b>
-  {for}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
-  {common}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
-  {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html],
-  rather than
-  {reinventing}[http://github.com/luislavena/rake-compiler/]
-  {the}[http://rake.rubyforge.org/classes/Rake/RDocTask.html]
-  {wheel}[http://rake.rubyforge.org/classes/Rake/TestTask.html].
+* It re-uses
+  {built-in}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
+  {Rubygems}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
+  {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].
 
 == Install
 
@@ -29,11 +22,10 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
 == Configure
 
-Shoe::Tasks accept no direct configuration. Instead, they rely on your project environment:
+Shoe's tasks rely on your project environment:
 
 Shoe::Tasks::Clean::
-  calls something like <tt>`git clean -fdX`</tt>, but preserves
-  <tt>.bundle/</tt>.
+  removes all <tt>.gitignore</tt>d files except <tt>.bundle/</tt>.
 
 Shoe::Tasks::Compile::
   builds the
@@ -64,13 +56,10 @@ Shoe::Tasks::Test::
   <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt> in
   your gemspec.
 
-Each Task class definition has more specific configuration notes.
-
 
 == Cherry Pick
 
-If you don't want to use all the Shoe::Tasks, just instantiate the ones you
-want:
+If you don't want to use all the tasks, just instantiate the ones you want:
 
  require 'shoe'
 
@@ -80,9 +69,5 @@ want:
 
 == Contribute
 
-A number of these tasks are maybe less useful for you than they could be,
-probably because you and I use different conventions. If you have some ideas
-for making Shoe better, I'd love to hear them! Feel free to send issues / pull
-requests / messages through GitHub.
-
-All the best,  -- Matthew
+Feel free to send issues / pull requests / messages through
+GitHub[http://github.com/matthewtodd/shoe].
