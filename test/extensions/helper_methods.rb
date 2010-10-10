@@ -1,4 +1,3 @@
-require 'open3'
 require 'pathname'
 
 module Shoe
