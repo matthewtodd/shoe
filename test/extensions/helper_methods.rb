@@ -28,20 +28,29 @@ module Shoe
       end
 
       def append_file(path, contents)
-        write_file(path, contents, 'a')
+        write_file(path, "#{contents}\n", 'a')
       end
 
       def prepend_file(path, contents)
         write_file(path, "#{contents}\n#{File.read(path)}")
       end
 
+      # TODO this method should go away
       def prepend_shoe_path_to_gemfile
         prepend_file('Gemfile', "path '#{SHOE_PATH}'")
       end
 
       def in_project(name)
-        Dir.mkdir(name)
+        Dir.mkdir(name) unless File.directory?(name)
         Dir.chdir(name)
+      end
+
+      def configure_project_for_shoe
+        prepend_file 'Gemfile',  "path '#{SHOE_PATH}'"
+        # TODO instead of appending to Gemfile, alter gemspec directly
+        append_file  'Gemfile',  "gem 'shoe'"
+        append_file  'Rakefile', "require 'shoe'"
+        append_file  'Rakefile', "Shoe.install_tasks"
       end
 
       def assert_file(path)

@@ -6,15 +6,15 @@ class RakeCleanTest < Test::Unit::TestCase
 
   def setup
     super
+    system 'bundle gem foo'
     in_project 'foo'
-    system 'shoe'
-    prepend_shoe_path_to_gemfile
+    configure_project_for_shoe
   end
 
   test 'rake clean is active only if there is a .git directory' do
-    assert_no_task 'clean'
-    system 'git init'
     assert_task 'clean'
+    system 'mv .git .git.bak'
+    assert_no_task 'clean'
   end
 
   test 'rake clean removes ignored files, excluding .bundler' do
@@ -30,6 +30,6 @@ class RakeCleanTest < Test::Unit::TestCase
 
     files_before_clean = find('.')
     system 'rake clean'
-    assert_find  '.', files_before_clean - ['bar'] + ['Gemfile.lock']
+    assert_find  '.', files_before_clean - ['bar']
   end
 end
