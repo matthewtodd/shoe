@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.5
 .\" http://github.com/rtomayko/ronn/
 .
-.TH "SHOE" "3" "September 2010" "Matthew Todd" "RubyGems Manual"
+.TH "SHOE" "3" "October 2010" "Matthew Todd" "RubyGems Manual"
 .
 .SH "NAME"
 \fBshoe\fR \-\- standard Rake tasks for your RubyGems project
@@ -10,10 +10,10 @@
 require 'shoe'
 .
 .br
-Shoe::Tasks.define('\fIproject.gemspec\fR')
+Shoe.install_tasks
 .
 .SH "DESCRIPTION"
-\fBShoe::Tasks.define()\fR defines a number of standard \fBrake(1)\fR tasks for your
+\fBShoe.install_tasks\fR defines a number of standard \fBrake(1)\fR tasks for your
 RubyGems project. These tasks derive their configuration from your
 Gem::Specification, and they assume you are using \fBgit(1)\fR.
 .
@@ -42,12 +42,6 @@ reads the \fBrdoc_options\fR and \fBextra_rdoc_files\fR fields in your
 Gem::Specification.
 .
 .TP
-\fBrake release\fR
-Push a release to \fIhttp://rubygems.org/\fR, additionally running \fBgit\-push(1)\fR if
-you have a \fBgit\-remote(1)\fR named \fBorigin\fR. Before pushing, runs \fBgit\-commit(1)\fR and \fBgit\-tag(1)\fR with the current \fBversion\fR in your
-Gem::Specification.
-.
-.TP
 \fBrake ronn\fR
 Generate man pages with \fBronn(1)\fR from the \fBman/*.ronn\fR sources listed in the \fBfiles\fR field of your Gem::Specification. (The generated manpages will then
 be available via \fBgem\-man(1)\fR once your gem is installed.)
@@ -65,4 +59,4 @@ Matthew Todd, \fImatthewtodd\fR on GitHub. Do drop
 me a line if you use \fBshoe\fR \-\- I'd love to hear from you!
 .
 .SH "SEE ALSO"
-\fIshoe(1)\fR, \fIhttp://docs.rubygems.org/read/chapter/20\fR, \fIhttp://semver.org/\fR
+\fIhttp://docs.rubygems.org/read/chapter/20\fR

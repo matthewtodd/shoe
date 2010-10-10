@@ -4,11 +4,11 @@ shoe(3) -- standard Rake tasks for your RubyGems project
 ## SYNOPSIS
 
 require 'shoe'  
-Shoe::Tasks.define('_project.gemspec_')
+Shoe.install_tasks
 
 ## DESCRIPTION
 
-`Shoe::Tasks.define()` defines a number of standard `rake(1)` tasks for your
+`Shoe.install_tasks` defines a number of standard `rake(1)` tasks for your
 RubyGems project. These tasks derive their configuration from your
 Gem::Specification, and they assume you are using `git(1)`.
 
@@ -52,6 +52,4 @@ me a line if you use `shoe` -- I'd love to hear from you!
 
 ## SEE ALSO
 
-[shoe(1)](shoe.1.html),
-<http://docs.rubygems.org/read/chapter/20>,
-<http://semver.org/>
+<http://docs.rubygems.org/read/chapter/20>
