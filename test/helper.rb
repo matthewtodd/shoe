@@ -16,23 +16,16 @@ class Shoe::TestCase < Test::Unit::TestCase
   include Shoe::TestExtensions::HelperMethods
 
   class << self
-    def pending(name, options={}, &block)
-      warn "WARN: Pending test \"#{name}\""
+    def skip(name, options={}, &block)
+      warn "Skipping test \"#{name}\""
     end
 
     def test(name, options={}, &block)
-      if !block_given?
-        pending(name, options, &block)
-        return
-      end
-
-      requires = Array(options[:require])
-
-      requires.each do |lib|
+      Array(options[:require]).each do |lib|
         begin
           require lib
         rescue LoadError
-          warn "WARN: #{lib} is not available.\n  Skipping test \"#{name}\""
+          skip(name)
           return
         end
       end
