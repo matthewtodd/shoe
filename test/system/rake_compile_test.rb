@@ -9,7 +9,6 @@ class RakeCompileTest < Test::Unit::TestCase
     system 'bundle gem foo'
     in_project 'foo'
     configure_project_for_shoe
-    add_to_gemspec 's.extensions = Dir["ext/**/extconf.rb"]'
   end
 
   test 'rake compile is active only if there are extensions' do

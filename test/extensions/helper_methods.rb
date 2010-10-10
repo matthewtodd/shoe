@@ -27,6 +27,10 @@ module Shoe
         path.open(mode) { |stream| stream.write(contents) }
       end
 
+      def gsub_file(path, search, replace)
+        write_file(path, File.read(path).gsub(search, replace))
+      end
+
       # TODO can this method be removed once I've cleaned up the tests?
       def append_file(path, contents)
         inject_into_file(path, contents, :after => /\z/)
@@ -49,7 +53,7 @@ module Shoe
           flag     = options.delete(:before)
         end
 
-        write_file(path, File.read(path).gsub(flag, contents))
+        gsub_file(path, flag, contents)
       end
 
       # TODO can this method be removed once I've cleaned up the tests?
@@ -69,13 +73,20 @@ module Shoe
         append_file  'Rakefile', "Shoe.install_tasks"
       end
 
+      def gemspec
+        Dir['*.gemspec'].first
+      end
+
       def add_to_gemspec(contents)
-        gemspec = Dir['*.gemspec'].first
         inject_into_file(gemspec, contents, :before => /en.\s*\z/)
       end
 
       def add_development_dependency(name)
         add_to_gemspec("s.add_development_dependency('#{name}')")
+      end
+
+      def mask_todos_in_gemspec
+        gsub_file(gemspec, /TODO: Write [ \w]*/, 'Masked')
       end
 
       def assert_file(path)
