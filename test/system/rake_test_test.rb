@@ -6,9 +6,9 @@ class RakeTestTest < Test::Unit::TestCase
 
   def setup
     super
+    system 'bundle gem foo'
     in_project 'foo'
-    system 'shoe --no-test-unit'
-    prepend_shoe_path_to_gemfile
+    configure_project_for_shoe
   end
 
   test 'rake test is active only if there are test files present' do
@@ -41,6 +41,8 @@ class RakeTestTest < Test::Unit::TestCase
         end
       end
     END
+
+    system 'git add .'
   end
 
 end

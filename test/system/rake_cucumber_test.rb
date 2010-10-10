@@ -7,13 +7,13 @@ class RakeCucumberTest < Test::Unit::TestCase
 
   def setup
     super
+    system 'bundle gem foo'
     in_project 'foo'
-    system 'shoe'
-    prepend_shoe_path_to_gemfile
+    configure_project_for_shoe
   end
 
   test 'rake cucumber is active only if there are profiles in cucumber.yml', :require => 'cucumber' do
-    append_file 'Gemfile', 'gem "cucumber"'
+    add_development_dependency 'cucumber'
     assert_no_task 'cucumber'
     add_files_for_cucumber
     assert_task 'cucumber'
@@ -21,14 +21,14 @@ class RakeCucumberTest < Test::Unit::TestCase
   end
 
   test 'rake cucumber runs cucumber features', :require => 'cucumber' do
-    append_file 'Gemfile', 'gem "cucumber"'
+    add_development_dependency 'cucumber'
     add_files_for_cucumber
     system 'rake cucumber'
     assert_match '1 scenario (1 passed)', stdout
   end
 
   test 'rake cucumber depends on rake compile', :require => 'cucumber' do
-    append_file 'Gemfile', 'gem "cucumber"'
+    add_development_dependency 'cucumber'
     add_files_for_c_extension
     add_files_for_cucumber 'require "foo/extension"'
     system 'rake cucumber'

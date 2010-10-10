@@ -97,6 +97,8 @@ module Shoe
       end
 
       def add_files_for_c_extension
+        add_to_gemspec 's.extensions = `git ls-files -- "ext/**/extconf.rb"`.split("\n")'
+
         write_file "ext/foo/extconf.rb", <<-END.gsub(/^ */, '')
           require 'mkmf'
           create_makefile 'foo/extension'
@@ -111,6 +113,8 @@ module Shoe
             mExtension = rb_define_module_under(mFoo, "Extension");
           }
         END
+
+        system 'git add .'
       end
 
     end
