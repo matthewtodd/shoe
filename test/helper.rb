@@ -8,12 +8,13 @@ rescue LoadError
   # check --test shoe` without installing anything else.
 end
 
-module Shoe
-  module TestExtensions
-    autoload :HelperMethods,       'test/extensions/helper_methods'
-    autoload :IsolatedEnvironment, 'test/extensions/isolated_environment'
-    autoload :TestCase,            'test/extensions/test_case'
-  end
-end
+require 'test/extensions/helper_methods'
+require 'test/extensions/isolated_environment'
+require 'test/extensions/test_case'
 
-Test::Unit::TestCase.extend(Shoe::TestExtensions::TestCase)
+class Test::Unit::TestCase
+  extend Shoe::TestExtensions::TestCase
+
+  include Shoe::TestExtensions::IsolatedEnvironment
+  include Shoe::TestExtensions::HelperMethods
+end

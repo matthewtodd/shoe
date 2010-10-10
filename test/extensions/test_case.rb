@@ -2,14 +2,6 @@ module Shoe
   module TestExtensions
 
     module TestCase
-      def isolate_environment
-        include IsolatedEnvironment
-      end
-
-      def include_helper_methods
-        include HelperMethods
-      end
-
       def pending(name, options={}, &block)
         warn "WARN: Pending test \"#{name}\""
       end

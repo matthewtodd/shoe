@@ -1,9 +1,6 @@
 require 'test/helper'
 
 class RakeTestTest < Test::Unit::TestCase
-  isolate_environment
-  include_helper_methods
-
   def setup
     super
     system 'bundle gem foo'
