@@ -38,7 +38,7 @@ module Shoe
     # that (again) you won't break <tt>`gem check --test`</tt> for people who
     # don't have redgreen installed.
     #
-    class Test < Abstract
+    class Test < Task
       def active?
         !spec.test_files.empty?
       end

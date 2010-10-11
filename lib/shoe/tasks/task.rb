@@ -1,7 +1,7 @@
 module Shoe
   module Tasks
 
-    class Abstract
+    class Task
       attr_reader :spec
 
       def initialize(spec)

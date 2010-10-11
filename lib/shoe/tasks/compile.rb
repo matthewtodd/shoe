@@ -13,7 +13,7 @@ module Shoe
     # To enable and configure, add
     # <tt>extensions[http://docs.rubygems.org/read/chapter/20#extensions]</tt>
     # to your gemspec.
-    class Compile < Abstract
+    class Compile < Task
       def active?
         !spec.extensions.empty?
       end

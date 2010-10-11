@@ -12,7 +12,7 @@ module Shoe
     #
     # To configure, edit your
     # <tt>{.gitignore}[http://www.kernel.org/pub/software/scm/git/docs/gitignore.html]</tt>.
-    class Clean < Abstract
+    class Clean < Task
       def active?
         File.directory?('.git')
       end

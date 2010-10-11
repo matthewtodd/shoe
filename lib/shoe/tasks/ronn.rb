@@ -23,7 +23,7 @@ module Shoe
     # * You may like to add a <tt>task :man => :ronn</tt> to your
     #   <tt>Rakefile</tt>. I felt a little uncomfortable clogging that
     #   namespace without your consent.
-    class Ronn < Abstract
+    class Ronn < Task
       def active?
         !ronn_files.empty?
       end

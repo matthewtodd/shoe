@@ -22,7 +22,7 @@ module Shoe
     # <tt>rdoc_options[http://docs.rubygems.org/read/chapter/20#rdoc_options]</tt> and
     # <tt>extra_rdoc_files[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]</tt>
     # to your gemspec.
-    class Rdoc < Abstract
+    class Rdoc < Task
       def active?
         true
       end

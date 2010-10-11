@@ -12,7 +12,7 @@ module Shoe
     #
     # To enable and configure, create and edit your
     # <tt>{cucumber.yml}[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]</tt>.
-    class Cucumber < Abstract
+    class Cucumber < Task
       def active?
         !cucumber_profiles.empty?
       end
