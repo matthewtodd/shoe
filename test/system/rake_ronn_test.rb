@@ -1,14 +1,14 @@
 require 'test/helper'
 
 class RakeRonnTest < Shoe::TestCase
-  test 'rake ronn is enabled if there are ronn files', :require => 'ronn' do
+  it 'is enabled if there are ronn files', :require => 'ronn' do
     add_development_dependency 'ronn'
     assert_no_task 'ronn'
     add_files_for_ronn
     assert_task 'ronn'
   end
 
-  test 'rake ronn generates man pages', :require => 'ronn' do
+  it 'generates man pages', :require => 'ronn' do
     ENV['MANPAGER'] = '/bin/cat'
     add_development_dependency 'ronn'
     add_files_for_ronn
@@ -17,7 +17,7 @@ class RakeRonnTest < Shoe::TestCase
     assert_match 'FOO(3)', stdout.chomp
   end
 
-  test 'rake ronn registers itself as a prerequisite of rake build', :require => 'ronn' do
+  it 'registers itself as a prerequisite of rake build', :require => 'ronn' do
     add_development_dependency 'ronn'
     add_files_for_ronn
     mask_gemspec_todos

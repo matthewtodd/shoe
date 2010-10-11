@@ -1,11 +1,11 @@
 require 'test/helper'
 
 class RakeRdocTest < Shoe::TestCase
-  test 'rake rdoc is unconditionally active' do
+  it 'is unconditionally active' do
     assert_task 'rdoc'
   end
 
-  test 'rake rdoc generates rdoc' do
+  it 'generates rdoc' do
     # Launchy runs BROWSER in a subshell, sending output to /dev/null, so if I
     # want to test it, I'm going to have to be more clever than this. For the
     # meantime, though, using /bin/echo at least keeps from opening a real

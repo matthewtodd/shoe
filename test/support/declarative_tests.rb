@@ -1,5 +1,5 @@
 module DeclarativeTests
-  def test(name, options={}, &block)
+  def it(name, options={}, &block)
     Array(options[:require]).each do |lib|
       begin
         require lib
