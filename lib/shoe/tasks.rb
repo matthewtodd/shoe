@@ -1,6 +1,5 @@
 module Shoe
   module Tasks
-
     autoload :Abstract,  'shoe/tasks/abstract'
     autoload :Clean,     'shoe/tasks/clean'
     autoload :Compile,   'shoe/tasks/compile'
@@ -9,19 +8,13 @@ module Shoe
     autoload :Ronn,      'shoe/tasks/ronn'
     autoload :Test,      'shoe/tasks/test'
 
-    NAMES = %w(
-      Clean
-      Compile
-      Cucumber
-      Rdoc
-      Ronn
-      Test
-    )
-
     def self.define(spec)
-      NAMES.map { |name| const_get(name) }.
-           each { |task| task.new(spec)  }
+      Clean.new(spec)
+      Compile.new(spec)
+      Cucumber.new(spec)
+      Rdoc.new(spec)
+      Ronn.new(spec)
+      Test.new(spec)
     end
-
   end
 end
