@@ -1,13 +1,11 @@
 = Shoe
 
-Shoe is an ecosystem-friendly library of Rake tasks for your gem.
-
-* It {reads your gemspec}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/].
-
-* It re-uses
-  {built-in}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
-  {Rubygems}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
-  {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].
+Configuration-free Rake tasks that {read your
+gemspec}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/] and
+re-use
+{built-in}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
+{Rubygems}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
+{functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].
 
 == Install
 
@@ -22,39 +20,27 @@ Shoe is an ecosystem-friendly library of Rake tasks for your gem.
 
 == Configure
 
-Shoe's tasks rely on your project environment:
+Keep your configuration DRY: use your gemspec! (And friends.)
 
 Shoe::Tasks::Clean::
-  removes all <tt>.gitignore</tt>d files except <tt>.bundle/</tt>.
+  {.gitignore}[http://www.kernel.org/pub/software/scm/git/docs/gitignore.html]
 
 Shoe::Tasks::Compile::
-  builds the
-  <tt>extensions[http://docs.rubygems.org/read/chapter/20#extensions]</tt> in
-  your gemspec.
+  {#extensions}[http://docs.rubygems.org/read/chapter/20#extensions]
 
 Shoe::Tasks::Cucumber::
-  runs individual profiles in your
-  <tt>{cucumber.yml}[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]</tt>.
+  cucumber.yml[http://wiki.github.com/aslakhellesoy/cucumber/cucumberyml]
 
 Shoe::Tasks::Rdoc::
-  uses the
-  <tt>rdoc_options[http://docs.rubygems.org/read/chapter/20#rdoc_options]</tt>
-  and
-  <tt>extra_rdoc_files[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]</tt>
-  in your gemspec.
+  {#rdoc_options}[http://docs.rubygems.org/read/chapter/20#rdoc_options],
+  {#extra_rdoc_files}[http://docs.rubygems.org/read/chapter/20#extra_rdoc_files]
 
 Shoe::Tasks::Ronn::
-  builds man pages from your <tt>{ronn}[http://rtomayko.github.com/ronn/]</tt> sources,
-  honoring the
-  <tt>date[http://docs.rubygems.org/read/chapter/20#date]</tt>
-  and the first
-  <tt>author[http://docs.rubygems.org/read/chapter/20#authors]</tt>
-  in your gemspec.
+  {#date}[http://docs.rubygems.org/read/chapter/20#date],
+  {#author}[http://docs.rubygems.org/read/chapter/20#authors]
 
 Shoe::Tasks::Test::
-  runs the
-  <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt> in
-  your gemspec.
+  {#test_files}[http://docs.rubygems.org/read/chapter/20#test_files]
 
 
 == Cherry Pick

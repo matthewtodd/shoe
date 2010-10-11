@@ -19,24 +19,16 @@ module Shoe
     # check}[http://docs.rubygems.org/read/chapter/10#page30] --test
     # your_project`</tt>.
     #
-    # (Incidentally, this ensures your tests _are_ runnable via <tt>`gem
-    # check`</tt>, a forgotten command second only to <tt>`{gem
-    # cert}[http://docs.rubygems.org/read/chapter/10#page93]`</tt> in its
-    # underuse.)
-    #
     # To enable and configure, edit the
     # <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt>
     # in your gemspec.
     #
-    # = <tt>Test::Unit</tt>
+    # = Use <tt>Test::Unit</tt>
     #
-    # Using <tt>Gem::Validator</tt> in this way means that you *must* use
-    # <tt>Test::Unit</tt> in all of your
-    # <tt>test_files[http://docs</tt>.rubygems.org/read/chapter/20#test_files]
-    # -- if you prefer Rspec[http://rspec.info], just leave <tt>test_files</tt>
-    # blank and set up your own Rake task.
+    # Using <tt>Gem::Validator</tt> means that only <tt>Test::Unit</tt> tests
+    # will be run.
     #
-    # = <tt>$LOAD_PATH</tt>
+    # = Be aware of the <tt>$LOAD_PATH</tt>
     #
     # At test time, the root of your gem, any
     # <tt>{require_paths}[http://docs.rubygems.org/read/chapter/20#require_paths]</tt>,
