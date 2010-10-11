@@ -69,8 +69,7 @@ class RakeTest < Shoe::TestCase
       # I want to test it, I'm going to have to be more clever than this. For
       # the meantime, though, using /bin/echo at least keeps from opening a
       # real browser at test time.
-      ENV['BROWSER'] = '/bin/echo'
-      system 'rake rdoc'
+      system 'BROWSER=/bin/echo rake rdoc'
       assert_file 'rdoc/index.html'
     end
   end
@@ -85,10 +84,9 @@ class RakeTest < Shoe::TestCase
       end
 
       it 'generates man pages' do
-        ENV['MANPAGER'] = '/bin/cat'
         add_development_dependency 'ronn'
         add_files_for_ronn
-        system 'rake ronn'
+        system 'MANPAGER=/bin/cat rake ronn'
         assert_file 'man/foo.3'
         assert_match 'FOO(3)', output
       end
