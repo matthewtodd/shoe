@@ -1,13 +1,6 @@
 require 'test/helper'
 
 class RakeRonnTest < Shoe::TestCase
-  def setup
-    super
-    system 'bundle gem foo'
-    in_project 'foo'
-    configure_project_for_shoe
-  end
-
   test 'rake ronn is enabled if there are ronn files', :require => 'ronn' do
     add_development_dependency 'ronn'
     assert_no_task 'ronn'

@@ -1,13 +1,6 @@
 require 'test/helper'
 
 class RakeRdocTest < Shoe::TestCase
-  def setup
-    super
-    system 'bundle gem foo'
-    in_project 'foo'
-    configure_project_for_shoe
-  end
-
   test 'rake rdoc is unconditionally active' do
     assert_task 'rdoc'
   end

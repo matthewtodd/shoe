@@ -2,13 +2,6 @@ require 'test/helper'
 require 'yaml'
 
 class RakeCucumberTest < Shoe::TestCase
-  def setup
-    super
-    system 'bundle gem foo'
-    in_project 'foo'
-    configure_project_for_shoe
-  end
-
   test 'rake cucumber is active only if there are profiles in cucumber.yml', :require => 'cucumber' do
     add_development_dependency 'cucumber'
     assert_no_task 'cucumber'

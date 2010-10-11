@@ -1,13 +1,6 @@
 require 'test/helper'
 
 class RakeCompileTest < Shoe::TestCase
-  def setup
-    super
-    system 'bundle gem foo'
-    in_project 'foo'
-    configure_project_for_shoe
-  end
-
   test 'rake compile is active only if there are extensions' do
     assert_no_task 'compile'
     add_files_for_c_extension

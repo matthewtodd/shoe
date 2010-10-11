@@ -1,13 +1,6 @@
 require 'test/helper'
 
 class RakeTestTest < Shoe::TestCase
-  def setup
-    super
-    system 'bundle gem foo'
-    in_project 'foo'
-    configure_project_for_shoe
-  end
-
   test 'rake test is active only if there are test files present' do
     assert_no_task 'test'
     add_files_for_test

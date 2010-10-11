@@ -1,13 +1,6 @@
 require 'test/helper'
 
 class RakeCleanTest < Shoe::TestCase
-  def setup
-    super
-    system 'bundle gem foo'
-    in_project 'foo'
-    configure_project_for_shoe
-  end
-
   test 'rake clean is active only if there is a .git directory' do
     assert_task 'clean'
     system 'mv .git .git.bak'

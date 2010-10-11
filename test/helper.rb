@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'tempfile'
 require 'shoe'
 
 begin
@@ -12,8 +13,8 @@ require 'test/extensions/helper_methods'
 require 'test/extensions/isolated_environment'
 
 class Shoe::TestCase < Test::Unit::TestCase
-  include Shoe::TestExtensions::IsolatedEnvironment
   include Shoe::TestExtensions::HelperMethods
+  include Shoe::TestExtensions::IsolatedEnvironment
 
   class << self
     def skip(name, options={}, &block)
@@ -36,5 +37,12 @@ class Shoe::TestCase < Test::Unit::TestCase
 
   def default_test
     # keep Test::Unit from complaining
+  end
+
+  def setup
+    super
+    system 'bundle gem foo'
+    in_project 'foo'
+    configure_project_for_shoe
   end
 end
