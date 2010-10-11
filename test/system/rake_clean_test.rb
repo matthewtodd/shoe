@@ -18,8 +18,8 @@ class RakeCleanTest < Shoe::TestCase
     write_file '.bundle/config.rb', '# STAYING ALIVE'
     write_file 'bar',               'NOT LONG FOR THIS WORLD'
 
-    files_before_clean = find('.')
-    system 'rake clean'
-    assert_find  '.', files_before_clean - ['bar'] + ['Gemfile.lock']
+    assert_files_removed 'bar' do
+      system 'rake clean'
+    end
   end
 end

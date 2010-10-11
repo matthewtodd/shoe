@@ -1,5 +1,4 @@
 require 'test/helper'
-require 'yaml'
 
 class RakeCucumberTest < Shoe::TestCase
   test 'rake cucumber is active only if there are profiles in cucumber.yml', :require => 'cucumber' do
@@ -23,23 +22,5 @@ class RakeCucumberTest < Shoe::TestCase
     add_files_for_cucumber 'require "foo/extension"'
     system 'rake cucumber'
     assert_match '1 scenario (1 passed)', stdout
-  end
-
-  private
-
-  def add_files_for_cucumber(assertion='')
-    write_file 'cucumber.yml', { 'default' => 'features', 'wip' => 'features' }.to_yaml
-
-    write_file 'features/api.feature', <<-END.gsub(/^      /, '')
-      Feature: The API
-        Scenario: Exercising something
-          Then I should pass
-    END
-
-    write_file 'features/step_definitions/steps.rb', <<-END
-      Then /^I should pass$/ do
-        #{assertion}
-      end
-    END
   end
 end

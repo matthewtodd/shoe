@@ -19,20 +19,4 @@ class RakeTestTest < Shoe::TestCase
     system 'rake test'
     assert_match '1 tests, 0 assertions, 0 failures, 0 errors', stdout
   end
-
-  private
-
-  def add_files_for_test(assertion='assert true')
-    write_file 'test/foo_test.rb', <<-END
-      require 'test/unit'
-      class FooTest < Test::Unit::TestCase
-        def test_something
-          #{assertion}
-        end
-      end
-    END
-
-    system 'git add .'
-  end
-
 end

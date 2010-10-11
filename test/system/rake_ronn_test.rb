@@ -24,15 +24,4 @@ class RakeRonnTest < Shoe::TestCase
     system 'rake build --trace'
     assert_file 'man/foo.3'
   end
-
-  private
-
-  def add_files_for_ronn
-    write_file 'man/foo.3.ronn', <<-END.gsub(/^ */, '')
-      foo(3) -- be awesome
-      ====================
-    END
-
-    system 'git add .'
-  end
 end
