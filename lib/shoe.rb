@@ -1,14 +1,38 @@
 require 'shoe/version'
 
 module Shoe
-  autoload :Browser,    'shoe/browser'
   autoload :Extensions, 'shoe/extensions'
   autoload :Tasks,      'shoe/tasks'
 
-  def self.install_tasks(name='*')
-    # totally stolen from Bundler::GemHelper.
-    gemspecs = Dir["#{name}.gemspec"]
-    raise "Unable to determine name from existing gemspec. Use 'gemname' in #install_tasks to manually set it." unless gemspecs.size == 1
-    Tasks.define(gemspecs.first)
+  class << self
+    def browse(url)
+      system(browser, url)
+    end
+
+    def install_tasks(name='*')
+      Tasks.define Dir["#{name}.gemspec"].first
+    end
+
+    private
+
+    # stolen from hub
+    def browser
+      if ENV['BROWSER']
+        ENV['BROWSER']
+      elsif RUBY_PLATFORM.include?('darwin')
+        'open'
+      elsif command?("xdg-open")
+        'xdg-open'
+      elsif command?("cygstart")
+        'cygstart'
+      else
+        abort 'Please set $BROWSER to a web launcher to use this command.'
+      end
+    end
+
+    def command?(name)
+      `which #{name} 2>/dev/null`
+      $?.success?
+    end
   end
 end

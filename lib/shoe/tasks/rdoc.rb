@@ -36,7 +36,7 @@ module Shoe
         END
         task :rdoc do
           Gem::DocManager.new(spec).extend(Extensions::DocManager).generate_rdoc
-          Browser.open('rdoc/index.html')
+          Shoe.browse('rdoc/index.html')
         end
       end
     end
