@@ -1,15 +1,23 @@
 module DeclarativeTests
-  def it(name, options={}, &block)
-    Array(options[:require]).each do |lib|
-      begin
-        require lib
-      rescue LoadError
-        warn "#{lib} is not available. Skipping test \"#{name}\"."
-        return
-      end
-    end
+  def describe(name, &block)
+    @context ||= []
+    @context.push(name)
+    block.call
+    @context.pop
+  end
 
-    define_method("test #{name}", &block)
+  def requires(lib, &block)
+    require lib
+  rescue LoadError
+    warn "#{lib} is not available. Skipping some tests."
+  else
+    block.call
+  end
+
+  def it(name, &block)
+    describe(name) do
+      define_method("test #{@context.join(' ')}", &block)
+    end
   end
 end
 

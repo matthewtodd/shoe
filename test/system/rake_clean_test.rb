@@ -1,25 +1,20 @@
 require 'test/helper'
 
 class RakeCleanTest < Shoe::TestCase
-  it 'is active only if there is a .git directory' do
-    assert_task 'clean'
-    system 'mv .git .git.bak'
-    assert_no_task 'clean'
-  end
+  describe 'rake clean' do
+    it 'is active only if there is a .git directory' do
+      assert_task 'clean'
+      system 'mv .git .git.bak'
+      assert_no_task 'clean'
+    end
 
-  it 'removes ignored files, excluding .bundler' do
-    system 'git init'
-
-    write_file '.gitignore', <<-END
-      .bundle
-      bar
-    END
-
-    write_file '.bundle/config.rb', '# STAYING ALIVE'
-    write_file 'bar',               'NOT LONG FOR THIS WORLD'
-
-    assert_files_removed 'bar' do
-      system 'rake clean'
+    it 'removes ignored files, excluding .bundler' do
+      write_file '.gitignore',        ".bundle\nbar"
+      write_file '.bundle/config.rb', '# will remain'
+      write_file 'bar',               'will be deleted'
+      assert_files_removed 'bar' do
+        system 'rake clean'
+      end
     end
   end
 end
