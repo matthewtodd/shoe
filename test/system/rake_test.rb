@@ -29,7 +29,7 @@ class RakeTest < Shoe::TestCase
       add_files_for_c_extension
       system 'rake compile'
       system 'ruby -Ilib -rfoo/extension -e "puts Foo::Extension.name"'
-      assert_equal 'Foo::Extension', stdout.chomp
+      assert_equal 'Foo::Extension', output
     end
   end
 
@@ -46,7 +46,7 @@ class RakeTest < Shoe::TestCase
         add_development_dependency 'cucumber'
         add_files_for_cucumber
         system 'rake cucumber'
-        assert_match '1 scenario (1 passed)', stdout
+        assert_match '1 scenario (1 passed)', output
       end
 
       it 'depends on rake compile' do
@@ -54,7 +54,7 @@ class RakeTest < Shoe::TestCase
         add_files_for_c_extension
         add_files_for_cucumber 'require "foo/extension"'
         system 'rake cucumber'
-        assert_match '1 scenario (1 passed)', stdout
+        assert_match '1 scenario (1 passed)', output
       end
     end
   end
@@ -90,7 +90,7 @@ class RakeTest < Shoe::TestCase
         add_files_for_ronn
         system 'rake ronn'
         assert_file 'man/foo.3'
-        assert_match 'FOO(3)', stdout.chomp
+        assert_match 'FOO(3)', output
       end
 
       it 'registers itself as a prerequisite of rake build' do
@@ -113,14 +113,14 @@ class RakeTest < Shoe::TestCase
     it 'runs tests' do
       add_files_for_test
       system 'rake test'
-      assert_match '1 tests, 1 assertions, 0 failures, 0 errors', stdout
+      assert_match '1 tests, 1 assertions, 0 failures, 0 errors', output
     end
 
     it 'depends (perhaps indirectly) on rake compile' do
       add_files_for_c_extension
       add_files_for_test 'require "foo/extension"'
       system 'rake test'
-      assert_match '1 tests, 0 assertions, 0 failures, 0 errors', stdout
+      assert_match '1 tests, 0 assertions, 0 failures, 0 errors', output
     end
   end
 end

@@ -1,9 +1,10 @@
 module CommandRunner
-  attr_reader :stdout
+  attr_reader :output
 
   def system(command)
-    IO.popen("#{command} 2>&1") { |io| @stdout = io.read }
-    assert $?.success?, @stdout
+    IO.popen("#{command} 2>&1") { |io| @output = io.read.chomp }
+    assert $?.success?, @output
+    @output
   end
 end
 

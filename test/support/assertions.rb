@@ -38,8 +38,7 @@ module Assertions
   end
 
   def find_tasks
-    system 'rake --tasks'
-    stdout.lines.grep(/^rake (\S+)/).map { |line| line.split(' ')[1] }
+    system('rake --tasks').lines.grep(/^rake/) { |l| l.split(' ')[1] }
   end
 end
 
