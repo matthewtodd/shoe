@@ -1,5 +1,6 @@
 require 'pathname'
 
+# Largely stolen from thor, then simplified a bit.
 module FileManipulation
   def prepend_file(path, contents)
     inject_into_file(path, contents, :before => /\A/)
@@ -9,7 +10,6 @@ module FileManipulation
     inject_into_file(path, contents, :after => /\z/)
   end
 
-  # Stolen from thor, then simplified a bit.
   def inject_into_file(path, contents, options={})
     flag = nil
 
@@ -29,11 +29,14 @@ module FileManipulation
   end
 
   def write_file(path, contents)
-    contents.gsub! /^ */, ''
-
     path = Pathname.new(path)
     path.parent.mkpath
     path.open('w') { |stream| stream.write(contents) }
+  end
+
+  def write_versioned_file(path, contents)
+    write_file path, contents
+    system "git add #{path}"
   end
 end
 
