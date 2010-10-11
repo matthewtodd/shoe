@@ -21,7 +21,6 @@ GEM
     polyglot (0.3.1)
     rake (0.8.7)
     rdiscount (1.6.3.1)
-    redgreen (1.2.2)
     ronn (0.5)
       hpricot (>= 0.8.2)
       rdiscount (>= 1.5.8)
@@ -36,6 +35,5 @@ DEPENDENCIES
   bundler (~> 1.0.0)
   cucumber (~> 0.6.4)
   rake (~> 0.8.7)
-  redgreen (~> 1.2.2)
   ronn (~> 0.5)
   shoe!

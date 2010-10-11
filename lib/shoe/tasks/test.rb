@@ -31,12 +31,11 @@ module Shoe
     #
     # = Pretty Colors
     #
-    # If you like pretty colors (I do!), just <tt>require
-    # '{redgreen}[http://rubygems.org/gems/redgreen]'</tt> in your tests. (The
-    # <tt>Gem::Validator</tt> has been configured to play nicely with it.) But
-    # be sure to rescue any <tt>LoadError</tt> when you <tt>require</tt> it, so
-    # that (again) you won't break <tt>`gem check --test`</tt> for people who
-    # don't have redgreen installed.
+    # For Ruby 1.8, Shoe patches the <tt>Gem::Validator</tt> to play nicely with
+    # {redgreen}[http://rubygems.org/gems/redgreen]</tt>.
+    #
+    # For Ruby 1.9, <tt>require 'shoe/util/minitest_colors'</tt> in your
+    # <tt>test_helper</tt>.
     #
     class Test < Task
       def active?
