@@ -50,7 +50,7 @@ module Shoe
         END
 
         task :test do
-          Gem::Validator.extend(Extensions::Validator) if RUBY_VERSION < '1.9'
+          Gem::Validator.extend(Extensions::Validator)
           Gem::Validator.new.unit_test(spec)
         end
 
