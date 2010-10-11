@@ -49,7 +49,7 @@ class RakeTest < Shoe::TestCase
         assert_match '1 scenario (1 passed)', output
       end
 
-      it 'depends on rake compile' do
+      it 'depends (perhaps indirectly) on rake compile' do
         add_development_dependency 'cucumber'
         add_files_for_c_extension
         add_files_for_cucumber 'require "foo/extension"'
@@ -95,7 +95,7 @@ class RakeTest < Shoe::TestCase
         add_development_dependency 'ronn'
         add_files_for_ronn
         mask_gemspec_todos
-        system 'rake build --trace'
+        system 'rake build'
         assert_file 'man/foo.3'
       end
     end
