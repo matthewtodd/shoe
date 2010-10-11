@@ -9,9 +9,9 @@ class RakeTest < Shoe::TestCase
     end
 
     it 'removes ignored files, excluding .bundler' do
-      write_file '.gitignore',        ".bundle\nbar"
-      write_file '.bundle/config.rb', '# will remain'
-      write_file 'bar',               'will be deleted'
+      write_file '.gitignore',     ".bundle\nbar"
+      write_file '.bundle/foo.rb', 'will remain'
+      write_file 'bar',            'will be deleted'
       assert_file_removed 'bar' do
         system 'rake clean'
       end
