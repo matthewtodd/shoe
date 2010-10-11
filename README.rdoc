@@ -7,6 +7,9 @@ re-use
 {Rubygems}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
 {functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].
 
+Shoe works great on both Ruby 1.8 and 1.9.
+
+
 == Install
 
  $ gem install shoe

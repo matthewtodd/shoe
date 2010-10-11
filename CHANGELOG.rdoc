@@ -1,5 +1,6 @@
 == Git
 
+* 1.9 compatibility!
 * Remove shoe generator; use `bundle gem foo` instead.
 * Remove release tasks; suggest Bundler's instead.
 * Use Shoe.install_tasks to auto-detect gemspec.
