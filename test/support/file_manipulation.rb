@@ -29,6 +29,8 @@ module FileManipulation
   end
 
   def write_file(path, contents)
+    contents.gsub! /^ */, ''
+
     path = Pathname.new(path)
     path.parent.mkpath
     path.open('w') { |stream| stream.write(contents) }

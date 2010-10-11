@@ -20,7 +20,7 @@ class RakeRonnTest < Shoe::TestCase
   test 'rake ronn registers itself as a prerequisite of rake build', :require => 'ronn' do
     add_development_dependency 'ronn'
     add_files_for_ronn
-    mask_todos_in_gemspec
+    mask_gemspec_todos
     system 'rake build --trace'
     assert_file 'man/foo.3'
   end

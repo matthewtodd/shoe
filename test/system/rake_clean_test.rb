@@ -10,7 +10,7 @@ class RakeCleanTest < Shoe::TestCase
   test 'rake clean removes ignored files, excluding .bundler' do
     system 'git init'
 
-    write_file '.gitignore', <<-END.gsub(/^ */, '')
+    write_file '.gitignore', <<-END
       .bundle
       bar
     END

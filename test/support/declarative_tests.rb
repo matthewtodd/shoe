@@ -1,14 +1,10 @@
 module DeclarativeTests
-  def skip(name, options={}, &block)
-    warn "Skipping test \"#{name}\""
-  end
-
   def test(name, options={}, &block)
     Array(options[:require]).each do |lib|
       begin
         require lib
       rescue LoadError
-        skip(name)
+        warn "#{lib} is not available. Skipping test \"#{name}\"."
         return
       end
     end
