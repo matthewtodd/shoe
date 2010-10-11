@@ -76,9 +76,6 @@ module Shoe
         END
 
         task :test do
-          Gem.source_index.extend(Extensions::SourceIndex)
-          Gem.source_index.local_gemspec = spec
-
           Gem::Validator.extend(Extensions::Validator)
           Gem::Validator.new.unit_test(spec)
         end
