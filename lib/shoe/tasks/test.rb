@@ -23,46 +23,28 @@ module Shoe
     # <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt>
     # in your gemspec.
     #
-    # = Use <tt>Test::Unit</tt>
+    # = A Few Precautions
     #
-    # Using <tt>Gem::Validator</tt> means that only <tt>Test::Unit</tt> tests
-    # will be run.
+    # * Using <tt>Gem::Validator</tt> means that only <tt>Test::Unit</tt> tests
+    #   will be run.
     #
-    # = Be aware of the <tt>$LOAD_PATH</tt>
+    # * You'll need to <tt>Bundler.setup(:default, :development)</tt> in your
+    #   <tt>Rakefile</tt> so that the <tt>Gem::Validator</tt> can find your
+    #   code. (If you put this line in your <tt>test_helper</tt> instead,
+    #   you'll break <tt>`gem check --test`</tt> for people who don't have
+    #   Bundler installed.)
     #
-    # At test time, the root of your gem, any
-    # <tt>{require_paths}[http://docs.rubygems.org/read/chapter/20#require_paths]</tt>,
-    # and any
-    # <tt>{dependencies}[http://docs.rubygems.org/read/chapter/20#dependencies]</tt>
-    # are on the <tt>$LOAD_PATH</tt>.
-    #
-    # <b>Wrong:</b>
-    #
-    #  # Don't do this; test_helper's not in the $LOAD_PATH
-    #  require 'test_helper'
-    #
-    # <b>Right:</b>
-    #
-    #  require 'test/test_helper'
+    # * The <tt>test</tt> directory will not be in the <tt>$LOAD_PATH</tt>, so
+    #   you'll have to <tt>require 'test/test_helper'</tt>.
     #
     # = Pretty Colors
     #
     # If you like pretty colors (I do!), just <tt>require
-    # '{redgreen}[http://rubygems.org/gems/redgreen]'</tt> in your tests. The
-    # <tt>Gem::Validator</tt> has been configured to play nicely with it.
-    #
-    # <b>Wrong:</b>
-    #
-    #  # Don't do this; it breaks `gem check --test` if redgreen's not installed.
-    #  require 'redgreen' if $stdout.tty?
-    #
-    # <b>Right:</b>
-    #
-    #  begin
-    #    require 'redgreen' if $stdout.tty?
-    #  rescue LoadError
-    #    # No colors, but `gem check --test` is golden!
-    #  end
+    # '{redgreen}[http://rubygems.org/gems/redgreen]'</tt> in your tests. (The
+    # <tt>Gem::Validator</tt> has been configured to play nicely with it.) But
+    # be sure to rescue any <tt>LoadError</tt> when you <tt>require</tt> it, so
+    # that (again) you won't break <tt>`gem check --test`</tt> for people who
+    # don't have redgreen installed.
     #
     class Test < Abstract
       def active?
