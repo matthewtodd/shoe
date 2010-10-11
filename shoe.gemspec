@@ -1,40 +1,35 @@
-$:.unshift File.expand_path('../lib', __FILE__)
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path('../lib', __FILE__)
 require 'shoe/version'
 
-Gem::Specification.new do |spec|
-  spec.name    = 'shoe'
-  spec.version = Shoe::VERSION
+Gem::Specification.new do |s|
+  s.name        = 'shoe'
+  s.version     = Shoe::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ['Matthew Todd']
+  s.email       = ['matthew.todd@gmail.com']
+  s.homepage    = 'http://github.com/matthewtodd/shoe'
+  s.summary     = 'Configuration-free Rake tasks that read your gemspec.'
+  s.description = "#{s.summary} These tasks re-use built-in Rubygems functionality so you can be confident you're shipping what you think you are."
 
-  spec.summary = 'An ecosystem-friendly library of Rake tasks for your gem.'
-  spec.description = <<-END.gsub(/^ */, '')
-    #{spec.summary}
+  s.rubyforge_project = 'shoe'
 
-    Shoe assumes you could be using any number of other tools -- bundler,
-    cucumber, git, rip, rubygems -- and so leans hard on them for the things
-    they do well, relegating command-line rake to mere syntactic sugar.
-  END
+  s.requirements = ['git']
+  s.required_rubygems_version = '>= 1.3.6'
+  s.add_runtime_dependency 'rake', '~> 0.8.7'
+  s.add_development_dependency 'bundler',  '~> 1.0.0'
+  s.add_development_dependency 'cucumber', '~> 0.6.4'
+  s.add_development_dependency 'ronn',     '~> 0.5'
 
-  spec.author = 'Matthew Todd'
-  spec.email  = 'matthew.todd@gmail.com'
-  spec.homepage = 'http://github.com/matthewtodd/shoe'
+  s.files            = `git ls-files`.split("\n")
+  s.test_files       = `git ls-files -- test`.split("\n")
+  s.extra_rdoc_files = `git ls-files -- "**/*.rdoc"`.split("\n")
+  s.require_paths    = ['lib']
 
-  spec.requirements = ['git']
-  spec.required_rubygems_version = '>= 1.3.6'
-  spec.add_runtime_dependency 'rake', '~> 0.8.7'
-  spec.add_development_dependency 'bundler',  '~> 1.0.0'
-  spec.add_development_dependency 'cucumber', '~> 0.6.4'
-  spec.add_development_dependency 'ronn',     '~> 0.5'
-
-  spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
-  spec.executables      = Dir['bin/*'].map &File.method(:basename)
-  spec.extensions       = Dir['ext/**/extconf.rb']
-  spec.extra_rdoc_files = Dir['**/*.rdoc', 'ext/**/*.c']
-  spec.test_files       = Dir['test/**/*_test.rb']
-
-  spec.rdoc_options     = %W(
+  s.rdoc_options = %W(
     --main README.rdoc
-    --title #{spec.full_name}
+    --title #{s.full_name}
     --inline-source
-    --webcvs http://github.com/matthewtodd/shoe/blob/v#{spec.version}/
+    --webcvs http://github.com/matthewtodd/shoe/blob/v#{s.version}/
   )
 end
