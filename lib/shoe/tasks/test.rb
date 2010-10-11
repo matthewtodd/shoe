@@ -1,12 +1,4 @@
 require 'rubygems/validator'
-require 'test/unit/ui/console/testrunner'
-
-# Disable Test::Unit::AutoRunner.
-#
-# Though I tried to be really restrictive with the above testrunner require
-# statement, test/unit itself still gets pulled in, activating the at_exit
-# hook. Dang.
-Test::Unit.run = true
 
 module Shoe
   module Tasks
@@ -58,7 +50,7 @@ module Shoe
         END
 
         task :test do
-          Gem::Validator.extend(Extensions::Validator)
+          Gem::Validator.extend(Extensions::Validator) if RUBY_VERSION < '1.9'
           Gem::Validator.new.unit_test(spec)
         end
 

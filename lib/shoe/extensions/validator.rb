@@ -1,3 +1,7 @@
+require 'test/unit'
+
+Test::Unit.run = true
+
 module Shoe
   module Extensions
 
