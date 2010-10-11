@@ -17,8 +17,8 @@ module Shoe
     #
     # = A Few Precautions
     #
-    # * Using <tt>Gem::Validator</tt> means that only <tt>Test::Unit</tt> tests
-    #   will be run.
+    # * Using <tt>Gem::Validator</tt> means that only <tt>Test::Unit</tt> (all
+    #   Rubies) and <tt>MiniTest::Unit</tt> (Ruby 1.9) tests will be run.
     #
     # * You'll need to <tt>Bundler.setup(:default, :development)</tt> in your
     #   <tt>Rakefile</tt> so that the <tt>Gem::Validator</tt> can find your
