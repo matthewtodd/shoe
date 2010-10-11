@@ -3,16 +3,16 @@ require 'test/helper'
 class RakeTest < Shoe::TestCase
   describe 'rake clean' do
     it 'is active only if there is a .git directory' do
-      assert_task 'clean'
-      system 'mv .git .git.bak'
-      assert_no_task 'clean'
+      assert_task_removed 'clean' do
+        system 'mv .git .git.bak'
+      end
     end
 
     it 'removes ignored files, excluding .bundler' do
       write_file '.gitignore',        ".bundle\nbar"
       write_file '.bundle/config.rb', '# will remain'
       write_file 'bar',               'will be deleted'
-      assert_files_removed 'bar' do
+      assert_file_removed 'bar' do
         system 'rake clean'
       end
     end
@@ -20,9 +20,9 @@ class RakeTest < Shoe::TestCase
 
   describe 'rake compile' do
     it 'is active only if there are extensions' do
-      assert_no_task 'compile'
-      add_files_for_c_extension
-      assert_task 'compile'
+      assert_task_added 'compile' do
+        add_files_for_c_extension
+      end
     end
 
     it 'builds extensions' do
@@ -37,10 +37,9 @@ class RakeTest < Shoe::TestCase
     requires 'cucumber' do
       it 'is active only if there are profiles in cucumber.yml' do
         add_development_dependency 'cucumber'
-        assert_no_task 'cucumber'
-        add_files_for_cucumber
-        assert_task 'cucumber'
-        assert_task 'cucumber:wip'
+        assert_task_added 'cucumber', 'cucumber:wip' do
+          add_files_for_cucumber
+        end
       end
 
       it 'runs cucumber features' do
@@ -80,9 +79,9 @@ class RakeTest < Shoe::TestCase
     requires 'ronn' do
       it 'is enabled if there are ronn files' do
         add_development_dependency 'ronn'
-        assert_no_task 'ronn'
-        add_files_for_ronn
-        assert_task 'ronn'
+        assert_task_added 'ronn' do
+          add_files_for_ronn
+        end
       end
 
       it 'generates man pages' do
@@ -106,9 +105,9 @@ class RakeTest < Shoe::TestCase
 
   describe 'rake test' do
     it 'is active only if there are test files present' do
-      assert_no_task 'test'
-      add_files_for_test
-      assert_task 'test'
+      assert_task_added 'test' do
+        add_files_for_test
+      end
     end
 
     it 'runs tests' do
