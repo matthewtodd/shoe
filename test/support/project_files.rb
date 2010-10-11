@@ -22,16 +22,16 @@ module ProjectFiles
   end
 
   def add_files_for_cucumber(assertion='')
-    write_versioned_file 'cucumber.yml',
+    write_file 'cucumber.yml',
       { 'default' => 'features', 'wip' => 'features' }.to_yaml
 
-    write_versioned_file 'features/api.feature', <<-END
+    write_file 'features/api.feature', <<-END
       Feature: The API
         Scenario: Exercising something
           Then I should pass
     END
 
-    write_versioned_file 'features/step_definitions/steps.rb', <<-END
+    write_file 'features/step_definitions/steps.rb', <<-END
       Then /^I should pass$/ do
         #{assertion}
       end
