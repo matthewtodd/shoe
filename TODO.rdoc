@@ -1,6 +1,5 @@
 = Next Up
 
-* Bundler automatically sets the LOAD_PATH and takes care of datadir; use it!
 * Start running on 1.9: Gem::Validator uses MiniTest::Unit.
 
 = Someday Maybe
