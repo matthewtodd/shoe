@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
 
   s.files            = `git ls-files`.split("\n")
   s.test_files       = `git ls-files -- test`.split("\n")
-  s.extra_rdoc_files = `git ls-files -- "**/*.rdoc"`.split("\n")
+  s.extra_rdoc_files = `git ls-files -- {**/,}*.rdoc`.split("\n")
   s.require_paths    = ['lib']
 
   s.rdoc_options = %W(
