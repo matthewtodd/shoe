@@ -1,6 +1,7 @@
 = Next Up
 
-* Start running on 1.9: Gem::Validator uses MiniTest::Unit.
+* Re-work for rubygems-test. https://github.com/erikh/rubygems-test
+* Use minitest/pride for colors.
 
 = Someday Maybe
 
