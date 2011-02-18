@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ronn',     '~> 0.5'
 
   s.files            = `git ls-files`.split("\n")
-  s.test_files       = `git ls-files -- test`.split("\n")
+  s.test_files       = `git ls-files -- test/**/*_test.rb`.split("\n")
   s.extra_rdoc_files = `git ls-files -- {**/,}*.rdoc`.split("\n")
   s.require_paths    = ['lib']
 
