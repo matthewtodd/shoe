@@ -1,3 +1,7 @@
+== 0.7.1 -- 2010 October 12
+
+* Include top-level rdoc files in the shoe gem.
+
 == 0.7.0 -- 2010 October 11
 
 * 1.9 compatibility!
