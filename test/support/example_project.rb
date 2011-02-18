@@ -12,6 +12,8 @@ module ExampleProject
     self.initial_directory = Dir.pwd
     self.working_directory = Dir.mktmpdir
 
+    ENV['BUNDLE_GEMFILE'] = nil
+
     Dir.chdir working_directory
     system 'bundle gem foo'
     Dir.chdir 'foo'
@@ -23,8 +25,6 @@ module ExampleProject
       require 'shoe'
       Shoe.install_tasks
     END
-
-    ENV['BUNDLE_GEMFILE'] = nil
   end
 
   def teardown
