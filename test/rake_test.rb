@@ -1,4 +1,4 @@
-require 'test/helper'
+require 'helper'
 
 class RakeTest < Shoe::TestCase
   describe 'rake clean' do

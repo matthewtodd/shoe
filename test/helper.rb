@@ -11,4 +11,6 @@ class Shoe::TestCase < Test::Unit::TestCase
   end
 end
 
-Dir['test/support/*.rb'].each { |path| require path }
+Dir.chdir('test') do
+  Dir['support/*.rb'].each { |path| require path }
+end
