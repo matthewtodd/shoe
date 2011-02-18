@@ -34,6 +34,5 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.0)
   cucumber (~> 0.6.4)
-  rake (~> 0.8.7)
   ronn (~> 0.5)
   shoe!
