@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.5
 .\" http://github.com/rtomayko/ronn/
 .
-.TH "SHOE" "3" "October 2010" "Matthew Todd" "RubyGems Manual"
+.TH "SHOE" "3" "February 2011" "Matthew Todd" "RubyGems Manual"
 .
 .SH "NAME"
 \fBshoe\fR \-\- standard Rake tasks for your RubyGems project
@@ -48,7 +48,8 @@ be available via \fBgem\-man(1)\fR once your gem is installed.)
 .
 .TP
 \fBrake test\fR
-Run tests with RubyGems' built\-in Gem::Validator, which reads the \fBtest_files\fR field in your Gem::Specification to know which tests to run.
+Run tests with Ruby's built\-in testrb, reading the \fBtest_files\fR field in your
+Gem::Specification to know which tests to run.
 .
 .P
 Note these tasks check conditions before defining themselves, so that your \fBrake \-\-tasks\fR list stays relevant and compact. You won't see all the tasks all

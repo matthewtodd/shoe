@@ -38,8 +38,8 @@ Gem::Specification, and they assume you are using `git(1)`.
   be available via `gem-man(1)` once your gem is installed.)
 
 * `rake test`:
-  Run tests with RubyGems' built-in Gem::Validator, which reads the
-  `test_files` field in your Gem::Specification to know which tests to run.
+  Run tests with Ruby's built-in testrb, reading the `test_files` field in your
+  Gem::Specification to know which tests to run.
 
 Note these tasks check conditions before defining themselves, so that your
 `rake --tasks` list stays relevant and compact. You won't see all the tasks all

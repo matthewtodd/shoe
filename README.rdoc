@@ -2,10 +2,9 @@
 
 Configuration-free Rake tasks that {read your
 gemspec}[http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/] and
-re-use
-{built-in}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
-{Rubygems}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html]
-{functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/Validator.html].
+re-use built-in
+{Rubygems}[http://rubygems.rubyforge.org/rubygems-update/Gem/Ext/ExtConfBuilder.html]
+{functionality}[http://rubygems.rubyforge.org/rubygems-update/Gem/DocManager.html].
 
 Shoe works great on both Ruby 1.8 and 1.9.
 
