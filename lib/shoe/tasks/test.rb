@@ -17,9 +17,19 @@ module Shoe
     # * You'll need to <tt>Bundler.setup(:default, :development)</tt> in your
     #   <tt>Rakefile</tt> so that <tt>testrb</tt> can find your code.
     #
-    # * The <tt>test</tt> directory will not be in the <tt>$LOAD_PATH</tt>, so
-    #   you'll have to <tt>require 'test/test_helper'</tt>.
+    # * Your <tt>test_files</tt> need only contain actual tests -- support
+    #   files, like test_helper, need not be included.
     #
+    # * The <tt>LOAD_PATH</tt> will contain all of the immediate parent
+    #   directories of your <tt>test_files</tt>. You should not count on the
+    #   top-level project directory being included -- in other words,
+    #   <tt>"require 'test/test_helper'"</tt> may not work, and <tt>"require
+    #   'test_helper'"</tt> will only work if <tt>test_helper</tt> is a sibling
+    #   of one of your <tt>test_files</tt>.
+    #
+    # For further clarification on these guidelines, you may find it helpful to
+    # browse {Shoe's own test
+    # setup}[https://github.com/matthewtodd/shoe/tree/master/test].
     class Test < Task
       def active?
         !spec.test_files.empty?
