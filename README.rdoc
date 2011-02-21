@@ -9,13 +9,6 @@ re-use built-in
 Shoe works great on both Ruby 1.8 and 1.9.
 
 
-== Note, 2010-12-10
-
-I've just become aware of https://github.com/erikh/rubygems-test, which changes
-the landscape for Shoe::Tasks::Test. Once I've had the chance to further check it
-out, Shoe will move to embrace it.
-
-
 == Install
 
  $ gem install shoe

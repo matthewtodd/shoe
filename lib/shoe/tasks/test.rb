@@ -9,6 +9,10 @@ module Shoe
     # <tt>test_files[http://docs.rubygems.org/read/chapter/20#test_files]</tt>
     # in your gemspec.
     #
+    # (You may also want to add a <tt>.gemtest</tt> file to the root of your
+    # gem, so that others can run your tests via
+    # {rubygems-test}[https://github.com/rubygems/rubygems-test].)
+    #
     # = A Few Precautions
     #
     # * Using <tt>testrb</tt> means that only <tt>Test::Unit</tt> (all
