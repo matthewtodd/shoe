@@ -34,28 +34,26 @@ class RakeTest < Shoe::TestCase
   end
 
   describe 'rake cucumber' do
-    requires 'cucumber' do
-      it 'is active only if there are profiles in cucumber.yml' do
-        add_development_dependency 'cucumber'
-        assert_task_added 'cucumber', 'cucumber:wip' do
-          add_files_for_cucumber
-        end
-      end
-
-      it 'runs cucumber features' do
-        add_development_dependency 'cucumber'
+    it 'is active only if there are profiles in cucumber.yml' do
+      add_development_dependency 'cucumber'
+      assert_task_added 'cucumber', 'cucumber:wip' do
         add_files_for_cucumber
-        system 'rake cucumber'
-        assert_match '1 scenario (1 passed)', output
       end
+    end
 
-      it 'depends (perhaps indirectly) on rake compile' do
-        add_development_dependency 'cucumber'
-        add_files_for_c_extension
-        add_files_for_cucumber 'require "foo/extension"'
-        system 'rake cucumber'
-        assert_match '1 scenario (1 passed)', output
-      end
+    it 'runs cucumber features' do
+      add_development_dependency 'cucumber'
+      add_files_for_cucumber
+      system 'rake cucumber'
+      assert_match '1 scenario (1 passed)', output
+    end
+
+    it 'depends (perhaps indirectly) on rake compile' do
+      add_development_dependency 'cucumber'
+      add_files_for_c_extension
+      add_files_for_cucumber 'require "foo/extension"'
+      system 'rake cucumber'
+      assert_match '1 scenario (1 passed)', output
     end
   end
 
@@ -75,29 +73,27 @@ class RakeTest < Shoe::TestCase
   end
 
   describe 'rake ronn' do
-    requires 'ronn' do
-      it 'is enabled if there are ronn files' do
-        add_development_dependency 'ronn'
-        assert_task_added 'ronn' do
-          add_files_for_ronn
-        end
-      end
-
-      it 'generates man pages' do
-        add_development_dependency 'ronn'
+    it 'is enabled if there are ronn files' do
+      add_development_dependency 'ronn'
+      assert_task_added 'ronn' do
         add_files_for_ronn
-        system 'MANPAGER=/bin/cat rake ronn'
-        assert_file 'man/foo.3'
-        assert_match 'FOO(3)', output
       end
+    end
 
-      it 'registers itself as a prerequisite of rake build' do
-        add_development_dependency 'ronn'
-        add_files_for_ronn
-        mask_gemspec_todos
-        system 'rake build'
-        assert_file 'man/foo.3'
-      end
+    it 'generates man pages' do
+      add_development_dependency 'ronn'
+      add_files_for_ronn
+      system 'MANPAGER=/bin/cat rake ronn'
+      assert_file 'man/foo.3'
+      assert_match 'FOO(3)', output
+    end
+
+    it 'registers itself as a prerequisite of rake build' do
+      add_development_dependency 'ronn'
+      add_files_for_ronn
+      mask_gemspec_todos
+      system 'rake build'
+      assert_file 'man/foo.3'
     end
   end
 
