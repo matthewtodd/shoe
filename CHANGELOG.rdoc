@@ -1,4 +1,4 @@
-== Git
+== 0.8.0 -- 2011 February 21
 
 * Rubygems 1.5.0 removes <tt>Gem::Validator#unit_test</tt>. Switch to using <tt>testrb</tt> for <tt>Shoe::Tasks::Test</tt>.
 * Shoe is now testable with rubygems-test.
