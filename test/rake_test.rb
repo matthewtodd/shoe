@@ -116,5 +116,18 @@ class RakeTest < Shoe::TestCase
       system 'rake test'
       assert_match '1 tests, 0 assertions, 0 failures, 0 errors', output
     end
+
+    it 'stops further rake execution on failure' do
+      add_files_for_test 'assert false'
+
+      append_file 'Rakefile', <<-TASK
+        task :dependent => :test do
+          puts 'DEPENDENT TASK COMPLETED'
+        end
+      TASK
+
+      system 'rake dependent', false
+      assert_no_match /DEPENDENT TASK COMPLETED/, output
+    end
   end
 end

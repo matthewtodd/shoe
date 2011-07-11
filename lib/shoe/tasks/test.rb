@@ -46,7 +46,7 @@ module Shoe
         END
 
         task :test do
-          system 'testrb', *spec.test_files
+          system('testrb', *spec.test_files) || exit(1)
         end
 
         task :prepare
